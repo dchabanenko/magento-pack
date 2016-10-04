@@ -1,0 +1,58 @@
+category: Database
+questions:
+    -
+        question: 'You have a product collection and want to add a filter to get all products whose name starts with Test or whose price is 0.00. Which of the following statements would add that OR condition?'
+        answers:
+            -
+              value: |
+                $collection->addAttributeToFilter(array(
+                array('attribute' => 'price', 'eq' => 0.00),
+                array('attribute' => 'name', 'like' => 'Test%')
+                ))
+              correct: true
+
+            -
+              value: |
+                $collection
+                ->addFieldToFilter('price', 0.00)
+                ->addFieldToFilter('name', array('like' => 'Test%')
+                );
+              correct: false
+
+            -
+              value: |
+                $collection
+                ->addAttributeToFilter('price', 0.00)
+                ->addAttributeToFilter('name', array('like' => 'Test%')
+                );
+              correct: false
+
+            -
+              value: |
+                $collection->addFieldToFilter(
+                array('price', 'name'),
+                array(array('eq' => 0.00, array('like' =>'Test%'),
+                );
+              correct: false
+
+            -
+              value: |
+                $collection
+                ->addAttributeToFilter('price',0.00)
+                ->addOrCondition('name', array('like' => 'Test%'));
+              correct: false
+
+    -
+        question: |
+                       What would go in place of ?????? below to make this script execute without a fatal error?
+                       $a = 1;
+                       $b = 0;
+                       /* ?????? */
+                       $c = $a / $b;
+        answers:
+            - {value: 'quit();', correct: false}
+            - {value: 'die();', correct: true}
+            - {value: 'stop();', correct: false}
+            - {value: '__halt_compiler();', correct: true}
+            - {value: 'exit();', correct: true}
+

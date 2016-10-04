@@ -1,0 +1,25 @@
+category: Adminhtml
+questions:
+    -
+        question: 'For an attribute to be loaded on a catalog/product object, which two of the following conditions must be satisfied? (Choose two)'
+        answers:
+            - {value: 'The eav_attribute table must contain a row defining the attribute s properties and its entity type.', correct: true}
+            - {value: 'The attribute must have a backend model configured in the XML config.',  correct: false}
+            - {value: 'The attribute must be part of the attribute set pertaining to the object being loaded.', correct: true}
+            - {value: 'There must be a record of the attribute on the catalog_product_super_attribute table.', correct: false}
+            - {value: 'There must be a column added to the catalog_product_entity table.', correct: false}
+    -
+        question: 'What class does an adminhtml grid directly extend?'
+        answers:
+            - {value: 'Mage_Adminhtml_Block_Widget', correct: true}
+            - {value: 'Varien_Data_Grid',  correct: false}
+            - {value: 'Varien_Data_Widget', correct: false}
+            - {value: 'Mage_Adminhtml_Block_Template', correct: false}
+    -
+        question: 'Which three of the following conditions are used to protect an admin route via ACL? (Choose three)'
+        answers:
+            - {value: 'You have defined an ACL in your module configuration', correct: true}
+            - {value: 'At least one admin role must have permission for that route',  correct: false}
+            - {value: 'You have extended the controller from Mage_Adminhtml_Controller_Action', correct: true}
+            - {value: 'You have defined a method _isAllowed which checks the permission', correct: true}
+            - {value: 'The route name must start with admin', correct: false}

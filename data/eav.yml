@@ -1,0 +1,19 @@
+category: EAV
+questions:
+    -
+        question: 'For an attribute to be loaded on a catalog/product object, which two of the following conditions must be satisfied? (Choose two)'
+        answers:
+            - {value: 'The eav_attribute table must contain a row defining the attributes properties and its entity type', correct: true}
+            - {value: 'The attribute must have a backend model configured in the XML config',  correct: false}
+            - {value: 'The attribute must be part of the attribute set pertaining to the object being loaded', correct: true}
+            - {value: 'There must be a record of the attribute on the catalog_product_super_attribute table', correct: false}
+            - {value: 'There must be a column added to the catalog_product_entity table', correct: false}
+    -
+        question: 'Which two EAV attribute frontend_input types make use of source models? (Choose two)'
+        answers:
+            - {value: 'text', correct: false}
+            - {value: 'textarea', correct: false}
+            - {value: 'select', correct: true}
+            - {value: 'multiselect', correct: true}
+            - {value: 'date', correct: false}
+            - {value: 'gallery', correct: false}

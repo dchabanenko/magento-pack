@@ -1,0 +1,14 @@
+{
+    "name": "dchabanenko/magento-pack",
+    "type": "certificationy-pack",
+    "description": "A series of questions to prepare for the Magento Developer certification",
+    "keywords": ["Magento", "certification", "test", "exam"],
+    "homepage": "http://github.com/dchabanenko/magento-pack",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dmytro Chabanenko",
+            "email": "dchabanenko@corevalue.net"
+        }
+    ]
+}
