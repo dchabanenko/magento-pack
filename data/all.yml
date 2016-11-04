@@ -1,0 +1,2690 @@
+category: Magento all
+questions:
+    -
+        question: 'For an attribute to be loaded on a catalog/product object, which two of the following conditions must be satisfied? (Choose two)'
+        answers:
+            - {value: 'The eav_attribute table must contain a row defining the attribute s properties and its entity type.', correct: true}
+            - {value: 'The attribute must have a backend model configured in the XML config.',  correct: false}
+            - {value: 'The attribute must be part of the attribute set pertaining to the object being loaded.', correct: true}
+            - {value: 'There must be a record of the attribute on the catalog_product_super_attribute table.', correct: false}
+            - {value: 'There must be a column added to the catalog_product_entity table.', correct: false}
+    -
+        question: 'What class does an adminhtml grid directly extend?'
+        answers:
+            - {value: 'Mage_Adminhtml_Block_Widget', correct: true}
+            - {value: 'Varien_Data_Grid',  correct: false}
+            - {value: 'Varien_Data_Widget', correct: false}
+            - {value: 'Mage_Adminhtml_Block_Template', correct: false}
+    -
+        question: 'Which three of the following conditions are used to protect an admin route via ACL? (Choose three)'
+        answers:
+            - {value: 'You have defined an ACL in your module configuration', correct: true}
+            - {value: 'At least one admin role must have permission for that route',  correct: false}
+            - {value: 'You have extended the controller from Mage_Adminhtml_Controller_Action', correct: true}
+            - {value: 'You have defined a method _isAllowed which checks the permission', correct: true}
+            - {value: 'The route name must start with admin', correct: false}
+    -
+        question: 'You have a product collection and want to add a filter to get all products whose name starts with Test or whose price is 0.00. Which of the following statements would add that OR condition?'
+        answers:
+            -
+              value: |
+                $collection->addAttributeToFilter(array(
+                array('attribute' => 'price', 'eq' => 0.00),
+                array('attribute' => 'name', 'like' => 'Test%')
+                ))
+              correct: true
+
+            -
+              value: |
+                $collection
+                ->addFieldToFilter('price', 0.00)
+                ->addFieldToFilter('name', array('like' => 'Test%')
+                );
+              correct: false
+
+            -
+              value: |
+                $collection
+                ->addAttributeToFilter('price', 0.00)
+                ->addAttributeToFilter('name', array('like' => 'Test%')
+                );
+              correct: false
+
+            -
+              value: |
+                $collection->addFieldToFilter(
+                array('price', 'name'),
+                array(array('eq' => 0.00, array('like' =>'Test%'),
+                );
+              correct: false
+
+            -
+              value: |
+                $collection
+                ->addAttributeToFilter('price',0.00)
+                ->addOrCondition('name', array('like' => 'Test%'));
+              correct: false
+#5
+    -
+        question: 'Which table is used for calculating a new increment ID for an order?'
+        answers:
+            - {value: 'sales_flat_order_increment', correct: false}
+            - {value: 'eav_entity_store',  correct: true}
+            - {value: 'core_increment', correct: false}
+            - {value: 'core_config_data', correct: false}
+
+#6
+    -
+        question: 'Which one of the following API methods exists in Magento?'
+        answers:
+            - {value: 'catalog_category.save', correct: false}
+            - {value: 'catalog_product.items',  correct: false}
+            - {value: 'catalog_product_attribute_set.update', correct: false}
+            - {value: 'catalog_product.info', correct: true}
+
+#7
+    -
+        question: 'Which one of the following classes must you extend in order to implement a custom indexer?'
+        answers:
+            - {value: 'Mage_Eav_Model_Indexer_Abstract', correct: false}
+            - {value: 'Mage_Core_Model_Indexer_Abstract', correct: false}
+            - {value: 'Mage_Index_Model_Entity_Indexer_Abstract', correct: false}
+            - {value: 'Mage_Index_Model_Indexer_Abstract', correct: true}
+
+#8
+    -
+        question: 'Which two EAV attribute frontend_input types make use of source models? (Choose two)'
+        answers:
+            - {value: 'text', correct: false}
+            - {value: 'textarea', correct: false}
+            - {value: 'select', correct: true}
+            - {value: 'multiselect', correct: true}
+            - {value: 'date', correct: false}
+            - {value: 'gallery', correct: false}
+
+# DISCUSSION/ANSWER: C, D (from http://wap.testsnow.net/4/4647/54941.html)
+
+#9
+    -
+        question: 'What is the difference in the effect of calling the invoice capture() method versus the invoice pay() method?'
+        answers:
+            - {value: 'No difference: pay() will always call capture().', correct: false}
+            - {value: 'pay() will trigger the payment and capture() will not.', correct: false}
+            - {value: 'capture() will trigger the payment and pay() will not.', correct: true}
+            - {value: 'The difference is determined by the payment method implementation.', correct: false}
+
+#DISCUSSION/ANSWER: C. capture() will trigger the payment and pay() will not.
+
+#10
+    -
+        question: 'How is the sort order in which total models collect their values specified?'
+        answers:
+            - {value: 'The sort order is specified in the admin configuration under Sales > "Checkout Totals Sort Order".', correct: false}
+            - {value: 'The sort order is specified in the system configuration under global/sales/quote/totals/ [total_code] with <before> and <after> nodes.', correct: true}
+            - {value: 'The sort order is defined by the module loading order as specified by the children of the modules/[module_name]/depends configuration node.', correct: false}
+            - {value: 'The sort order is specified by the collect method in each total model.', correct: false}
+
+#DISCUSSION/ANSWER: not sure
+
+
+
+#11
+    -
+        question: 'Which method is called on a shipping carrier model to fetch a list of all available shipping methods, along with the rates associated with them, for a quote address?'
+        answers:
+            - {value: 'collectShippingRates()', correct: false}
+            - {value: 'getAllowedMethods()', correct: false}
+            - {value: 'getShippingRates ()', correct: false}
+            - {value: 'getAvailableRates()', correct: false}
+            - {value: 'collectRates()', correct: true}
+#DISCUSSION/ANSWER: E
+
+#12
+    -
+        question: 'Which one of the following EAV attribute types may be used for layered navigation in native Magento?'
+        answers:
+            - {value: 'varchar', correct: false}
+            - {value: 'enum', correct: false}
+            - {value: 'option', correct: true}
+            - {value: 'union', correct: false}
+
+#DISCUSSION/ANSWER: C option
+
+#13
+    -
+        question: 'You are creating a custom CMS module named Achme_Cms. Which one of the following is the correct XML required to override a controller from the Mage_Cms module in your Achme_Cms module?'
+        answers:
+              value: |
+                  <frontend>
+                      <routers>
+                          <cms>
+                              <args>
+                                  <modules>
+                                     <achme_cms before="Mage_Cms">Achme_Cms</achme_cms>
+                                  </modules>
+                              </args>
+                          </cms>
+                      </routers>
+                  </frontend>
+              correct: true
+
+              value: |
+                  <frontend>
+                      <routers>
+                          <achme_cms>
+                              <args>
+                                  <modules>
+                                     <cms before="Mage_Cms">Achme_Cms</cms>
+                                  </modules>
+                              </args>
+                          </achme_cms>
+                      </routers>
+                  </frontend>
+              correct: false
+
+              value: |
+                  <frontend>
+                      <routers>
+                          <cms>
+                              <args>
+                                  <rewrite>
+                                     <mage_cms>Achme_Cms</cms>
+                                  </rewrite>
+                              </args>
+                          </cms>
+                      </routers>
+                  </frontend>
+              correct: false
+              value: |
+                  <global>
+                      <controllers>
+                          <achme_cms>
+                              <rewrite>
+                                     <mage_cms>Achme_Cms</cms>
+                              </rewrite>
+                          </achme_cms>
+                      </controllers>
+                  </global>
+              correct: false
+
+# DISCUSSION/ANSWER: A
+
+#14
+    -
+        question: 'Which of the following options would cause a "poll/poll" collection to load all entities that have been posted during April, 2011?'
+        answers:
+            -
+                value: |
+                    $collection->addAttributeToFilter('date_posted', array('from' => '2011-04-01', 'to' => '2011-04-30') );
+                correct: false
+            -
+                value: |
+                    $collection->addFieldToFilter('date_posted', array('from' => '2011-04-01', 'to' => '2011-04-30'));
+                correct: true
+            -
+                value: |
+                   $collection->addPostDateFilter('2011-04-01', '2011-04-30');
+                correct: false
+            -
+                value: |
+                   $collection->addFieldToSelect(('date_posted', Array('from' => '2011-04-01', 'to' => '2011-04-30') );
+                correct: false
+#DISCUSSION/ANSWER: B. $collection->addFieldToFilter('date_posted', array('from' => '2011-04-01', 'to' => '2011-04-30'));
+
+#15
+    -
+        question: 'The final price for the product on the product view page is __________.'
+        answers:
+            - {value: 'taken from the catalog_product_index_price table', correct: false}
+            - {value: 'taken from the catalog_product_index_price_idx table', correct: false}
+            - {value: 'taken from the catalog_product_index_price_final_idx table', correct: false}
+            - {value: 'calculated on-the-fly on php-level', correct: true}
+            - {value: 'pre-calculated in the products price attribute', correct: false}
+
+#DISCUSSION/ANSWER: D. calculated on-the-fly on php-level
+
+#16
+    -
+         question: ' Which of the following is a true statement about how Magento loads data for an EAV-based data model?'
+         answers:
+            - {value: 'A data helper is used in order to properly load an object`s attributes from the database.', correct: false}
+            - {value: 'EAV-based data models use a different abstract resource class than other data models.', correct: true}
+            - {value: 'The attribute values are loaded into an attribute collection object.', correct: false}
+            - {value: 'You must always specify each of the attributes to be loaded on the model.', correct: false}
+
+#DISCUSSION/ANSWER: B - different abstract
+
+#17
+    -
+         question: 'Which one of the following class types directly charges a credit card when you capture an invoice in Magento admin?'
+         answers:
+             - {value: 'Order', correct: false}
+             - {value: 'Payment', correct: false}
+             - {value: 'Invoice', correct: false}
+             - {value: 'payment_method', correct: true}
+
+#DISCUSSION/ANSWER: D. payment_method
+
+#18
+    -
+         question: 'Applying the shopping cart rule`s action affects the quote item by setting the quote item`s ___________.'
+         answers:
+            - {value: 'base_price and price properties with the discounted price', correct: false}
+            - {value: 'base_discount_amount and discount_amount with the discount applied to the original price', correct: true}
+            - {value: 'base_row_total and row_total properties with the discounted price', correct: false}
+            - {value: 'base_price_incl_tax and price_incl_tax properties with the discounted price', correct: false}
+
+#DISCUSSION/ANSWER: B. base_discount_amount and discount_amount with the discount applied to the original price
+
+#19
+    -
+         question: 'Which one of the following statements is true regarding Mage_Core_Block_Text_List?'
+         answers:
+            - {value: 'Mage_Core_Block_Text_List declares its own template for rendering, but the rendered template can be overridden via layout XML.', correct: false}
+            - {value: 'Child blocks of Mage_Core_Block_Text_List are always rendered alphabetically by name.', correct: false}
+            - {value: 'Mage_Core_Block_Text_List will always render all children automatically when it is rendered.', correct: true}
+            - {value: 'Mage_Core_Block_Text_List directly extends Mage_Core_Block_Template', correct: false}
+            - {value: 'In order to render, the parent block of Mage_Core_Block_Text_List must always be an output block.', correct: false}
+
+#DISCUSSION/ANSWER: C. Mage_Core_Block_Text_List will always render all children automatically when it is rendered.
+
+#20
+    -
+         question: 'Which one of the following API protocols does native Magento support?'
+         answers:
+            - {value: 'XmlRpc', correct: true}
+            - {value: 'REST', correct: false}
+            - {value: 'POST', correct: false}
+            - {value: 'Open Social', correct: false}
+            - {value: 'XQuery', correct: false}
+
+#DISCUSSION/ANSWER: A. XmlRpc
+
+#21
+    -
+         question: 'What is the difference between the base_grand_total and grand_total attributes of the order?'
+         answers:
+            - {value: 'base_grand_total is a grand total before tax is applied; grand_total is the grand total after tax is applied.', correct: false}
+            - {value: 'base_grand_total is the grand total at the moment of order submission; grand_total is the grand total at the moment of order closing.', correct: false}
+            - {value: 'base_grand_total is the grand total in the currency of the store where the order was submitted; grand_total is in US dollars always.', correct: false}
+            - {value: 'base_grand_total is in a base currency and grand_total is in the currency of the website where the order was submitted.', correct: true}
+
+#DISCUSSION/ANSWER: D. base_grand_total is in a base currency and grand_total is in the currency of the website where the order was submitted.
+
+#22
+    -
+         question: 'Which object never encapsulates any shopping cart items?'
+         answers:
+            - {value: 'Mage_Checkout_Model_Cart', correct: false}
+            - {value: 'Mage_Sales_Model_Quote', correct: true}
+            - {value: 'Mage_Sales_Model_Quote_Address<type=shipping>', correct: false}
+            - {value: 'Mage_Sales_Model_Quote_Address<type=billing>', correct: false}
+
+#DISCUSSION/ANSWER: B. Mage_Sales_Model_Quote
+
+#23
+    -
+         question: 'Which of the following items is NOT utilized in Magento implementation of EAV-based data models?'
+         answers:
+            - {value: 'An entity table for storing the entities basic information', correct: false}
+            - {value: 'One or more tables to store the entities associated pieces of information', correct: false}
+            - {value: 'A two-column cross-link table to associate attribute values with a corresponding entity', correct: true}
+            - {value: 'Foreign keys on each relevant table to connect relevant pieces of information at the database level', correct: false}
+            - {value: 'An attribute table that defines what data (and of what type) may be stored on a particular entity', correct: false}
+
+#DISCUSSION/ANSWER:
+
+#24
+    -
+         question: 'Which four of these xml elements are used in system.xml to configure a system configuration property? (Choose four)'
+         answers:
+            - {value: 'backend_model', correct: true}
+            - {value: 'admin_model', correct: false}
+            - {value: 'frontend_model', correct: true}
+            - {value: 'source_model', correct: true}
+            - {value: 'source_type', correct: false}
+            - {value: 'show in store', correct: true}
+
+#DISCUSSION/ANSWER: A, C, D, F
+
+#25
+    -
+         question: 'Which two of the following are supported in the native Magento API? (Choose two)'
+         answers:
+            - {value: 'partial void', correct: false}
+            - {value: 'partial invoice', correct: true}
+            - {value: 'partial capture', correct: false}
+            - {value: 'partial refund', correct: false}
+            - {value: 'partial shipment', correct: true}
+
+# DISCUSSION/ANSWER: B. partial invoice + E. partial shipment
+
+#26
+    -
+         question: 'Which of the following API calls allows you to fetch the list of related products using the native Magento API?'
+         answers:
+            -
+                value: |
+                    catalog_product_link.list, with arguments $type='related', $product_id'
+                correct: true
+            -
+                value: |
+                    catalog_product.list, with arguments $type='related', $product_id'
+                correct: false
+            - {value: 'catalog_product_related.list, with argument $product_id', correct: false}
+            -
+                value: |
+                    catalog_product_option.list, with arguments $type='related', $product_id'
+                correct: false
+
+#DISCUSSION/ANSWER: A. catalog_product_link.list, with arguments $type='related', $product_id
+
+
+# note: quote symbol ' is replaced by ` for simple yaml entering
+#27
+    -
+         question: 'Which two of the following will return an instance of a block object? (Choose two)'
+         answers:
+            - {value: 'Mage::getBlock(`page/html_header`);', correct: false}
+            - {value: 'Mage::app()->createBlock(`page/html_header`);', correct: false}
+            - {value: 'Mage::createBlock(`page/html_header`);', correct: false}
+            - {value: 'Mage::app()->getLayout()->createBlock(`page/html_header`);', correct: true}
+            - {value: 'Mage::getLayout()->createBlock(`page/html_header`);', correct: false}
+            - {value: 'Mage::app()->getLayout()->createBlock(`page/html_header`)->setTemplate(`page/html/header.phtml`);', correct: true}
+
+#DISCUSSION/ANSWER: D + F, with method Mage::app()->getLayout()->createBlock()
+
+#28
+    -
+         question: 'Inside the XML node config/global/blocks, what is the correct xpath for rewriting the catalog/product_view block?'
+         answers:
+            - {value: 'catalog/rewrite/product/view', correct: false}
+            - {value: 'catalog_product/rewrite/view', correct: false}
+            - {value: 'catalog/product/rewrite/view', correct: false}
+            - {value: 'catalog/product_view/rewrite', correct: false}
+            - {value: 'catalog/rewrite/product_view', correct: true }
+            - {value: 'catalog_product_view/rewrite', correct: false}
+
+# DISCUSSION/ANSWER: E. catalog/rewrite/product_view
+
+#29
+    -
+         question: 'Which statement correctly describes order state and order status?'
+         answers:
+            - {value: 'State and status are independent properties of the order.', correct: false}
+            - {value: 'The status is a child of the state.', correct: true}
+            - {value: 'State represents the general state of the order, while status works on item level.', correct: false}
+            - {value: 'An order doesn`t have a status, only a state. Status is a property of an invoice, shipment, and credit memo.', correct: false}
+
+#DISCUSSION/ANSWER: B. The status is a child of the state.
+
+#30
+    -
+         question: 'Which three of the following conditions should exclude a quote item from the shipping rate calculation by a carrier model? (Choose three)'
+         answers:
+            - {value: '$quoteItem->getFreeShipping() == true', correct: true}
+            - {value: '$quoteltem->getProduct()->isvirtual() == true', correct: true}
+            - {value: '$quoteltem->getWeight() > 0', correct: false}
+            - {value: '$quoteItem->isShipSeparately() && $quoteItem->getHasChildren()', correct: true}
+            - {value: '$quoteItem()->getQty() < Mage::getStoreConfig(`carriers/tablerate/min_shipping_qty`)', correct: false}
+
+#DISCUSSION/ANSWER: A + B + D
+
+#31
+    -
+         question: 'What happens when you edit an existing order using the order management page?'
+         answers:
+            - {value: 'A form appears that allows you to edit all information on the current order.', correct: false}
+            - {value: 'A form appears that allows you to edit shipping information of the current order only.', correct: false}
+            - {value: 'Depending on the order status, different editing forms appear for the current order.', correct: false}
+            - {value: 'The current order is canceled and a new order is created from scratch based on the current order`s data.', correct: true}
+
+#DISCUSSION/ANSWER: D. The current order is canceled and a new order is created from scratch based on the current order's data.
+
+#32
+    -
+         question: 'Which two of the following methods can be used to bad an entity`s data from its configured data table? (Choose two)'
+         answers:
+            - {value: '$entityModel->loadEntity($id)', correct: false}
+            - {value: '$entityModel->load($attributeValue, SattributeCode)', correct: true}
+            - {value: '$entityModel->loadById($id)', correct: false}
+            - {value: '$entityModel->loadEntity($attributeCode, $attributeValue)', correct: false}
+            - {value: '$entityModel->load($id)', correct: true}
+
+# DISCUSSION/ANSWER: B + E, only variants with $entityModel->load()  is available by default
+
+#33
+    -
+         question: 'Which class is extended to render a dropdown in admin forms?'
+         answers:
+            - {value: 'Mage_Adminhtml_Block_Widget', correct: false}
+            - {value: 'Mage_Core_Block_Abstract', correct: false}
+            - {value: 'Mage_Adminhtml_Block_Abstract', correct: false}
+            - {value: 'Mage_Adminhtml_Block_Template', correct: false}
+            - {value: 'Varien_Data_Form_Abstract', correct: true}
+
+# DISCUSSION/ANSWER: E. Varien_Data_Form_Abstract is extended by Varien_Data_Form_Element_Abstract which is extended by Varien_Data_Form_Element_Select
+
+#34
+    -
+         question: 'Which one of the following is responsible for sending a remote request to the payment service when capturing an order?'
+         answers:
+            - {value: 'Payment Info', correct: false}
+            - {value: 'Order Payment', correct: false}
+            - {value: 'Payment Method', correct: true}
+            - {value: 'Invoice', correct: false}
+
+#DISCUSSION/ANSWER: C. Payment Method
+
+#35
+    -
+         question: 'The checkbox "Use default value" is checked and the corresponding input field is disabled, as shown in the graphic above. How does Magento represent this state in the corresponding EAV value tables?'
+         answers:
+            - {value: 'no row with a value for this store view and a row with value NULL for default', correct: false}
+            - {value: 'no row with a value for this store view and a row with any value for default', correct: true}
+            - {value: 'a row with value NULL for this store view and a row with value NULL for default', correct: false}
+            - {value: 'a row with value NULL for this store view and a row with any value for default', correct: false}
+            - {value: 'no row with a value for this store view and no row with a value for default', correct: false}
+
+#DISCUSSION/ANSWER: B
+
+#36
+    -
+         question: 'You want to define a list of quote object attributes that are copied to the order object when an order is placed. Which one of the following statements is true?'
+         answers:
+            - {value: 'You can define this list by modifying the list of elements found in the configuration with the xpath global/fieldsets/sales_convert_quote.', correct: true}
+            - {value: 'You can define this list by modifying the list of elements found in the configuration with the xpath global/sales/quote/item/product_attributes.', correct: false}
+            - {value: 'You can define this list by checking the checkbox on the attribute edit page in the admin.', correct: false}
+            - {value: 'You cannot modify the list of fields copied from quote to order because the process is hardcoded.', correct: false}
+
+#DISCUSSION/ANSWER: A. global/fieldsets/sales_convert_quote.
+#But, for some reason, the really working variant is global/fieldsets/sales_convert_quote_address
+
+#37
+    -
+         question: 'Which statement describes a model class that extends Mage_Core_Model_Abstract?'
+         answers:
+            - {value: 'The model class consists of properties and methods for storing and manipulating data retrieved via separate resource classes responsible for database operations.', correct: true}
+            - {value: 'The model class is responsible for loading the frontend layout templates and responding to page requests via its Action methods (for example, indexAction).', correct: false}
+            - {value: 'The model class does not encapsulate any logic except for logic providing access to the data loaded from the database.', correct: false}
+            - {value: 'The model class is primarily responsible for direct query operations such as retrieving and storing data and then rendering that data to the frontend view.', correct: false}
+
+#DISCUSSION/ANSWER: A. The model class consists of properties and methods...
+
+#38
+    -
+         question: 'Which of the following actions will enable logging via calls to debugData() on a native Magento payment method model?'
+         answers:
+            - {value: 'Set the protected property $_debug of the payment model to true', correct: false}
+            - {value: 'Set the config node default/payment/debug/[method code] to 1', correct: false}
+            - {value: 'Call Mage::register("payment_method_debug_" . [method code], true);', correct: false}
+            - {value: 'Set the config node default/payment/[method code]/debug to 1', correct: true}
+            - {value: 'Call setDebug(true) on the payment method model', correct: false}
+
+#DISCUSSION/ANSWER: D. Set the config node default/payment/[method code]/debug to 1
+#Example:
+#<default>
+#   <payment>
+#       <authorizenet_directpost>
+#           <active>0</active>
+#           <cctypes>AE,VI,MC,DI</cctypes>
+#           <cgi_url>https://secure.authorize.net/gateway/transact.dll</cgi_url>
+#           <debug>0</debug>
+#
+
+
+#39
+    -
+         question: ' Which method is responsible for a full re-index in the abstract Magento indexer?'
+         answers:
+            - {value: 'fullReindex()', correct: false}
+            - {value: 'reindexAll()', correct: true}
+            - {value: 'processEvent()', correct: false}
+            - {value: 'reindex()', correct: false}
+
+# DISCUSSION/ANSWER: B. reindexAll()
+
+#40
+    -
+         question: ' Which one of the following xpaths is correct for replacing Mage_Customer_Model_Custom_Address via Mage::helper(`customer/address`)?'
+         answers:
+            - {value: 'global/customer/helpers/address', correct: false}
+            - {value: 'global/rewrite/helpers/rewrite/address', correct: false}
+            - {value: 'global/helpers/customer/rewrite/address', correct: true}
+            - {value: 'global/helpers/rewrite/customer_address', correct: false}
+            - {value: 'global/helpers/rewrite/customer/address', correct: false}
+
+# DISCUSSION/ANSWER: C. global/helpers/customer/rewrite/address
+
+
+#41
+    -
+         question: 'Which one of the following controller classes could respond to this URL?: http://example.com/modulename/controller/index'
+         answers:
+            - {value: 'Namespace_ModuleName_IndexController', correct: false}
+            - {value: 'Namespace_ModuleName_Controller_Controllerlndex', correct: false}
+            - {value: 'Namespace_ModuleName_Controller_lndexController', correct: false}
+            - {value: 'Namespace_Modulename_ControllerController', correct: true}
+
+#DISCUSSION/ANSWER: D. Namespace_Modulename_ControllerController
+
+
+
+#42
+    -
+         question: 'In which table could you find the order state?'
+         answers:
+            - {value: 'sales_flat_order', correct: true}
+            - {value: 'sales_flat_order_state', correct: false}
+            - {value: 'sales_flat_order_status', correct: false}
+            - {value: 'sales_flat_order_status_history', correct: false}
+
+# DISCUSSION/ANSWER: A. sales_flat_order
+
+#43
+    -
+         question: 'Which of the following block methods is the best to override when there is a need to customize how the block`s html is rendered?'
+         answers:
+            - {value: '_toHtml()', correct: true}
+            - {value: 'toHtml()', correct: false}
+            - {value: 'setLayout()', correct: false}
+            - {value: 'renderLayout ()', correct: false}
+
+#DISCUSSION/ANSWER: A. _toHtml()
+
+#44
+    -
+         question: 'How many items will be added to the quote after adding a configurable product to the shopping cart?'
+         answers:
+            - {value: 'the number of options', correct: false}
+            - {value: 'the number of options+1', correct: false}
+            - {value: 'always 1', correct: false}
+            - {value: 'always 2', correct: true}
+
+#DISCUSSION/ANSWER: "D. always 2" and one of the items (parent item) will be invisible
+
+#45
+    -
+         question: 'Which of the following allows you to save a single attribute value on an EAV entity?'
+         answers:
+            - {value: '$model->saveAttribute($attributeCode);', correct: false}
+            - {value: '$model->save($attributeCode);', correct: false}
+            - {value: '$model->getResource()->saveAttribute($model, $attributeCode);', correct: true}
+            - {value: '$model->getResource()->save($model, $attributeCode);', correct: false}
+
+#DISCUSSION/ANSWER: C. $model->getResource()->saveAttribute($model, $attributeCode);
+
+#46
+    -
+         question: |
+              When setData('some', 'value') is called on an EAV entity and the entity is saved to the database, __________________.
+         answers:
+            - {value: 'the `value` of the attribute named ``some`` is saved in the eav_values table', correct: false}
+            - {value: 'the `value` of the attribute named ``some`` is saved in one of the entity`s tables depending on its datatype (for example, entityname_varchar)', correct: true}
+            - {value: 'the data will be stored in the EAV registry making `some` `value` available to the entity', correct: false}
+            - {value: 'the `value` of the attribute named `some` is saved in the eav attribute values table', correct: false}
+
+#DISCUSSION/ANSWER: B. the 'value' of the attribute named 'some' is saved in one of the entity's tables depending on its datatype (for example, entityname_varchar)
+
+
+
+#47
+    -
+         question: 'In which of the following integrations should you use the Magento API?'
+         answers:
+            - {value: 'to send a SOAP request from Magento to a third-party system', correct: false}
+            - {value: 'to receive a SOAP request from a third-party system to Magento', correct: true}
+            - {value: 'to send or receive SOAP requests in Magento', correct: false}
+            - {value: 'to provide tracking on the order success page', correct: false}
+
+#DISCUSSION/ANSWER: B. to receive a SOAP request from a third-party system to Magento
+
+#48
+    -
+         question: 'Which of the following is the default setup script class name?'
+         answers:
+            - {value: 'Mage_Core_Model_Mysql4_Setup', correct: false}
+            - {value: 'Mage_Core_Model_Resource_Setup_Default', correct: false}
+            - {value: 'Mage_Setup_Model_Resource_Default', correct: false}
+            - {value: 'Mage_Core_Model_Resource_Setup', correct: true}
+
+#DISCUSSION/ANSWER: D. Mage_Core_Model_Resource_Setup
+
+#49
+    -
+        question: |
+           In what order are the routers from the Magento core checked for a matching route?
+                Default: Mage_Core_Controller_Varien_Router_Default
+                CMS: Mage_Cms_Controller_Router
+                Standard: Mage_Core_Controller_Varien_Router_Standard
+                Admin: Mage_Core_Controller_Varien_Router_Admin
+        answers:
+            - {value: 'Admin, Standard, CMS, Default', correct: true}
+            - {value: 'Default, CMS, Standard, Admin', correct: false}
+            - {value: 'Admin, CMS, Standard, Default', correct: false}
+            - {value: 'Standard, Admin, Default, CMS', correct: false}
+
+#DISCUSSION/ANSWER: A. Admin, Standard, CMS, Default
+
+#50
+    -
+        question: 'Which of the following will NOT generate a <script> tag in the output of the standard Magento page/html_head block?'
+        answers:
+            -
+                value: |
+                    <layout>
+                      <default>
+                        <reference name="head">
+                          <action method="addJs">
+                            <file>js/some.js</file>
+                correct: false
+            -
+                value: |
+                    <layout>
+                      <default>
+                        <reference name="head">
+                          <action method="addJs">
+                            <name>js/some.js</file>
+                correct: false
+            -
+                value: |
+                    <layout>
+                      <default>
+                        <reference name="head">
+                          <action method="addItem">
+                            <file>js/some.js</file>
+                correct: true
+            -
+                value: |
+                    <layout>
+                      <default>
+                        <reference name="head">
+                          <action method="addItem">
+                            <item>js</item>
+                            <file>js/some.js</file>
+                correct: false
+
+#DISCUSSION/ANSWER: C
+
+#51
+    -
+         question: 'A custom frontend controller will extend which one of the following classes?'
+         answers:
+            - {value: 'Mage_Core_Controller_Front_Action', correct: true}
+            - {value: 'Mage_Adminhtml_Controller_Action', correct: false}
+            - {value: 'Mage_Core_Сontroller_Varien_Front', correct: false}
+            - {value: 'Mage_Core_Controller_Abstract', correct: false}
+
+#DISCUSSION/ANSWER: A. Mage_Core_Controller_Front_Action
+
+#52
+    -
+         question: 'Which table stores information about the relationship between configurable products and their child products?'
+         answers:
+            - {value: 'catalog_product_link', correct: false}
+            - {value: 'catalog_product_super_link', correct: true}
+            - {value: 'catalog_product_option', correct: false}
+            - {value: 'catalog_product_relation', correct: false}
+
+#DISCUSSION/ANSWER: B
+
+#53
+    -
+         question: 'Which of the following lines includes a payment method object?'
+         answers:
+            - {value: '$quote->getShippingAddress()->setPaymentMethod(isset($data["method"]) ? $data["method"] : null); inside Mage_Checkout_Model_Type_Onepage', correct: false}
+            - {value: 'public function setPayment(Mage_Sales_Model_Quote_Payment $payment) inside Mage_Sales_Model_Quote', correct: true}
+            - {value: '$method = $this->getMethodInstance(); inside Mage_Sales_Model_Quote_Payment', correct: false}
+            - {value: '$instance->setInfoInstance($this); inside Mage_Payment_Model_Info', correct: false}
+
+#DISCUSSION/ANSWER: C. $method = $this->getMethodInstance(); inside Mage_Sales_Model_Quote_Payment
+
+#54
+    -
+         question: 'What type of Magento class is an API resource?'
+         answers:
+            - {value: 'Controller', correct: false}
+            - {value: 'Helper', correct: false}
+            - {value: 'Model', correct: true}
+            - {value: 'Resource model', correct: false}
+
+#DISCUSSION/ANSWER: C
+
+#55
+    -
+         question: |
+            A valid way to extend Mage_Adminhtml_Cms_PageController with the Acme Cms Adminhtml_PageController class would be to set the following configuration;
+               <admin>
+                   <routers>
+                       <adminhtml>
+                           <args>
+                               <modules>
+                                   <custom_cms before="____">____</<custom_cms>
+                               </modules>
+                           </args>
+                       </adminhtml>
+                   </routers>
+               </admin>
+            Which of the following code pairs should be inserted in the blank spots in the code shown above?
+         answers:
+            - {value: 'Mage_Adminhtml, Acme_Cms_Adminhtml', correct: true}
+            - {value: 'Mage_Adminhtml, Acme_Cms_Adminhtml_PageController', correct: false}
+            - {value: 'Mage_Adminhtml_Cms_PageController, Acme_Cms_Adminhtml', correct: false}
+            - {value: 'Mage_Adminhtml_Cms_PageController, Acme_Cms_Adminhtml_PageController', correct: false}
+
+#DISCUSSION/ANSWER: A. Mage_Adminhtml, Acme_Cms_Adminhtml
+#Rewriting modules front-names and not the controllers
+
+#56
+    -
+         question: 'When you register an event observer, which two of the following pieces of information are required for it to function? (Choose two)'
+         answers:
+            - {value: 'method (or function) name', correct: true}
+            - {value: 'method (or function) arguments', correct: false}
+            - {value: 'class name', correct: true}
+            - {value: 'object type (singleton, model, none, etc)', correct: false}
+            - {value: 'call order', correct: false}
+            - {value: 'active/inactive status', correct: false}
+
+#DISCUSSION/ANSWER: A and C
+
+#57
+    -
+         question: 'To update your order information from a third-party system using an XmlRpc call, you should:'
+         answers:
+            - {value: 'use the native sales_order.update API call with the url /api/xmlrpc/', correct: true}
+            - {value: 'create a custom API resource which allows you to receive XmlRpc requests', correct: false}
+            - {value: 'create a custom API adapter to receive XmlRpc requests', correct: false}
+            - {value: 'create a custom API handler to process XmlRpc requests', correct: false}
+
+#DISCUSSION/ANSWER: a (bruteforce) b?
+
+#58
+    -
+        question: 'Which of the following layout XML directives will set a value on a block?'
+        answers:
+            -
+                value: |
+                    <layout>
+                      <block type="some/block_class">
+                        <setSomeValue>value
+                correct: false
+            -
+                value: |
+                    <layout>
+                      <block type="some/block_class">
+                        <value>value
+                correct: false
+            -
+                value: |
+                    <layout>
+                      <block type="some/block_class">
+                        <action method="setSomeValue">value
+                correct: false
+            -
+                value: |
+                    <layout>
+                      <block type="some/block_class">
+                        <action method="setSomeValue">
+                          <a>value
+                correct: true
+            -
+                value: |
+                    <layout>
+                      <catalog_product_view>
+                        <block type="some/block_class">
+                          <setSomeValue>value
+                correct: false
+
+# DISCUSSION/ANSWER: D
+
+
+
+#59
+    -
+        question: 'To implement a standard Adminhtml form for a custom data model, which two of the following must you do? (Choose two)'
+        answers:
+            - {value: 'Declare your module`s block class prefix in the config.xml file.', correct: true}
+            - {value: 'Implement a sub-class of Mage_Adminhtml_Block_Widget_Form.', correct: true}
+            - {value: 'Implement a sub-class of Mage_Adminhtml_Block_Form_Abstract.', correct: false}
+            - {value: 'Create sub-classes of Mage_Adminhtml_Block_Form_Element_Abstract for each form field to be presented.', correct: false}
+            - {value: 'Add a set of configuration values in the module`s config.xml defining the form fields to be displayed.', correct: false}
+
+#DISCUSSION/ANSWER: A + B
+
+
+
+#60
+    -
+        question: 'Which three of the following object types will have a parent class found in the Mage_Eav module for the purposes of EAV data storage in Magento? (Choose three)'
+        answers:
+            - {value: 'data model', correct: false}
+            - {value: 'data helper', correct: false}
+            - {value: 'resource model', correct: true}
+            - {value: 'resource collection', correct: true}
+            - {value: 'setup class', correct: true}
+
+#DISCUSSION/ANSWER: C,D,E
+
+#61
+    -
+        question: 'Given a grid interface that extends from Mage_Adminhtml_Block_Widget_Grid, which of the following methods could you override to allow data to be loaded from a custom data collection?'
+        answers:
+            - {value: '_prepareDataModel', correct: false}
+            - {value: '_prepareCollection', correct: true}
+            - {value: '_initDataModel', correct: false}
+            - {value: 'initGrid', correct: false}
+
+#DISCUSSION/ANSWER: B. _prepareCollection
+
+#62
+    -
+        question: 'When changes are made to more than one of a collection`s items using setData(`some`, `value`), which of the following methods will save the changes in the collection?'
+        answers:
+            - {value: '$collection->saveAll();', correct: false}
+            - {value: '$collection->saveItems();', correct: false}
+            - {value: '$collection->saveAllItems ();', correct: false}
+            - {value: '$collection->save();', correct: true}
+
+#DISCUSSION/ANSWER: D. $collection->save(); the same as for models
+
+#63
+    -
+         question: 'You want to implement a custom attribute source model. Which method do you have to implement after extending Mage_Eav_Model_Entity_Attribute_Source_Abstract?'
+         answers:
+            - {value: 'getOptionText()', correct: false}
+            - {value: 'getAllOptions()', correct: true}
+            - {value: 'getOptionHash()', correct: false}
+            - {value: 'getOptionld()', correct: false}
+
+#DISCUSSION/ANSWER: B
+
+#64
+    -
+        question: 'How can you make a payment method store entire credit card numbers?'
+        answers:
+            - {value: 'For security reasons, there are no native ways for doing that.', correct: false}
+            - {value: 'Pass the credit card number to the payment method: it will be stored automatically.', correct: false}
+            - {value: 'Change the protected property of payment method $_canSaveCc to true.', correct: true}
+            - {value: 'Configure your method to save the card number by setting 1 to the following xpath: default/payment/_NAME_/save_cc', correct: false}
+
+#DISCUSSION/ANSWER: C, потрібно обговорити, бо актуально тільки для нащадків Mage_Payment_Model_Method_Cc та номер кредитки сториться зашифрованим
+
+#65
+    -
+        question: |
+            When the Magento configuration is being loaded, all the XML files in app/etc and the module registration files under app/etc/modules/ are loaded first. After that step, in which order are the following items loaded?'
+              1. Configuration from the core_config_data DB table
+              2. app/etc/local.xml
+              3. The etc/config.xml of all active modules
+        answers:
+            - {value: '1, 3, 2', correct: false}
+            - {value: '3, 1, 2', correct: false}
+            - {value: '3, 2, 1', correct: true}
+            - {value: '1, 2, 3', correct: false}
+
+#DISCUSSION/ANSWER:
+
+#66
+    -
+        question: 'Which one of the following declares a Layout XML file?'
+        answers:
+            -
+                value: |
+                  <global>
+                    <layout>
+                      <file>
+                        <some>
+                          <module>layout.xml
+                correct: false
+            -
+                value: |
+                  <layout>
+                    <updates>
+                      <file>layout.xml
+                correct: false
+            -
+                value: |
+                  <admin>
+                    <layout>
+                      <updates>
+                        <module>
+                          <layout>layout.xml
+                correct: false
+            -
+                value: |
+                  <frontend>
+                    <layout>
+                      <updates>
+                        <module>
+                          <layout>layout.xml
+                correct: true
+
+#DISCUSSION/ANSWER: D
+
+
+
+#67
+    -
+        question: 'In order to successfully register and configure a new entity capable of being saved and loaded from the database, you must create a model and which three of the following? (Choose three)'
+        answers:
+            - {value: 'a collection class', correct: false}
+            - {value: 'configuration settings in your module`s config.xml', correct: true}
+            - {value: 'an entry in Mage::$_registry', correct: false}
+            - {value: 'a record in the eav_entity table', correct: false}
+            - {value: 'a resource model', correct: true}
+            - {value: 'a table in the database that will store the entity"s data', correct: true}
+
+# DISCUSSION/ANSWER: B + E + F, config.xml + resource model + table in the database
+
+#68
+    -
+        question: 'What does Magento use to determine whether the automatically run upgrade scripts have been run yet?'
+        answers:
+            - {value: 'The modification date on the modules` etc/config.xml file', correct: false}
+            - {value: 'The version number (or lack thereof) stored in the core_module_version table', correct: false}
+            - {value: 'The version number (or lack thereof) stored in the core_resource table', correct: true}
+            - {value: 'A comparison of the resources that are capable of successfully loading', correct: false}
+
+# DISCUSSION/ANSWER: C. The version number (or lack thereof) stored in the core_resource table
+
+
+
+#69
+    -
+        question: 'Assume that PayPal has presented a new API for online purchasing that you are going to use. Which class should you extend for doing that?'
+        answers:
+            - {value: 'Mage_Sales_Model_Quote_Payment', correct: false}
+            - {value: 'Mage_Payment_Model_lnfo', correct: false}
+            - {value: 'Mage_Payment_Model_Method_Abstract', correct: true}
+            - {value: 'Mage_Sales_Model_Order_Payment', correct: false}
+
+# DISCUSSION/ANSWER: C. Mage_Payment_Model_Method_Abstract
+
+#70
+    -
+        question: 'Which two public methods must be implemented in a functional custom shipping method directly extending Mage_Shipping_Model_Carrier_Abstract and also implementing Mage_Shipping_Model_Carrier_Interface? (Choose two)'
+        answers:
+            - {value: 'collectRates()', correct: true}
+            - {value: 'getAllowedMethods()', correct: true}
+            - {value: 'isTrackingAvailable()', correct: false}
+            - {value: 'isFixed()', correct: false}
+            - {value: 'getConfigDatat()', correct: false}
+            - {value: 'checkAvailablesnipCountries()', correct: false}
+
+# DISCUSSION/ANSWER: A + B, collectRates() + getAllowedMethods()
+
+#71
+    -
+        question: 'The initial call to ______________ will create and return an instance of the specified class. Subsequent calls to this method during the same execution cycle will return the same class instance as opposed to creating a new one.'
+        answers:
+            - {value: 'Mage::getResourceModel(`namespace/modulename`);', correct: false}
+            - {value: 'Mage::getInstance(`namespace/modulename`);', correct: false}
+            - {value: 'Mage::getModel(`modulename/modelname`) ;', correct: false}
+            - {value: 'Mage::getSingleton(`modulename/modelname`);', correct: true}
+
+# DISCUSSION/ANSWER: D. Mage::getSingleton('modulename/modelname');
+
+#72
+    -
+        question: 'You want to display a grid for a custom collection. After extending Mage_Adminhtml_Block_Widget_Grid, which two of these methods should you implement? (Choose two)'
+        answers:
+            - {value: '_getCollection()', correct: false}
+            - {value: '_prepareCollection()', correct: true}
+            - {value: '_prepareColumns()', correct: true}
+            - {value: 'toHtml()', correct: false}
+            - {value: 'render()', correct: false}
+
+#DISCUSSION/ANSWER: B. _prepareCollection() and C. _prepareColumns()
+
+#73
+    -
+        question: 'What is the basic class/interface for every model observer class?'
+        answers:
+            - {value: 'Mage_Model_Config_Observer', correct: false}
+            - {value: 'Mage_Core_Model_Event_Observer_Abstract', correct: false}
+            - {value: 'Mage_Core_Model_Event_Observer_Interface', correct: false}
+            - {value: 'There is no required inheritance.', correct: true}
+            - {value: 'Varien_Object', correct: false}
+
+# DISCUSSION/ANSWER: D. There is no required inheritance.
+
+#74
+    -
+        question: 'You want to filter a product collection so that it will return only SKUs 12 and 123. You will use a call to $collection->addFieldToFilter(`sku`, ____________ ); Two of the following arrays could be used to complete that call correctly. Which two? (Choose two)'
+        answers:
+            - {value: 'array(`sku` => 12, `sku` => 123)', correct: false}
+            - {value: 'array(array(`eq` => 12), array(`eq` => 123))', correct: true}
+            - {value: 'array(12 => true, 123 => true)', correct: false}
+            - {value: 'array(12, 123)', correct: true}
+            - {value: 'array(array(`int` => 12), array(`int` => 123))', correct: false}
+
+#DISCUSSION/ANSWER: B + D, array(array('eq' => 12), array('eq' => 123)) + array(12, 123)
+
+#75
+    -
+        question: ' How can you update a third-party system with every new order created in Magento?'
+        answers:
+            - {value: 'Use the native sales_order_update API call.', correct: false}
+            - {value: 'Use a sales_order_place_after API call.', correct: false}
+            - {value: 'Create an observer in Magento on the sales_order_place_after event.', correct: true}
+            - {value: 'Customize the third-party system to listen to Magento`s sales_order_place_after event.', correct: false}
+
+#DISCUSSION/ANSWER: C. Create an observer in Magento on the sales_order_place_after event.
+
+#76
+    -
+        question: 'Which of the following xpaths defines the correct XML structure for informing Magento that your module has install scripts?'
+        answers:
+            - {value: 'global/resources/etc/setup/<script_directory_name>/module', correct: false}
+            - {value: 'system/database/resources/<script_directory_name>/setup/module', correct: false}
+            - {value: 'global/resources/<script_directory_name>/setup/module', correct: true}
+            - {value: 'database/action/scripts/<script_directory_name>', correct: false}
+
+#DISCUSSION/ANSWER: C. global/resources/<script_directory_name>/setup/module
+
+#77
+    -
+        question: 'You have used the "refresh" action on the cache management page for the block html cache type. Which of the following types of cache record would be cleared?'
+        answers:
+            - {value: 'all cache records containing HTML code', correct: false}
+            - {value: 'items for block classes extending Mage_Core_Block_Template only', correct: false}
+            - {value: 'items having at least one of the tags found in the configuration under the xpath global/cache/types/block_html/tags', correct: true}
+            - {value: 'block class items with expired lifetime', correct: false}
+
+#DISCUSSION/ANSWER: C
+
+#78
+    -
+        question: 'Which of the following methods will force an EAV resource collection model to include an attribute in its result set?'
+        answers:
+            - {value: 'addAttributeToSelect($attribute);', correct: true}
+            - {value: 'getResource()->addAttribute($attribute);', correct: false}
+            - {value: 'addFieldToSelect($attribute);', correct: false}
+            - {value: 'getSelect()->from( ` ` , $attribute);', correct: false}
+            - {value: 'addAttributeToCollection($attribute);', correct: false}
+
+#DISCUSSION/ANSWER: A. addAttributeToSelect($attribute);
+
+#79
+    -
+        question: 'Assume you have product with `qty in stock`=1, and two people are trying to buy it at the same time. Which of the following statements is true?'
+        answers:
+            - {value: 'Only one is able to add the product to the shopping cart. That person will be able to buy the product.', correct: false}
+            - {value: 'Only the person who starts checkout first will be able to buy the product.', correct: false}
+            - {value: 'Only the person who passes the payment step first will be able to buy the product.', correct: false}
+            - {value: 'Both persons can go to the Place Order step, but the one who places the order first will get the product.', correct: true}
+            - {value: 'Both persons will be able to complete the checkout, because both have local copies of the available inventory.', correct: false}
+
+# DISCUSSION/ANSWER: D. Both persons can go to the Place Order step, but the one who places the order first will get the product.
+
+#80
+    -
+        question: ' In which config areas are layout files declared? (Choose two)'
+        answers:
+            - {value: '<admin>', correct: false}
+            - {value: '<adminhtml>', correct: true}
+            - {value: '<default>', correct: false}
+            - {value: '<frontend>', correct: true}
+            - {value: '<global>', correct: false}
+
+#DISCUSSION/ANSWER: B + D, <adminhtml> + <frontend>
+
+#81
+    -
+        question: ' To register a new API resource, what should you do?'
+        answers:
+            - {value: 'Register your new resource in config.xml in the node global/api/[module name]/resources.', correct: false}
+            - {value: 'Create etc/api.xml and register your resource in the api/resources node.', correct: true}
+            - {value: 'Go to the System/Web services/API Resources management page, and add a new resource from there.', correct: false}
+            - {value: 'Create an etc/resources.xml config file and register your resource in the api/resources node.', correct: false}
+
+# DISCUSSION/ANSWER: B. Create etc/api.xml and register your resource in the api/resources node.
+
+#82
+    -
+        question: 'Two modules, Foo and Moo, both rewrite the catalog/product model, but only the Moo module`s rewrite is being used. Both modules Foo and Moo reside in the community code pool. Which two approaches allow the functionality from both classes to be used? (Choose two)'
+        answers:
+            - {value: 'Copy Foo_Model_Product to the local code pool', correct: false}
+            - {value: 'Copy Moo_Model_Product to the local code pool and merge the logic from Foo_Model_Product into it.', correct: true}
+            - {value: 'Copy Moo_Model_Product to the local code pool and make it extend Foo_Model_Product, making sure the logic of both classes does not conflict.', correct: true}
+            - {value: 'Copy Moo_Model_Product to the local code pool.', correct: false}
+            - {value: 'Change the rewrite directive of the Moo module to rewrite foo/product instead of catalog/product.', correct: false}
+
+# DISCUSSION/ANSWER: B + C, merge + extend
+
+#83
+    -
+        question: ' In admin, a shipment can be created ____________.'
+        answers:
+            - {value: 'only after the whole order is invoiced', correct: false}
+            - {value: 'only after at least one item is invoiced', correct: false}
+            - {value: 'even before an invoice is created', correct: true}
+            - {value: 'only after tracking number(s) are specified', correct: false}
+
+#DISCUSSION/ANSWER: C. even before an invoice is created
+
+#84
+    -
+        question: 'How can you restrict access to a custom API resource?'
+        answers:
+            - {value: 'Only by creating a new role under System/Web Services/Roles', correct: false}
+            - {value: 'By setting up an ACL in etc/api.xml and creating a new role for it in System/Web Services/Roles', correct: true}
+            - {value: 'Only by extending Mage_Api_Controller_Action and overriding the _isAllowed method', correct: false}
+            - {value: 'By setting up an ACL in etc/adminhtml.xml and creating a new role in System/Permissions/Roles', correct: false}
+
+# DISCUSSION/ANSWER: B. By setting up an ACL in etc/api.xml and creating a new role for it in System/Web Services/Roles
+
+#85
+    -
+        question: 'What must be done to allow a third-party system to access the Magento API?'
+        answers:
+            - {value: 'Run a login call with username/password, and use the returned session_id for every request.', correct: true}
+            - {value: 'Get a token previously generated in Magento admin.', correct: false}
+            - {value: 'Run an authenticate call with username/password; the call will set up a session automatically.', correct: false}
+            - {value: 'Register the remote IP address in the api/allowed_ips/[system name] node.', correct: false}
+            - {value: 'Use a secure certificate, with public/private keys, and get a private key installed inside Magento.', correct: false}
+
+#DISCUSSION/ANSWER: A. Run a login call with username/password, and use the returned session_id for every request.
+
+#86
+    -
+        question: ' Which one of the following statements is true regarding layout update handles?'
+        answers:
+            - {value: 'Layout update handles must always match a module_controller_action pattern such as catalog_product_view.', correct: false}
+            - {value: 'There may never be more than one layout update handle per request.', correct: false}
+            - {value: 'Layout update handles are declared at any level of the layout XML hierarchy.', correct: false}
+            - {value: 'A layout update handle may be specified as a string argument when calling loadLayout().', correct: true}
+
+#DISCUSSION/ANSWER: D. A layout update handle may be specified as a string argument when calling loadLayout().
+
+#87
+    -
+        question: 'Which three of the following will return an instance of a resource model? (Choose three)'
+        answers:
+            - {value: 'Mage::getResourceModel(`customer/customer`);', correct: true}
+            - {value: 'Mage::getResourceSingleton(`customer/customer`);', correct: true}
+            - {value: 'Mage::getModel(`customer/customer`)->getResourceModel();', correct: false}
+            - {value: 'Mage::getResourceModel(`customer/customer`)->getInstance();', correct: false}
+            - {value: 'Mage::getModel(`customer/customer`)->getResource();', correct: true}
+            - {value: 'Mage::getResourceModel(`customer/customer`)->getResource();', correct: false}
+
+#DISCUSSION/ANSWER: A + B + E, getResourceModel + getResourceSingleton + model->getResource
+
+
+
+#88
+    -
+        question: ' By enabling Flat catalog, you will ____________.'
+        answers:
+            - {value: 'speed up performance on the frontend', correct: true}
+            - {value: 'speed up saving product on the backend', correct: false}
+            - {value: 'simplify the product import process', correct: false}
+            - {value: 'speed up loading product on the backend', correct: false}
+
+#DISCUSSION/ANSWER: A. speed up performance on the frontend
+
+#89
+    -
+        question: 'Which of the following payment methods` payment actions creates an invoice during the "place order" step?'
+        answers:
+            - {value: 'Mage_Payment_Model_Method_Abstract::ACTION_AUTHORIZE', correct: false}
+            - {value: 'Mage_Payment_Model_Method_Abstract::ACTION_CAPTURE', correct: false}
+            - {value: 'Mage_Payment_Model_Method_Abstract::ACTION_AUTHORIZE_CAPTURE', correct: true}
+            - {value: 'Mage_Payment_Model_Method_Abstract::ACTION_INVOICE', correct: false}
+
+#DISCUSSION/ANSWER: C. Mage_Payment_Model_Method_Abstract::ACTION_AUTHORIZE_CAPTURE
+
+#90
+    -
+        question: 'Which model is responsible for calculating the taxes for the selected shipping rate?'
+        answers:
+            - {value: 'shipping/rate_result', correct: false}
+            - {value: 'shipping/total_tax', correct: false}
+            - {value: 'tax/sales_total_quote_tax', correct: true}
+            - {value: 'the concrete shipping carrier model implementation', correct: false}
+            - {value: 'shipping/rate_request', correct: false}
+
+#DISCUSSION/ANSWER: C. tax/sales_total_quote_tax
+
+#91
+    -
+        question: ' A native Magento EAV entity will use _____________.'
+        answers:
+            - {value: 'A single table with separate columns for each data type (for instance, decimal, text, varchar, etc.)', correct: false}
+            - {value: 'A single table with separate columns for all data types used by the entity', correct: false}
+            - {value: 'A separate table for each data type (for instance, decimal, text, varchar, etc.)', correct: true}
+            - {value: 'A separate table for each data type in addition to a flat data table with separate columns to store values for each data type used by the entity', correct: false}
+
+#DISCUSSION/ANSWER: C. A separate table for each data type (for instance, decimal, text, varchar, etc.)
+
+#92
+    -
+        question: |
+          In which order are the following methods executed after Mage_Core_Model_Abstract::save () is called?
+            1- Mage_Core_Model_Abstract::_beforeSave()
+            2- Mage_Core_Model_Abstract::_afterSave()
+            3- Mage_Core_Model_Mysql4_Abstract::_beforeSave()
+            4- Mage_Core_Model_Mysql4_Abstract::_afterSave()
+            5- Mage_Core_Model_Abstract::afterCommitCallback()
+        answers:
+            - {value: '1, 2, 3, 4, 5', correct: false}
+            - {value: '1, 3, 2, 4, 5', correct: false}
+            - {value: '1, 3, 4, 2, 5', correct: true}
+            - {value: '3, 1, 4, 2, 5', correct: false}
+
+#DISCUSSION/ANSWER: C. 1, 3, 4, 2, 5, model->before + mysql->before + mysql->after + model->after + callback
+
+#93
+    -
+        question: 'Which of the following node names may be used inside the setup resource declaration to utilize a custom setup class?'
+        answers:
+            - {value: 'resourceModel', correct: false}
+            - {value: 'resourceClass', correct: false}
+            - {value: 'setupClass', correct: false}
+            - {value: 'class', correct: true}
+
+#DISCUSSION/ANSWER: D. class
+
+#94
+    -
+        question: 'How does Magento store comments regarding different entities (invoice, credit memo, shipment)?'
+        answers:
+            - {value: 'Each comment is a separate entity with a type attribute which identifies the owner of the comment. All comments are stored in one sales_comment table.', correct: false}
+            - {value: 'Comments to invoice, credit memo and shipment are different entities stored in the different tables.', correct: true}
+            - {value: 'All comments belong directly to the order, and are stored in the sales_flat_order_comments table.', correct: false}
+            - {value: 'Each comment is an attribute of the appropriate entity (invoice, credit memo, shipment).', correct: false}
+
+#DISCUSSION/ANSWER: B, different tables/entities
+
+#95
+    -
+        question: 'Which file path correctly identifies the location of a modules install/upgrade scripts inside the primary module directory?'
+        answers:
+            - {value: 'sql/<setup_resource_name>/', correct: true}
+            - {value: 'var/scripts/', correct: false}
+            - {value: 'scripts/', correct: false}
+            - {value: '<setup_resource_name>/', correct: false}
+
+#DISCUSSION/ANSWER: A. sql/<setup_resource_name>/
+
+#96
+    -
+        question: 'Given an EAV-based data model whose data is stored in the table foo_entity, in which table would you find the values for an attribute of the varchar type?'
+        answers:
+            - {value: 'foo_entity_attribute_storage', correct: false}
+            - {value: 'foo_entity_varchar', correct: true}
+            - {value: 'entity_attribute_varchar', correct: false}
+            - {value: 'foo_entity', correct: false}
+
+# DISCUSSION/ANSWER: B. foo_entity_varchar
+
+#97
+    -
+        question: 'A customer bought two items but wants to cancel one. Which option enables the administrator of the site to edit the quantity while the invoice is being captured in the admin area?'
+        answers:
+            - {value: 'In the System Configuration, under the Sales section, set "Allow partial invoice" to "true".', correct: false}
+            - {value: 'In the payment method, set the $_canCapturePartial protected variable to true.', correct: true}
+            - {value: 'There are no native ways to do this: override the sales/order/invoice/view/items.phtml template.', correct: false}
+            - {value: 'In the configuration node, set default/payment/{METHOD_NAME}/allow_partial_invoice to 1.', correct: false}
+
+#DISCUSSION/ANSWER: B, $_canCapturePartial
+
+#98
+    -
+        question: 'Which one of the following classes does NOT exist in Magento?'
+        answers:
+            - {value: 'Mage_Adminhtml_Block_Widget_Form_Element_Abstract', correct: true}
+            - {value: 'Mage_Adminhtml_Block_Widget_Form', correct: false}
+            - {value: 'Mage_Adminhtml_Block_Widget_Form_Container', correct: false}
+            - {value: 'Mage_Adminhtml_Block_Widget_Form_Element', correct: false}
+            - {value: 'Varien_Data_Form_Element_Abstract', correct: false}
+
+# DISCUSSION/ANSWER: A. Mage_Adminhtml_Block_Widget_Form_Element_Abstract
+
+#99
+    -
+        question: 'What do you need to do to implement a completely new Web Service protocol in Magento?'
+        answers:
+            - {value: 'Create your own adapter and controller.', correct: true}
+            - {value: 'Create your own API resource.', correct: false}
+            - {value: 'Create a new API helper.', correct: false}
+            - {value: 'Create a new model extended from Mage_Api_Model_Abstract.', correct: false}
+
+#DISCUSSION/ANSWER: A
+
+#100
+    -
+        question: 'What is the xpath to the list of product types?'
+        answers:
+            - {value: 'catalog/product/type', correct: false}
+            - {value: 'global/catalog/product/type', correct: true}
+            - {value: 'default/catalog/product/type', correct: false}
+            - {value: 'It depends on the product type.', correct: false}
+
+#DISCUSSION/ANSWER: B. global/catalog/product/type
+
+#101
+    -
+        question: 'For which two of the following composite products could the options be shipped separately on the frontend using "Checkout with multiple addresses"? (Choose two)'
+        answers:
+            - {value: 'configurable physical product', correct: false}
+            - {value: 'bundle product consisting of physical products', correct: true}
+            - {value: 'grouped product consisting of physical products', correct: true}
+            - {value: 'bundle product consisting of virtual products', correct: false}
+            - {value: 'grouped product consisting of virtual products', correct: false}
+
+# DISCUSSION/ANSWER: B, C
+
+
+#102
+    -
+        question: 'Assume you added a product with custom options to the shopping cart. Where will the data for the custom options be stored persistently?'
+        answers:
+            - {value: 'in the sales_flat_quote table, as a serialized string in a text field', correct: false}
+            - {value: 'in the session, as a serialized array', correct: false}
+            - {value: 'in a separate table, sales_flat_quote_item_option', correct: true}
+            - {value: 'Magento doesn`t store persistent data about custom options; only the new price and new SKU are stored.', correct: false}
+
+# DISCUSSION/ANSWER: C. in a separate table, sales_flat_quote_item_option
+
+
+#103
+    -
+        question: 'Which of the following operations is most impacted (in time required) by a large number of products and stores?'
+        answers:
+            - {value: 'loading a simple product page on the front', correct: false}
+            - {value: 'saving product in the admin area', correct: false}
+            - {value: 'importing tax rates to the database', correct: false}
+            - {value: 'adding new attributes to be used in flat catalog', correct: true}
+# DISCUSSION/ANSWER: 4.adding new attributes to be used in flat catalog
+
+#104
+    -
+        question: ' Which tags are used to declare catched event?(Choose 3 options among the followings)'
+        answers:
+            - {value: 'adminhtml', correct: true}
+            - {value: 'default', correct: false}
+            - {value: 'admin', correct: false}
+            - {value: 'frontend', correct: true}
+            - {value: 'global', correct: true}
+            - {value: 'crontab', correct: false}
+#  DISCUSSION/ANSWER: 1.adminhtml, 4.frontend, 5.global
+#Example: ../app/code/core/Mage/Bundle/etc/config.xml
+
+
+#105
+    -
+        question: 'Which tags CANNOT be used to identify calculation order of Total in Magento? (Choose 2 options among the followings)'
+        answers:
+            - {value: 'after', correct: false}
+            - {value: 'priority', correct: true}
+            - {value: 'before', correct: false}
+            - {value: 'order', correct: true}
+            - {value: 'sort_order', correct: false}
+#  DISCUSSION/ANSWER: 2.priority, 4.order
+
+
+#106
+    - 
+        question: 'Which element below has effect on Tax and price of product when customer checkout? (1 answer is correct)'
+        answers:
+            - {value: 'Customer name and email', correct: false}
+            - {value: 'Customer billing address', correct: false}
+            - {value: 'Customer shipping address', correct: false}
+            - {value: 'Customer Group', correct: true}
+#  DISCUSSION/ANSWER: 4. Customer Group
+
+
+#107
+    - 
+        question: 'When declaring a field in system configuration in Magento ( in file system.xml), which input types need to declare source_model? ( Choose 2 options)'
+        answers:
+            - {value: 'text', correct: false}
+            - {value: 'select', correct: true}
+            - {value: 'textarea', correct: false}
+            - {value: 'multiselect', correct: true}
+            - {value: 'date', correct: false}
+#  DISCUSSION/ANSWER: select  +  multiselect
+
+
+#108
+    -         
+        question: 'To add a total to reduce product price on page Shopping Cart, what do we do? ( 2 answers)'
+        answers:
+            - {value: 'Add config total in file config.xml under xpath is config/global/sales/order_invoice/totals', correct: false}
+            - {value: 'Add config total in file config.xml under xpath is config/global/sales/quote/totals', correct: true}
+            - {value: 'Add code in to layout file with handle is sales_order_view', correct: false}
+            - {value: 'Add Block that is correspondent to the configuration in config.xml, block with method initTotals', correct: false}
+            - {value: 'Add Model that is correspondent to the configuration in config.xml, model with collect and fetch method.', correct: true}
+#  DISCUSSION/ANSWER: B, E
+
+
+#109
+    -         
+        question: |
+            When declaring a code in file system.xml to add configuration for system.
+            Where to get the default value that display in backend configuration?
+                <config>
+                    <tabs>
+                        <magestore translate="label">
+                            <label>Magestore Extension</label>
+                            <sort_order>400</sort_order>
+                        </magestore>
+                    </tabs>
+                    <sections>
+                        <giftcard translate="label" module="giftcard">
+                            <class>separator-top</class>
+                            <label>Gift Card</label>
+                            <tab>magestore</tab>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>299</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <groups>
+                                <general translate="label">
+                                    <label>General Configuration</label>
+                                    <frontend_type>text</frontend_type>
+                                    <sort_order>299</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                    <fields>
+                                        <prefix translate="label comment">
+                                            <label>Frontend Gift Code Prefix</label>
+                                            <frontend_type>text</frontend_type>
+                                            <sort_order>299</sort_order>
+                                            <show_in_default>1</show_in_default>
+                                            <show_in_website>1</show_in_website>
+                                            <show_in_store>1</show_in_store>
+                                            <comment></comment>
+                                        </prefix>
+                                    </fields>
+                                </general>
+                            </groups>
+                        </giftcard>
+                    </sections>
+                <config>
+        answers:
+            - {value: 'Always display an empty textbox', correct: false}
+            - {value: 'Configuration in file admin html.xml under xpath is config/global/giftcard/general/prefix.', correct: false}
+            - {value: 'Configuration in file config.xml under xpath is config/global/giftcard/general/prefix', correct: false}
+            - {value: 'Configuration in file config.xml under xpath is config/default/giftcard/general/prefix', correct: true}
+            - {value: 'Value in tags in the above code', correct: false}
+#  DISCUSSION/ANSWER: config/default/giftcard/general/prefix
+
+
+#110
+    -
+        question: 'In the module Magestore_GiftCard, what is the return value of  Mage::getModel(`giftcard/code` ( 1 answer)'
+        answers:
+            - {value: 'Return a line in database of giftcard table : giftcard_code', correct: false}
+            - {value: 'Return an object of class Magestore_GiftCard_Model_Code', correct: true}
+            - {value: 'Return a data array of module Magestore_GiftCard', correct: false}
+            - {value: 'Return the class Magestore_GiftCard_Model_Code', correct: false}
+#  DISCUSSION/ANSWER: B
+
+
+#111
+    -
+        question: 'Choose the best answer for describing the Layout of Magento:'
+        answers:
+            - {value: 'Blocks are organized hierarchically whose core is block core.', correct: false}
+            - {value: 'Each block may have many children blocks and use multiple templates.', correct: true}
+            - {value: 'There are two types of blocks: structure block and content block.', correct: false}
+            - {value: 'All blocks are located in Layout object.', correct: false}
+#  DISCUSSION/ANSWER: C
+
+
+#112
+    -
+        question: 'Which parameters are necessary for an event observer?	(choose 3)'
+        answers:
+            - {value: 'type (model, object, none, singleton)', correct: true}
+            - {value: 'class (class name of observer)', correct: true}
+            - {value: 'model(model of observer)', correct: false}
+            - {value: 'method (method to invoke)', correct: true}
+#  DISCUSSION/ANSWER: type  +  class  +  method
+
+
+#113
+    - 
+        question: 'How to improve magento website`s performance? (Choose many answers)'
+        answers:
+            - {value: 'Enabled magento caching', correct: true}
+            - {value: 'Disable any unused modules', correct: true}
+            - {value: 'Disable the Magento log', correct: false}
+            - {value: 'Combik8ne external CSS/JS into one file', correct: true}
+            - {value: 'Use eav table replace flat table', correct: false}
+#  DISCUSSION/ANSWER: A, D, E;  A,B,D;  A,B,D,E; - wrong, ABE-wrong; ABCDE-wrong;
+
+
+#114
+    -
+        question: 'Which product types are implemented as part of the Mage_Catalog module? (3 answers)'
+        answers:
+            - {value: 'Configurable', correct: true}
+            - {value: 'Grouped', correct: true}
+            - {value: 'Bundle', correct: false}
+            - {value: 'Simple', correct: true}
+#  DISCUSSION/ANSWER: A, B, D
+
+
+#115
+    -
+        question: 'How to change sort function for columns in grid magento in admin?'
+        answers:
+            - {value: 'Create renderer for the column you want to rewrite', correct: false}
+            - {value: 'Override template of thegrid', correct: false}
+            - {value: 'Rewrite function_setCollectionOrder for block grid', correct: true}
+            - {value: 'Rewrite _prepareCollection for block grid', correct: false}
+#  DISCUSSION/ANSWER: C(Mage_Adminhtml_Block_Widget_Grid: protected function _setCollectionOrder($column))
+
+
+
+#116
+    -
+        question: 'Choose the correct statement'
+        answers:
+            - {value: 'Attributes added to products are not included in catalog condition', correct: false}
+            - {value: 'Rewrite model catalog to add attributes', correct: false}
+            - {value: 'Edite attributes to allow display in catalog condition', correct: true}
+            - {value: 'All of them are incorrect', correct: false}
+#  DISCUSSION/ANSWER: Edite attributes to allow display in catalog condition
+
+#117
+    - 
+        question: 'In data base, What is time zone saved in magento core?'
+        answers:
+            - {value: 'Customer`s timezone', correct: false}
+            - {value: 'Store`s timezone in configuration.', correct: false}
+            - {value: 'Website`s timezone.', correct: false}
+            - {value: 'GTM 0', correct: true}
+#  DISCUSSION/ANSWER: GTM 0
+
+
+#118
+    -
+        question: 'To update button available on the system`s form as buton Back, Save, Save and Continue Delete ... then we use the following way:'
+        answers:
+            - {value: '_setButton ("name_button");', correct: false}
+            - {value: '_changeButton (" name_button ");', correct: false}
+            - {value: '_updateButton ("name_button");', correct: true}
+            - {value: 'All are correct', correct: false}
+#  DISCUSSION/ANSWER: C
+
+
+#119
+    - 
+        question: 'When $ this ->load Layout (`foo_bar_baz`) is called in a standard front action, what is the effect on the layout update object instance?'
+        answers:
+            - {value: 'foo_bar_baz will be the only handle added', correct: false}
+            - {value: 'loadLayout () does not take any arguments, so there is no effect', correct: false}
+            - {value: 'Only two handles will be added: foo_bar_baz and default', correct: false}
+            - {value: 'Foo_bar_baz will be added instead of the default handle', correct: true}
+# DISCUSSION/ANSWER: Foo_bar_baz will be added instead of the default handle
+
+
+#120
+    -
+        question: 'Choose the FALSE statement when rewriting controller in Magento:(Choose 1 option among the followings)'
+        answers:
+            - {value: 'Need to declare Router to rewrite controller in config', correct: false}
+            - {value: 'Use a rewrite tag to declare rewrite controller', correct: false}
+            - {value: 'To re-use the system code, rewrite controller needs inheriting from the rewritten layer', correct: false}
+            - {value: 'Inheriting code has to include code from controller file of the system', correct: false}
+            - {value: 'Need to declare class for controllers of rewrite module in config', correct: true}
+# DISCUSSION/ANSWER: Need to declare class for controllers of rewrite module in config
+
+
+#121
+    - 
+        question: 'What elements are necessary to create API (SOAP) in Magento (2 answers)'
+        answers:
+            - {value: 'controller', correct: false}
+            - {value: 'Model', correct: true}
+            - {value: 'Helper', correct: false}
+            - {value: 'etc/api.xml', correct: true}
+            - {value: 'Resource Model', correct: false}
+# DISCUSSION/ANSWER: Model, etc/api.xml
+
+
+#122
+    - 
+        question: 'What is the difference between Model and Resource Model? Choose the correct answer.'
+        answers:
+            - {value: 'In EAV models, Model works with the entity tables and Resource Model works with the Attribute and Value tables.', correct: false}
+            - {value: 'The Model loads data of one entity (one row) from database table. The Resource Model loads data of one collection (includes many entities)', correct: false}
+            - {value: 'The Model is a temporary data store. The Resource Model works with database.', correct: true}
+            - {value: 'The Model and the Resource Model support for database manipulation but the Resource Model includes more functions manipulating with database.', correct: false}
+# DISCUSSION/ANSWER:The Model is a temporary data store. The Resource Model works with database.
+
+
+#123
+    -         
+        question: 'How to set order for a magento collection?(Choose 2)'
+        answers:
+            - {value: '$coll->getSelect()->order("entity_id desc");', correct: true}
+            - {value: '$coll->setOrder("entity_id","desc");', correct: true}
+            - {value: '$coll->setOrder("entity_id desc");', correct: false}
+            - {value: '$coll->getSelect()->order("entity_id","desc");', correct: false}
+# DISCUSSION/ANSWER: A, B
+
+
+#124
+    -
+        question: ' Discount "To fixed Ammount" 10$ means:'
+        answers:
+            - {value: 'Discount $10', correct: false}
+            - {value: 'The product is sold at $10', correct: true}
+            - {value: 'The minimum price is $10', correct: false}
+            - {value: 'None of the above is correct', correct: false}
+# DISCUSSION/ANSWER: B
+
+
+#125
+    -
+        question: |
+             Choose the order of implement of the following functions:
+               1 - Mage_Core_Model_Abstract::_afterSave ( ) 3
+               2 - Mage_Core_Model_Mysql4_Abstract::_beforeSave ( ) 1
+               3 - Mage_Core_Model_Mysql4_Abstract::_afterSave ( ) 2
+               4 - Mage_Core_Model_Abstract::afterCommitCallback ( ) 4
+        answers:
+            - {value: '1->2->3->4', correct: false}
+            - {value: '1->2->4->3', correct: false}
+            - {value: '2->1->3->4', correct: true}
+            - {value: '2->3->1->4', correct: false}
+# DISCUSSION/ANSWER: 2->3->1->4   C.2->1->3->4
+# 2->1->3->4 - this answer has been verified on Magento 1.9.2.4
+
+#126
+    - 
+         question: |
+            Choose the correct statement with the following config:
+              <default>
+                <sales>
+                  <totals_sort>
+                    <rewardpoints>34</rewardpoints>
+                  </totals_sort>
+                </sales>
+              </default>
+         answers:
+            - {value: 'Declare total rewardpoints for calculation.', correct: false}
+            - {value: 'Declare the order of calculation for the total rewardpoints', correct: false}
+            - {value: 'Config the value displayed for the total rewardpoints', correct: true}
+            - {value: 'Config doesn`t work', correct: false}
+# DISCUSSION/ANSWER:  3
+
+
+#127
+    -
+        question: 'When specifying a custom connection resource for a module that handles the DB reads, which of the following is a possible resource name?'
+        answers:
+            - {value: '<modulename_readonly>', correct: false}
+            - {value: '<modulename_read>', correct: true}
+            - {value: '<modulename_default>', correct: false}
+            - {value: '<modulename_setup>', correct: false}
+            - {value: '<modulename_connection_read>', correct: false}
+# DISCUSSION/ANSWER: <modulename_read>
+
+
+#128
+    -
+        question: 'What kind of subject is used to provide data for action method when calling from layout file?(Choose 1 option among the followings)'
+        answers:
+            - {value: 'Block', correct: false}
+            - {value: 'Helper', correct: true}
+            - {value: 'Controller', correct: false}
+            - {value: 'Model', correct: false}
+            - {value: 'Resource model', correct: false}
+ #DISCUSSION/ANSWER: Helper
+
+#129
+    - 
+        question: ' The differences between the two following methods: Mage::getStoreConfig() and Mage::getStoreConfigFlag() are:'
+        answers:
+            - {value: 'Mage::getStoreConfigFlag() is used for conditional statement when we find the system value in Magento', correct: false}
+            - {value: 'Method Mage::getStoreConfigFlag() will get config data from database. By contrast, Mage:: getStoreConfig() will get data from both files 	config.xml and database', correct: false}
+            - {value: 'Method Mage::getStoreConfig() gets config data in raw format. However, 	Mage::getStoreConfigFlag() gets config data in Boolean format', correct: true}
+            - {value: 'Method Mage::getStoreConfigFlag() is used to check depends condition in layout and config menu, but Mage::getStoreConfig() is not', correct: true}
+            - {value: 'Method Mage::getStoreConfig() gets data from data base first, then get from file config.xml, However Mage::getStoreConfigFlag() does in opposite order.', correct: false}
+ #DISCUSSION/ANSWER: C, A, D, B - wrong, correct: C and, D
+
+
+#130
+    -
+         question: |
+           What is purpose of the following code (in file config.xml)? ( Choose 1 option):
+           <global>
+               ...
+               <fieldsets>
+                   <sales_convert_quote_address>
+                       <base_discount>
+                           <to_order>*</to_order>
+                       </base_discount>
+                   </sales_convert_quote_address>
+               </fieldsets>
+           </global>
+         answers:
+            - {value: 'Transfer data of field base_discount from quote to order when a customer orders.', correct: false}
+            - {value: 'Transfer data of field base_discount from quote address to order when creating an order', correct: true}
+            - {value: 'Transfer data of field base_discount field from order to address when creating an order', correct: false}
+            - {value: 'Create 	field base_discount for quote_address và order', correct: false}
+            - {value: 'Transfer field base_discount from quote address to order in database', correct: false}
+# DISCUSSION/ANSWER: Transfer data of field base_discount from quote address to order when creating an order
+
+
+#131
+    -
+        question: ' Which of following statements allow to adding javascript through layout? (2 correct answers)'
+        answers:
+            - {value: 'addJsFile', correct: false}
+            - {value: 'addJsle', correct: true}
+            - {value: 'addItem', correct: true}
+            - {value: 'addJsHtml', correct: false}
+#DISCUSSION/ANSWER: B, C
+
+
+#132
+    -
+        question: 'Which of the following statements once execution will create a new object? ( 2 correct answers)'
+        answers:
+            - {value: 'Mage::getResourceModel("modulename/modelname")', correct: true}
+            - {value: 'Mage::getModel("modulename/modelname")', correct: true}
+            - {value: 'Mage::helper("modulename")', correct: false}
+            - {value: 'Mage::getSingleton("modulename/modelname")', correct: false}
+#DISCUSSION/ANSWER: A, B
+
+#133
+    -         
+        question: 'Which product types implement a parent-child relationship between product entities?(choose 3)'
+        answers:
+            - {value: 'Configurable', correct: true}
+            - {value: 'Simple', correct: false}
+            - {value: 'Grouped', correct: true}
+            - {value: 'Bundle', correct: true}
+            - {value: 'Virtual', correct: false}
+            - {value: 'Downloadable', correct: false}
+#DISCUSSION/ANSWER: A, C, D
+
+#134
+    -         
+        question: 'How to get attribute value from attribute code of product? (choose some)'
+        answers:
+            - {value: '$attribute_value = $product->getAttributeText($attribute_code);', correct: true}
+            - {value: '$attribute_value = Mage::getResourceModel(`catalog/product`)->getAttributeRawValue($product_id, 	$attribute_code, $store_id);', correct: true}
+            - {value: '$attribute_value = $product->getAttributeValue($attribute_code)', correct: false}
+            - {value: '$attribute_value = $product->getResource()->getAttribute($attribute_code)->getFrontend()->getValue($product);', correct: true}
+#DISCUSSION/ANSWER: B, C, D, -wrong, A,B,D - correct
+
+#135
+    -
+        question: 'How to call a CMS page in PHTML file?'
+        answers:
+            - {value: '$this->getLayout()->createBlock("cms/block")->load("blockidentifier")->toHtml();', correct: false}
+            - {value: '$this->getLayout()->createBlock("cms/block")->setBlockId("blockidentifier")->toHtml();', correct: true}
+            - {value: 'Mage::getBlock("cms/block")->setBlockId("blockidentifier")->toHtml();', correct: false}
+            - {value: '$this->getLayout()->createBlock("cms/staticblock")->load("blockidentifier")->toHtml();', correct: false}
+#DISCUSSION/ANSWER: B
+
+
+#136
+    -
+        question: |
+           The order of loading config in magento is:
+            (1) Configuration from the core_config_data DB table
+            (2) The etc/config.xml of all active modules
+            (3) app/etc/local.xml
+        answers:
+           - {value: '1-2-3', correct: false}
+           - {value: '1-3-2', correct: false}
+           - {value: '2-3-1', correct: true}
+           - {value: '1-2-3', correct: false}
+# DISCUSSION/ANSWER: 2-3-1 http://magento.stackexchange.com/questions/101447/possibilities-in-local-xml-configuration
+
+#137
+    -
+        question: 'In magento, when is order refunded?'
+        answers:
+            - {value: 'When items are not fully refunded', correct: false}
+            - {value: 'When total order is greater than 0', correct: false}
+            - {value: 'When there is a item which is invoiced but not refunded d.', correct: false}
+            - {value: 'B and C', correct: true}
+#DISCUSSION/ANSWER: B and C. According to test quiz bruteforcing )
+
+#138
+    - 
+        question: 'What is correct order to load code pool?'
+        answers:
+            - {value: 'Local , core, community', correct: false}
+            - {value: 'Core, local, community', correct: false}
+            - {value: 'Community,local,core', correct: false}
+            - {value: 'None of them is correct', correct: true}
+#DISCUSSION/ANSWER: None of them is correct
+
+#139
+    -         
+        question: 'To display formatted like the following example: "Aug 30, 2013" , choose the date of the following format:'
+        answers:
+            - {value: 'Mage_Core_Model_Locale :: FORMAT_TYPE_MEDIUM', correct: true}
+            - {value: 'Mage_Core_Model_Locale :: FORMAT_TYPE_SHORT', correct: false}
+            - {value: 'Mage_Core_Model_Locale :: FORMAT_TYPE_LONG', correct: false}
+            - {value: 'Mage_Core_Model_Locale :: FORMAT_TYPE_FULL', correct: false}
+#DISCUSSION/ANSWER: Mage_Core_Model_Locale :: FORMAT_TYPE_MEDIUM
+#http://www.jyotiranjan.in/blog/magento-format-datetime-using-configuration-options/
+
+
+#140
+    -
+        question: |
+          What is the order to generate 3 events
+            (1)sales_order_place_after,
+            (2)sales_convert_quote_to_order,
+            (3)sales_order_save_before
+        answers:
+            - {value: '1->2->3', correct: false}
+            - {value: '1->3->2', correct: false}
+            - {value: '2->1->3', correct: true}
+            - {value: '2->3->1', correct: false}
+#DISCUSSION/ANSWER: С
+
+#141
+    - 
+        question: 'What types of subject doesMagentocreate cache for?(Choose 2 options among the followings)'
+        answers:
+            - {value: 'Module Configuration', correct: true}
+            - {value: 'Block Data', correct: false}
+            - {value: 'Model', correct: false}
+            - {value: 'Block Output HTML', correct: true}
+            - {value: 'Controller', correct: false}
+#DISCUSSION/ANSWER: Module Configuration + Block Output HTML
+
+#142
+    - 
+        question: ' Which of following caches are in Core Magento 1.9?'
+        answers:
+            - {value: 'Full page cache', correct: true}
+            - {value: 'APC cache', correct: false}
+            - {value: 'Cache Blocks HTML output', correct: true}
+            - {value: 'Vanish cache', correct: false}
+#DISCUSSION/ANSWER: C - B,C - A,C
+
+#143
+    -
+        question: 'What are necessary steps to create 1 module payment in Magento? (3 answers)'
+        answers:
+            - {value: 'Create model payment', correct: true}
+            - {value: 'Create controller', correct: false}
+            - {value: 'Declare payment method in xpathconfig/default/payment', correct: true}
+            - {value: 'Declare configuration in etc/system.xml', correct: true}
+            - {value: 'Create resource model payment', correct: false}
+#DISCUSSION/ANSWER: A, C, D
+
+#144
+    -
+        question: 'Choose the correct relationship between tax and discount in magento'
+        answers:
+            - {value: 'Tax is calculated before discount', correct: false}
+            - {value: 'Discount is calculated before tax', correct: false}
+            - {value: 'Admin config in order to change the order of calculating tax and discount', correct: true}
+            - {value: 'Tax and discount are calculated independently in 2 separate total.', correct: false}
+
+#DISCUSSION/ANSWER: C (System->Configuration->Apply Customer Tax:Before Discount, After Discount)
+
+#145
+    -         
+        question: 'What is true for configuration cron “1 1 1 * *” in Magento'
+        answers:
+            - {value: 'Implement once an hour', correct: false}
+            - {value: 'Implement once a minute', correct: false}
+            - {value: 'Implement once a year', correct: false}
+            - {value: 'Implement once a month', correct: true}
+#DISCUSSION/ANSWER: D
+
+#147
+    - 
+        question: 'Which product type does NOT exist in magento core? (1 correct answer)'
+        answers:
+            - {value: 'Bundle', correct: false}
+            - {value: 'Configurable', correct: false}
+            - {value: 'Options', correct: true}
+            - {value: 'Virtual', correct: false}
+            - {value: 'Simple', correct: false}
+#DISCUSSION/ANSWER: C (quiz bruteforce) (b) Configuration is their typo, should be Configurable)
+
+#148
+    -
+        question: 'What is the function of Mage::helper("core")->formatDate(...) ?'
+        answers:
+            - {value: 'To display the time based on US time formating. E.g: Sept 29, 2013.', correct: false}
+            - {value: 'To display the time based on GMT.', correct: false}
+            - {value: 'To display the time based on the timezone of the visitor.', correct: false}
+            - {value: 'To display the time based on the location of the store.', correct: true}
+
+#DISCUSSION/ANSWER: To display the time based on the location of the store.
+
+
+#149
+    -
+        question: 'The advantage of using EAV comparing with flat table in Magento is: (2 answers)'
+        answers:
+            - {value: 'Storing the data in many small tables instead of a big one, which helps the data access speed become faster when there is a large amount of data.', correct: false}
+            - {value: 'Protecting the data better and safer than flat table.', correct: false}
+            - {value: 'Changing the attributes without changing the table structure.', correct: true}
+            - {value: 'Reducing the number of blank cells in the database table when storing the entities with different attributes.', correct: true}
+#DISCUSSION/ANSWER: C,D
+
+#150
+    -
+        question: 'What is the address in which tax is calculated?'
+        answers:
+            - {value: 'Shipping Address', correct: false}
+            - {value: 'Billing Address', correct: false}
+            - {value: 'Shipping Origin', correct: false}
+            - {value: 'According to config in admin', correct: true}
+#DISCUSSION/ANSWER: D
+
+
+#151
+    -
+        question: ' To delete button is available on the system`s form as buton Back, Save, Save and Continue Delete ... then we use the following way:'
+        answers:
+            - {value: '_removeButton ("name_button");', correct: true}
+            - {value: '_deleteButton (" name_button ");', correct: false}
+            - {value: '_dropButton ("name_button");', correct: false}
+            - {value: 'All are correct', correct: false}
+#DISCUSSION/ANSWER: _removeButton ('name_button');
+#Mage_Adminhtml_Block_Widget_Container
+#public function removeButton($id)
+#{
+#   return $this->_removeButton($id);
+#}
+
+#152
+    -
+        question: 'Which of the following sentences is FALSE when talking about the structureblock and content block ? (2 correct answers)'
+        answers:
+            - {value: 'Structure block is a block which is created in oder to define the layout"s structure of a magento page', correct: false}
+            - {value: 'Content block is a child of structure block in layout system', correct: true}
+            - {value: 'Content block displays the content which is seen by users on their browser', correct: false}
+            - {value: 'Structure blocks don"t need to have template file', correct: false}
+            - {value: 'Content blocks have to have template to display', correct: true}
+#DISCUSSION/ANSWER: D, E - B, D false, B, E - true
+
+#153
+    - 
+        question: 'To declare a totalmodel ( used to recalculate value of an order), which xpath do we follow to declare in file config.xml? ( Choose 1 option)'
+        answers:
+            - {value: 'default/sales/quote/totals', correct: false}
+            - {value: 'frontend/quote/sales/totals', correct: false}
+            - {value: 'global/sales/quote/totals', correct: true}
+            - {value: 'global/fieldsets/totals/quote', correct: false}
+            - {value: 'frontend/totals/quote/model', correct: false}
+            - {value: '', correct: false}
+#DISCUSSION/ANSWER: C global/sales/quote/totals
+
+#154
+    -         
+        question: 'What does CMS stand for?'
+        answers:
+            - {value: 'Content Mapping System', correct: false}
+            - {value: 'Content Management System', correct: true}
+            - {value: 'Content Master System', correct: false}
+            - {value: 'None of the above', correct: false}
+            - {value: '', correct: false}
+#DISCUSSION/ANSWER: B
+
+#155
+    -      
+        question: 'How to filter product collection ($collection = Mage::getModel("catalog/product")->getCollection()) by status?'
+        answers:
+            - {value: '$collection->addStatusFilter($status);', correct: false}
+            - {value: '$collection->addAttributeToSelect("*")-> addAttributeToFilter("status"=>array("eq"=>$status));', correct: true}
+            - {value: '$collection->addFieldToFilter("status"=>array($status));', correct: false}
+            - {value: '$collection-> addAttributeToSelect("*")->addFilterStatus($status);', correct: false}
+#DISCUSSION/ANSWER: B
+
+#156
+    -
+        question: 'Why some magento products are not shown in categories? (choose some)'
+        answers:
+            - {value: 'Status disable', correct: true}
+            - {value: 'Invisibility in catalog, search', correct: true}
+            - {value: 'Product out of stock', correct: true}
+            - {value: 'Assigned website', correct: false}
+#DISCUSSION/ANSWER: A, B, D - ab - abcd - ; ABC - true
+
+#157
+    -         
+        question: ' Which product types can NOT be shipped?'
+        answers:
+            - {value: 'Virtual product , bundle product', correct: false}
+            - {value: 'Downloadable product, vitural product', correct: true}
+            - {value: 'Bundle product, group product', correct: false}
+            - {value: 'Download product, bundle product', correct: false}
+#DISCUSSION/ANSWER: B
+
+
+#158
+    -
+        question: 'What is true statement to get current URL in Magento?'
+        answers:
+            - {value: 'Mage::helper("core")->getCurrentUrl();', correct: false}
+            - {value: 'Mage::getSingleton("core/url")->getCurrent();', correct: false}
+            - {value: 'Mage::helper("core/url")->getCurrentUrl();', correct: true}
+            - {value: 'Mage::getUrl();', correct: false}
+#DISCUSSION/ANSWER: C
+
+#159
+    -
+        question: 'choose the correct statement:'
+        answers:
+            - {value: 'Disable module in advanced configuration but stil be able to use class rewrite of the module', correct: true}
+            - {value: 'Disable module in advanced configuration but stil be able to use block of the module', correct: false}
+            - {value: 'Disable module in configuration file in folder app/etc/modules, but still be able to rewrite class and block of the module', correct: false}
+            - {value: 'All of them are incorrect', correct: false}
+#DISCUSSION/ANSWER: Disable module in advanced configuration but stil be able to use class rewrite of the module
+
+#160
+    -
+        question: 'Which tags below are NOT used in declaring XML layout? (2 correct answers)'
+        answers:
+            - {value: 'update', correct: false}
+            - {value: 'block', correct: false}
+            - {value: 'handle', correct: true}
+            - {value: 'template', correct: true}
+            - {value: 'Action', correct: false}
+#DISCUSSION/ANSWER: C, D
+
+
+#161
+    -
+        question: ' Which functions are required to be declared when creating a Shipping carrier model? (2 answers):'
+        answers:
+            - {value: 'get Allowed Methods', correct: true}
+            - {value: 'is Tracking Available', correct: false}
+            - {value: 'is Active', correct: false}
+            - {value: 'collect Rates', correct: true}
+            - {value: 'get Method Price', correct: false}
+#DISCUSSION/ANSWER: collect Rates and get Allowed Methods
+#In Mage_Shipping_Model_Carrier_Abstract:
+#abstract public function collectRates(Mage_Shipping_Model_Rate_Request $request);
+#And in
+#Mage_Shipping_Model_Carrier_Interface
+#public function getAllowedMethods();
+
+
+#162
+    -
+        question: 'Which of the following types is not an input type when creating an attribute to product by Add Attribute method? (Choose 1 option among the followings)'
+        answers:
+            - {value: 'price', correct: false}
+            - {value: 'text', correct: false}
+            - {value: 'boolean', correct: false}
+            - {value: 'multiselect', correct: false}
+            - {value: 'int', correct: true}
+#DISCUSSION/ANSWER: int
+
+
+#163
+    -
+        question: 'What we need to do to add a product type into magento? ( 2 answers is correct)'
+        answers:
+            - {value: 'Add structure product type into file config by following XPath global/catalog/product/type', correct: true}
+            - {value: 'Add structure product type into file config by following XPath global/product/type', correct: false}
+            - {value: 'Write model for the new product type which is inherited from Mage_Catalog_Model_Product_Type_Abstract', correct: true}
+            - {value: 'Write model for the new product type which is inherited from Mage_Catalog_Model_Product_Type_Price', correct: false}
+            - {value: 'Add product display configuration in menu in file adminhtml.xml', correct: false}
+#DISCUSSION/ANSWER: A, C
+
+
+#164
+    -
+        question: ' What is the using purpose of  Mage::register(...)?'
+        answers:
+            - {value: 'To save the value of a variable into session and then take it back by using Mage::registry(...).', correct: false}
+            - {value: 'To save the temporary value of a variable into Table core_config_data, and then take it back by using Mage::registry(...).', correct: false}
+            - {value: 'To save the value of a variable into a session of Magento, and then take it back by using Mage::registry(...).', correct: true}
+            - {value: 'To save the value of a variable into Mage::_registers, and then take it back by using Mage::registry(...)', correct: false}
+#DISCUSSION/ANSWER: D - no,  C - yes.
+
+#165
+    -
+        question: ' Which statement will return a Block object? Choose the correct answer.'
+        answers:
+            - {value: 'Mage::getSingleton("catalog/product")', correct: false}
+            - {value: 'Mage::getLayout()->createBlock("catalog/product")', correct: false}
+            - {value: 'Mage::app()->getBlock("catalog/product")', correct: false}
+            - {value: 'Mage::getBlockSingleton("catalog/product")', correct: true}
+#DISCUSSION/ANSWER: D
+
+#166
+    -
+        question: 'What are the roles of adminhtml.xml file in etc directory?(choose 3)'
+        answers:
+            - {value: 'admin menu', correct: true}
+            - {value: 'admin acl', correct: true}
+            - {value: 'admin layout', correct: true}
+            - {value: 'admin router', correct: false}
+#DISCUSSION/ANSWER: A, B ,C
+
+#167
+    -
+        question: ' How to insert static block in template file(.phtml)?'
+        answers:
+            - {value: 'echo $this->getLayout()->createBlock("cms/block")->setBlockId("static_block_id")->toHTML();', correct: true}
+            - {value: 'echo $this->getLayout()->setBlockId("static_block_id")->toHTML();', correct: false}
+            - {value: 'echo $this->getLayout()->createBlock("cms/block")->getBlockId("static_block_id")->toHTML();', correct: false}
+            - {value: 'echo $this->getLayout()->getBlockId("static_block_id")->toHTML();', correct: false}
+#DISCUSSION/ANSWER: A
+
+#168
+    -         
+        question: 'Which description is correct about overwrite function in Magento? Choose the correct answer.'
+        answers:
+            - {value: 'The overwritten Class cannot be used.', correct: false}
+            - {value: 'Able to overwrite class abstract.', correct: false}
+            - {value: 'Only use functions which are declared in overwrite class.', correct: false}
+            - {value: 'The Object created is an instance of overwrite class.', correct: true}
+#DISCUSSION/ANSWER: The Object created is an instance of overwrite class.
+
+#169
+    -
+        question: 'How to get current url with and without parameters?'
+        answers:
+            - {value: '$currentUrl = $this->helper(`core/url`)->getCurrentUrl();', correct: false}
+            - {value: '$currentUrl = $this->getBaseUrl();', correct: false}
+            - {value: '$request = $this->getRequest();', correct: false}
+            - {value: '$currentUrl = $this->getBaseUrl() . $request->getRouteName() .DS.$request->getControllerName() .DS. $request->getActionName();', correct: true}
+            - {value: '$currentUrl = Mage::getBaseUrl(array("params"=>false))', correct: false}
+#DISCUSSION/ANSWER: C - http://magento.stackexchange.com/questions/60955/get-current-url-without-parameters
+
+#170
+    -
+        question: 'How to get product collection which IDs are in array(16,17,18,20) ?'
+        answers:
+            - {value: '$collection->addFieldToFilter("entity_id"=>array("in"=>array(16,17,18,19)))', correct: true}
+            - {value: '$collection->addFieldToFilter("id", array(16,17,18,19));', correct: false}
+            - {value: '$collection->addFieldToFilter("entity_id"=>array("gt"=>16,"lt"=>"19"))', correct: false}
+            - {value: '$collection->addIdToFilter(array(16,17,18,19));', correct: false}
+#DISCUSSION/ANSWER: A
+
+#171
+    -
+        question: ' What is the correct order to load translation files?'
+        answers:
+            - {value: 'App/locale , table core_translate, design/locale.', correct: false}
+            - {value: 'App/locale , design/locale, table core_translate', correct: true}
+            - {value: 'Table core_translate, App/locale , design/locale', correct: false}
+            - {value: 'Table core_translate, design/locale, App/locale.', correct: false}
+#DISCUSSION/ANSWER: B
+
+#172
+    - 
+        question: ' What is the difference between base_grand_total and grand_total of order? Choose the correct answer.'
+        answers:
+            - {value: 'base_grand_total is the original value of order, grand_total is the value after discount, tax, shipping fee.', correct: false}
+            - {value: 'base_grand_total value is equal to grand_total value.', correct: false}
+            - {value: 'base_grand_total is an amount of order value based on currency in back-end, grand_total is the amount of order value based on currency in front-end.', correct: true}
+            - {value: 'base_grand_total is order value, grand_total is an amount that customers have to pay.', correct: false}
+#DISCUSSION/ANSWER: C
+
+#173
+    -         
+        question: 'Where does Magento store system configuration data?'
+        answers:
+            - {value: 'In the database table core_config_data table with scope information', correct: true}
+            - {value: 'In the database table core_data table with scope information.', correct: false}
+            - {value: 'In the database table core_resource table with scope information.', correct: false}
+            - {value: 'In the database table core_config_information table with scope information.', correct: false}
+#DISCUSSION/ANSWER: A
+
+#174
+    -         
+        question: 'Which block type is usually used for a “content” block on Magento pages?;'
+        answers:
+            - {value: 'core/template', correct: false}
+            - {value: 'core/text_list', correct: true}
+            - {value: 'core/text', correct: false}
+            - {value: 'core/text_content', correct: false}
+#DISCUSSION/ANSWER: B
+
+#175 (duplicate-variation of #73
+    -         
+        question: ' Which class that observer model often inherits from?'
+        answers:
+            - {value: 'Mage_Model_Config_Observer', correct: false}
+            - {value: 'Mage_Core_Model_Event_Observer_Abstract', correct: false}
+            - {value: 'Mage_Core_Model_Event_Observer_Interface', correct: false}
+            - {value: 'There is no required inheritance.', correct: true}
+            - {value: 'Varien_Object', correct: false}
+#DISCUSSION/ANSWER: D
+
+#176
+    -
+        question: 'Which tag below is used to check config in layout? (1 answer is correct)'
+        answers:
+            - {value: 'depends', correct: false}
+            - {value: 'ifconfig', correct: true}
+            - {value: 'if', correct: false}
+            - {value: 'storeconfig', correct: false}
+            - {value: 'action', correct: false}
+#DISCUSSION/ANSWER: ifconfig
+
+#177
+    -
+        question: 'Which is the branch statement in Magento email template?'
+        answers:
+            -
+                value: |
+                    {{depend var is_send_to_friend}}
+                    <!-- content -->
+                    {{/depend}}
+                correct: false
+                value: |
+                    {{depend is_send_to_friend}}
+                    <!-- content -->
+                    {{/depend}}
+                correct: true
+                value: |
+                    {{depend is_send_to_friend==true}}
+                    <!-- content -->
+                    {{/depend}}
+                correct: false
+                value: |
+                    {{if is_send_to_friend}}
+                    <!-- content -->
+                    {{/endif}}
+                correct: false
+
+#DISCUSSION/ANSWER: B. depend is_send_to_friend
+
+#178
+    -         
+        question: 'Which tags below are not used in email template? ( 2 answers is correct)'
+        answers:
+            - {value: '{{var …}}', correct: false}
+            - {value: '{{if …}} … {{else}} … {{endif}}', correct: true}
+            - {value: '{{skin …}}', correct: false}
+            - {value: '{{depend …}}… {{/depend}}', correct: false}
+            - {value: '{{store …}}', correct: false}
+            - {value: '{{model …}}', correct: true}
+
+#DISCUSSION/ANSWER: {{if …}} … {{else}} … {{endif}}  +  {{model …}}
+
+#179
+    -         
+        question: 'How to redirect to another url from observer(Varien_Event_Observer $observer) file?'
+        answers:
+            - {value: '$this->redirect($url)', correct: false}
+            - {value: '$observer->redirectUrl($url)', correct: false}
+            - {value: '$observer->getRequest()->setParam("return_url", $url)', correct: true}
+            - {value: '$this->getRequest()->redirect($url)', correct: false}
+#DISCUSSION/ANSWER: C
+#Mage::app()->getResponse()->setRedirect(Mage::getBaseUrl());
+#$observer->getEvent()->getControllerAction()->setFlag('', Mage_Core_Controller_Varien_Action::FLAG_NO_DISPATCH, true);
+
+#180
+    -         
+        question: 'Do display a custom total in order page view in frontend, what do we do? ( Choose 2 options)'
+        answers:
+            - {value: 'Declare model total in configuration file of the module', correct: false}
+            - {value: 'Add layout to handle sales_order_view for model total declared in config', correct: true}
+            - {value: 'Write collect and fetch method for model total declared in config', correct: false}
+            - {value: 'Declare invoice total model in configuration file ( config.xml) of the module', correct: false}
+            - {value: 'Write method init Totals for block declared from layout.', correct: true}
+#DISCUSSION/ANSWER: A, C, B, E
+
+
+#181
+    -         
+        question: ' Choose the correct function to edit getURL customer in grid files in admin'
+        answers:
+            - {value: '$this->getUrl(`adminhtml/customer/edit`, array(`id` => $row->getId()));', correct: true}
+            - {value: '$this->getUrl(`admin/customer/edit`, array(`id` => $row->getId()));', correct: false}
+            - {value: '$this->getUrl(`customeradmin/customer/edit`, array(`id` => $row->getId()));', correct: false}
+            - {value: 'None of them is correct.', correct: false}
+#DISCUSSION/ANSWER: A
+
+#182
+    -
+        question: 'How can a template`s block instance be accessed inside the template file, and how can other block instances be accessed? or How can block instances be accessed from the controller?(choose 1) By use of the $this object From Controller:'
+        answers:
+            - {value: '$this->getLayout()->createBlock(`foo/bar`)', correct: true}
+            - {value: '$this->loadLayout()->createBlock(`foo/bar`)', correct: false}
+            - {value: '$this->renderLayout()->createBlock(`foo/bar`)', correct: false}
+            - {value: '$this->setLayout()->createBlock(`foo/bar`)', correct: false}
+#DISCUSSION/ANSWER: A
+
+#183
+    -   
+        question: 'Which methods to get magento table name?(Choose 2)'
+        answers:
+            - {value: 'Mage_Core_Model_Resource::getTableName()', correct: true}
+            - {value: 'Mage_Core_Model_Resource::getTable()', correct: false}
+            - {value: 'Mage_Core_Model_Mysql4_Abstract::getTableName()', correct: false}
+            - {value: 'Mage_Core_Model_Mysql4_Abstract::getTable()', correct: true}
+#DISCUSSION/ANSWER: A, D
+
+
+#184
+    -         
+        question: 'What is the factors that make Magento website slow? (Choose many answers)'
+        answers:
+            - {value: 'EAV structure of magento database, even for retrieving single entity the query becomes very complex .', correct: true}
+            - {value: 'Magento"s template system involves a lot of recursive rendering', correct: true}
+            - {value: 'Huge XML trees built up for layout configuration, application configuration settings', correct: true}
+            - {value: 'Place many orders at the same time.', correct: false}
+#DISCUSSION/ANSWER: A, B, C
+
+#185
+    -         
+        question: 'Which exist methods to join tables on collections and on select instances? (select 3 answers)'
+        answers:
+            - {value: 'joinLeft', correct: true}
+            - {value: 'joinnatural', correct: true}
+            - {value: 'joinfull', correct: true}
+            - {value: 'joinTable', correct: false}
+#ON/ANSWER: A, B, C
+
+#186
+    -         
+        question: ' When seting up class of Mage_Sales_Model_Mysql4_Setup, which of the following will correctly add an attribute to the sales/order entity?'
+        answers:
+            - {value: '$installer->addAttribute("sales_order_entity", "foo", array("type" => "int"));', correct: false}
+            - {value: '$installer->addAttribute("sales/order", "foo", array("type" => "int"));', correct: false}
+            - {value: '$installer->addAttribute("order", "foo", array("type" => "int"));', correct: true}
+            - {value: '$installer->addAttribute("sales_flat_order", "foo", array("type" => "int"));', correct: false}
+#DISCUSSION/ANSWER: C
+
+#187
+    -         
+        question: 'In Magento. when is order closed?'
+        answers:
+            - {value: 'When all products are invoiced', correct: false}
+            - {value: 'When all items are shipped', correct: false}
+            - {value: 'When admin sets close', correct: false}
+            - {value: 'When all items are refunded', correct: true}
+#DISCUSSION/ANSWER: D
+
+#188
+    -         
+        question: 'What product types do not need to ship?(choose 2)'
+        answers:
+            - {value: 'Configurable', correct: false}
+            - {value: 'Simple', correct: false}
+            - {value: 'Grouped', correct: false}
+            - {value: 'Bundle', correct: false}
+            - {value: 'Virtual', correct: true}
+            - {value: 'Downloadable', correct: true}
+#DISCUSSION/ANSWER: E, F
+
+#189
+    -
+        question: ' Which routers exist in a native Magento implementation? (4 answers)'
+        answers:
+            - {value: 'admin', correct: true}
+            - {value: 'standard', correct: true}
+            - {value: 'cms', correct: true}
+            - {value: 'adminhtml', correct: false}
+            - {value: 'frontend', correct: false}
+            - {value: 'Default', correct: true}
+#DISCUSSION/ANSWER: A, B, C, F
+
+#190
+    -         
+        question: 'To creat a mass action for grid in backend in Magento, what we need to do?'
+        answers:
+            - {value: 'Add mass action item in method _prepareMassaction of Thêmmassaction item trongphươngthức_prepareMassaction of the corresponding model grid.', correct: false}
+            - {value: 'Add mass action item in method_prepareMassaction of the corresponding block grid.', correct: true}
+            - {value: 'Add admin html controller/action to execute the corresponding action which is declared in method_prepare Massaction.', correct: true}
+            - {value: 'Declare massaction in file xml layout of the module', correct: false}
+#DISCUSSION/ANSWER: B, C
+
+#191
+    -
+        question: 'Which of following statements will return the information about version of Magento?'
+        answers:
+            - {value: 'Mage::app()->getVersion()', correct: false}
+            - {value: 'Mage::getVersionInfo()', correct: true}
+            - {value: 'Mage::app()->getVersionInfo()', correct: false}
+            - {value: 'Mage::getMagentoVersion()', correct: false}
+#DISCUSSION/ANSWER: B
+
+#192
+    -
+        question: 'To change the checkout mode form GUEST to REGISTER and vice versa,  which event is needed?'
+        answers:
+            - {value: 'checkout_allow_guest', correct: true}
+            - {value: 'change_checkout_method', correct: false}
+            - {value: 'is_allowed_guest_checkout', correct: false}
+            - {value: 'is_allowed_register_checkout', correct: false}
+#DISCUSSION/ANSWER: A
+
+#193
+    -         
+        question: 'Which statement to generate the product list contains “phone” in product name or has the price higher than 99? Choose the correct answer.'
+        answers:
+            - 
+                value: |
+                     $productCollection->addAttributeToFilter('
+                         array(
+                             array('attribute'=>'price','gt'=>99),
+                             array('attribute'=>'name','like'=>'%phone%')
+                         ));
+                correct: true
+            - 
+                value: |
+                    $productCollection->addFieldToFilter('price',array('gt'=>99))'
+                        ->addFieldToFilter('name',array('like'=>'%phone%'));
+                correct: false
+            - 
+                value: |        
+                    $productCollection->addFieldToFilter('
+                        array('price','name'),
+                        array(array('gt'=>99),array('like'=>'%phone%')),
+                    );
+                correct: false
+            - 
+                value: |
+                    $productCollection->addAttributeToFilter('price'=>array('gt'=>99))'
+                        ->addOrCondition('name',array('like'=>'%phone%'));
+                correct: false
+#DISCUSSION/ANSWER: a
+
+#194
+    -         
+        question: 'Which table to store the relationship data between configurable product and it"s simple product?'
+        answers:
+            - {value: 'catalog_product_relation table', correct: false}
+            - {value: 'catalog_product_superlink table', correct: false}
+            - {value: 'Both table catalog_product_superlink and catalog_product_relation', correct: true}
+            - {value: 'Catalog_product_link table', correct: false}
+#DISCUSSION/ANSWER: B
+
+#195
+    - 
+        question: | 
+            What does the following config mean?
+            <fieldsets>
+                <sales_convert_quote_address>
+                    <rewardpoints_earn>
+                        <to_order>*</to_order>
+                    </rewardpoints_earn>
+                </sales_convert_quote_address>
+            </fieldsets>
+        answers:
+            - {value: 'Save data in quote address', correct: false}
+            - {value: 'Save data in rewardpoints_earn table', correct: false}
+            - {value: 'Transfer data from sales/quote_address table to sale/order table', correct: true}
+            - {value: 'Transfer sale/order table to sales/quote_address table', correct: false}
+#DISCUSSION/ANSWER: Transfer data from sales/quote_address table to sale/order table
+
+#196
+    - 
+        question: ' Choose a path that leads to folder containing the class Mage_Catalog_Model_Product_Type_Price? Choose the correct answer.'
+        answers:
+            - {value: 'app/code/core/Mage/Catalog/Product/Type', correct: false}
+            - {value: 'app/code/local/Mage/Catalog /Product/Model/Type', correct: false}
+            - {value: 'app/code/core/Mage/Model/Catalog/Product/Type', correct: false}
+            - {value: 'app/code/core/Mage/Catalog/Model/Product/Type', correct: true}
+#DISCUSSION/ANSWER: C
+
+#197
+    -
+        question: |
+            The order to call function in grid block'
+              _prepareColumns
+              _prepareMassaction
+              _prepareCollection
+        answers:
+            - {value: '1->3->2', correct: false}
+            - {value: '1->2->3', correct: true}
+            - {value: '3->2->1', correct: false}
+            - {value: '2->1->3', correct: false}
+#DISCUSSION/ANSWER: 1>2>3
+
+#198
+    -         
+        question: 'Which statement is CORRECT when comparing database model EAV and the classic database model.'
+        answers:
+            - {value: 'EAV model is bulkier but runs faster.', correct: false}
+            - {value: 'EAV model is convenient to add a field by adding a table hi I that not to break data structure of the table', correct: true}
+            - {value: 'Installing EAV model is eaiser than installing the classic model.', correct: false}
+            - {value: 'EAV model is becoming popular and gradually replace the classic model', correct: false}
+#DISCUSSION/ANSWER: B
+
+
+#199
+    -         
+        question: 'When customers translate one word in three following position: table core_translate, design/locale, which position will be displayed?'
+        answers:
+            - {value: 'App/locale', correct: false}
+            - {value: 'table core_translate', correct: true}
+            - {value: 'design/locale', correct: false}
+            - {value: 'All of them are correct', correct: false}
+#DISCUSSION/ANSWER: table core_translate
+
+#200
+    -         
+        question: 'Which product types exist in Magento?(choose 6)'
+        answers:
+            - {value: 'simple product', correct: true}
+            - {value: 'gift product', correct: false}
+            - {value: 'grouped product', correct: true}
+            - {value: 'configurable product', correct: true}
+            - {value: 'special product', correct: false}
+            - {value: 'virtual product', correct: true}
+            - {value: 'bundle product', correct: true}
+            - {value: 'downloadable product', correct: true}
+#DISCUSSION/ANSWER: A, C, D, F, G, H
+
+#201
+    -         
+        question: ' How to change default length of Increment ID for orders?'
+        answers:
+            - {value: '$entityType = Mage::getModel("eav/entity_type")->loadByCode("order");$entityType->setIncrementPadLength(12)->save();', correct: true}
+            - {value: '$entity = Mage::getModel("eav/entity_type")->setType("order"); $entityType->setIncrementPadLength(12)->save();', correct: false} #true?
+            - {value: '$entity = Mage::getModel("eav/entity_type_order"); $entityType->setIncrementPadLength(12)->save();', correct: false}
+#DISCUSSION/ANSWER: A(quiz tells A is wrong, but should work fine)  B (quiz bruteforcing tells B, but the model is in $entity but undefined variable $entityType is saving. Typo ? (no c, because no model eav/entity_type_order exists)
+
+#202
+    -         
+        question: ' How does Magento process requests that cannot be mapped?'
+        answers:
+            - {value: 'It will redirect to 404 page.. cms/index/noRouter', correct: true}
+            - {value: 'It will return home page', correct: false}
+            - {value: 'It will show empty page', correct: false}
+            - {value: 'It will redirect to your previous page', correct: false}
+#DISCUSSION/ANSWER: A
+
+#203
+    -
+        question: 'When we add a Value of an attribute (price format)  to product, where is it stored? (1 correct answer)'
+        answers:
+            - {value: 'sales_flat_order', correct: false}
+            - {value: 'catalog_product_entity', correct: false}
+            - {value: 'catalog_product_entity_decimal', correct: true}
+            - {value: 'catalog_product_entity_text', correct: false}
+            - {value: 'catalog_eav_attribute', correct: false}
+#DISCUSSION/ANSWER: C
+
+#204
+    -         
+        question: |
+            By implementing the following commands, the price value saved in database is......Choose the correct answer.'
+                $firstProduct = Mage::getSingleton('catalog/product')->load(12);
+            	$secondProduct = Mage::getSingleton('catalog/product')->load(15);
+            	$firstProduct->setPrice(99);
+            	$secondProduct->setPrice($firstProduct->getPrice() * 2 + 1);
+            	$firstProduct->save();
+        answers:
+            - {value: 'firstProduct is 99, secondProduct is unchanged', correct: false}
+            - {value: 'firstProduct is 99, secondProduct is 199', correct: false}
+            - {value: 'firstProduct is unchanged, secondProduct is 199', correct: true}
+            - {value: 'Both of them are 199', correct: false}
+
+#DISCUSSION/ANSWER: firstProduct is unchanged, secondProduct is 199
+
+#205
+    -         
+        question: 'When installing a new module ( there is version 2.0, which files are run? (there are 2 correct answers)'
+        answers:
+            - {value: 'mysql4-install-0.1.0.php', correct: false}
+            - {value: 'mysql4-install-0.1.3.php', correct: true}
+            - {value: 'mysql4-upgrade-0.1.3-0.2.0.php', correct: true}
+            - {value: 'mysql4-upgrade-0.1.0-0.1.3.php', correct: false}
+            - {value: 'mysql4-upgrade-0.1.0-0.2.0.php', correctg: false}
+#DISCUSSION/ANSWER: mysql4-install-0.1.3.php  +  mysql4-upgrade-0.1.3-0.2.0.php
+
+#206
+    -
+        question: 'What is the minimum PHP version required for magento installation?'
+        answers:
+            - {value: '5.4', correct: false}
+            - {value: '5.3', correct: false}
+            - {value: '5.2', correct: true}
+            - {value: 'None of the above', correct: false}
+#DISCUSSION/ANSWER: 5.2
+
+#207
+    -         
+        question: 'To create a validate data for a Magento form, what should we do? (Choose 2 answers)'
+        answers:
+            - {value: 'Write a form with class : validate-form.', correct: true}
+            - {value: 'Write a form with field of a form which has a class required-entry', correct: true}
+            - {value: 'Declare Javascript code: new VarienForm("form_id", true);', correct: false}
+            - {value: 'Write a form with the method :post', correct: false}
+# DISCUSSION/ANSWER: A, C - A, D - B, C - B, D - C, D - A, B
+
+#208
+    - 
+        question: ' When exactly does inventory decrement occur? (choose 1)'
+        answers:
+            - {value: 'checkoutAllSubmitAfter()', correct: true}
+            - {value: 'saveOrder()', correct: false}
+            - {value: 'placeOrder()', correct: false}
+            - {value: 'createShipment()', correct: false}
+#DISCUSSION/ANSWER: checkoutAllSubmitAfter()
+
+#209
+    -
+        question: 'In which database is discount value of an order stored? Choose the correct answer.'
+        answers:
+            - {value: 'sales_order_entity_decimal', correct: false}
+            - {value: 'sales_flat_order', correct: true}
+            - {value: 'sales_order_entity', correct: false}
+            - {value: 'Sales_order_entity_int', correct: false}
+#DISCUSSION/ANSWER: B
+
+#210
+    -
+        question: 'What is not a default layout of native magento?(choose 1)'
+        answers:
+            - {value: ' 3columns.phtml', correct: false}
+            - {value: '2columns-left.phtml', correct: false}
+            - {value: '2columns-right.phtml', correct: false}
+            - {value: '1colums.phtml', correct: true}
+#DISCUSSION/ANSWER: D 1columns.phtml (typo: 1column.html)
