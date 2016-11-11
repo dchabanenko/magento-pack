@@ -1,0 +1,682 @@
+category: Magento Basics
+# Note: This section contains the questions from the other areas, like: request flow or rendering
+
+questions:
+#13
+    -
+        question: 'You are creating a custom CMS module named Achme_Cms. Which one of the following is the correct XML required to override a controller from the Mage_Cms module in your Achme_Cms module?'
+        answers:
+            -
+              value: |
+                  <frontend>
+                      <routers>
+                          <cms>
+                              <args>
+                                  <modules>
+                                     <achme_cms before="Mage_Cms">Achme_Cms</achme_cms>
+                                  </modules>
+                              </args>
+                          </cms>
+                      </routers>
+                  </frontend>
+              correct: true
+            -
+              value: |
+                  <frontend>
+                      <routers>
+                          <achme_cms>
+                              <args>
+                                  <modules>
+                                     <cms before="Mage_Cms">Achme_Cms</cms>
+                                  </modules>
+                              </args>
+                          </achme_cms>
+                      </routers>
+                  </frontend>
+              correct: false
+            -
+              value: |
+                  <frontend>
+                      <routers>
+                          <cms>
+                              <args>
+                                  <rewrite>
+                                     <mage_cms>Achme_Cms</cms>
+                                  </rewrite>
+                              </args>
+                          </cms>
+                      </routers>
+                  </frontend>
+              correct: false
+            -
+              value: |
+                  <global>
+                      <controllers>
+                          <achme_cms>
+                              <rewrite>
+                                     <mage_cms>Achme_Cms</cms>
+                              </rewrite>
+                          </achme_cms>
+                      </controllers>
+                  </global>
+              correct: false
+# DISCUSSION/ANSWER: A
+
+#19
+    -
+         question: 'Which one of the following statements is true regarding Mage_Core_Block_Text_List?'
+         answers:
+            - {value: 'Mage_Core_Block_Text_List declares its own template for rendering, but the rendered template can be overridden via layout XML.', correct: false}
+            - {value: 'Child blocks of Mage_Core_Block_Text_List are always rendered alphabetically by name.', correct: false}
+            - {value: 'Mage_Core_Block_Text_List will always render all children automatically when it is rendered.', correct: true}
+            - {value: 'Mage_Core_Block_Text_List directly extends Mage_Core_Block_Template', correct: false}
+            - {value: 'In order to render, the parent block of Mage_Core_Block_Text_List must always be an output block.', correct: false}
+
+#DISCUSSION/ANSWER: C. Mage_Core_Block_Text_List will always render all children automatically when it is rendered.
+
+#27
+    -
+         question: 'Which two of the following will return an instance of a block object? (Choose two)'
+         answers:
+            - {value: 'Mage::getBlock(`page/html_header`);', correct: false}
+            - {value: 'Mage::app()->createBlock(`page/html_header`);', correct: false}
+            - {value: 'Mage::createBlock(`page/html_header`);', correct: false}
+            - {value: 'Mage::app()->getLayout()->createBlock(`page/html_header`);', correct: true}
+            - {value: 'Mage::getLayout()->createBlock(`page/html_header`);', correct: false}
+            - {value: 'Mage::app()->getLayout()->createBlock(`page/html_header`)->setTemplate(`page/html/header.phtml`);', correct: true}
+
+#DISCUSSION/ANSWER: D + F, with method Mage::app()->getLayout()->createBlock()
+
+#28
+    -
+         question: 'Inside the XML node config/global/blocks, what is the correct xpath for rewriting the catalog/product_view block?'
+         answers:
+            - {value: 'catalog/rewrite/product/view', correct: false}
+            - {value: 'catalog_product/rewrite/view', correct: false}
+            - {value: 'catalog/product/rewrite/view', correct: false}
+            - {value: 'catalog/product_view/rewrite', correct: false}
+            - {value: 'catalog/rewrite/product_view', correct: true }
+            - {value: 'catalog_product_view/rewrite', correct: false}
+
+# DISCUSSION/ANSWER: E. catalog/rewrite/product_view
+
+
+#37
+    -
+         question: 'Which statement describes a model class that extends Mage_Core_Model_Abstract?'
+         answers:
+            - {value: 'The model class consists of properties and methods for storing and manipulating data retrieved via separate resource classes responsible for database operations.', correct: true}
+            - {value: 'The model class is responsible for loading the frontend layout templates and responding to page requests via its Action methods (for example, indexAction).', correct: false}
+            - {value: 'The model class does not encapsulate any logic except for logic providing access to the data loaded from the database.', correct: false}
+            - {value: 'The model class is primarily responsible for direct query operations such as retrieving and storing data and then rendering that data to the frontend view.', correct: false}
+
+#DISCUSSION/ANSWER: A. The model class consists of properties and methods...
+
+#40
+    -
+         question: ' Which one of the following xpaths is correct for replacing Mage_Customer_Model_Customer_Address via Mage::helper(`customer/address`)?'
+         answers:
+            - {value: 'global/customer/helpers/address', correct: false}
+            - {value: 'global/rewrite/helpers/rewrite/address', correct: false}
+            - {value: 'global/helpers/customer/rewrite/address', correct: true}
+            - {value: 'global/helpers/rewrite/customer_address', correct: false}
+            - {value: 'global/helpers/rewrite/customer/address', correct: false}
+
+# DISCUSSION/ANSWER: C. global/helpers/customer/rewrite/address
+
+
+#41
+    -
+         question: 'Which one of the following controller classes could respond to this URL?: http://example.com/modulename/controller/index'
+         answers:
+            - {value: 'Namespace_ModuleName_IndexController', correct: false}
+            - {value: 'Namespace_ModuleName_Controller_Controllerlndex', correct: false}
+            - {value: 'Namespace_ModuleName_Controller_lndexController', correct: false}
+            - {value: 'Namespace_Modulename_ControllerController', correct: true}
+
+#DISCUSSION/ANSWER: D. Namespace_Modulename_ControllerController
+
+
+#48
+    -
+         question: 'Which of the following is the default setup script class name?'
+         answers:
+            - {value: 'Mage_Core_Model_Mysql4_Setup', correct: false}
+            - {value: 'Mage_Core_Model_Resource_Setup_Default', correct: false}
+            - {value: 'Mage_Setup_Model_Resource_Default', correct: false}
+            - {value: 'Mage_Core_Model_Resource_Setup', correct: true}
+
+#DISCUSSION/ANSWER: D. Mage_Core_Model_Resource_Setup
+
+#49
+    -
+        question: |
+           In what order are the routers from the Magento core checked for a matching route?
+                Default: Mage_Core_Controller_Varien_Router_Default
+                CMS: Mage_Cms_Controller_Router
+                Standard: Mage_Core_Controller_Varien_Router_Standard
+                Admin: Mage_Core_Controller_Varien_Router_Admin
+        answers:
+            - {value: 'Admin, Standard, CMS, Default', correct: true}
+            - {value: 'Default, CMS, Standard, Admin', correct: false}
+            - {value: 'Admin, CMS, Standard, Default', correct: false}
+            - {value: 'Standard, Admin, Default, CMS', correct: false}
+
+#DISCUSSION/ANSWER: A. Admin, Standard, CMS, Default
+
+
+#51
+    -
+         question: 'A custom frontend controller will extend which one of the following classes?'
+         answers:
+            - {value: 'Mage_Core_Controller_Front_Action', correct: true}
+            - {value: 'Mage_Adminhtml_Controller_Action', correct: false}
+            - {value: 'Mage_Core_Сontroller_Varien_Front', correct: false}
+            - {value: 'Mage_Core_Controller_Abstract', correct: false}
+
+#DISCUSSION/ANSWER: A. Mage_Core_Controller_Front_Action
+
+#55
+    -
+         question: |
+            A valid way to extend Mage_Adminhtml_Cms_PageController with the Acme Cms Adminhtml_PageController class would be to set the following configuration;
+               <admin>
+                   <routers>
+                       <adminhtml>
+                           <args>
+                               <modules>
+                                   <custom_cms before="____">____</<custom_cms>
+                               </modules>
+                           </args>
+                       </adminhtml>
+                   </routers>
+               </admin>
+            Which of the following code pairs should be inserted in the blank spots in the code shown above?
+         answers:
+            - {value: 'Mage_Adminhtml, Acme_Cms_Adminhtml', correct: true}
+            - {value: 'Mage_Adminhtml, Acme_Cms_Adminhtml_PageController', correct: false}
+            - {value: 'Mage_Adminhtml_Cms_PageController, Acme_Cms_Adminhtml', correct: false}
+            - {value: 'Mage_Adminhtml_Cms_PageController, Acme_Cms_Adminhtml_PageController', correct: false}
+
+#DISCUSSION/ANSWER: A. Mage_Adminhtml, Acme_Cms_Adminhtml
+#Rewriting modules front-names and not the controllers
+
+#56
+    -
+         question: 'When you register an event observer, which two of the following pieces of information are required for it to function? (Choose two)'
+         answers:
+            - {value: 'method (or function) name', correct: true}
+            - {value: 'method (or function) arguments', correct: false}
+            - {value: 'class name', correct: true}
+            - {value: 'object type (singleton, model, none, etc)', correct: false}
+            - {value: 'call order', correct: false}
+            - {value: 'active/inactive status', correct: false}
+
+#DISCUSSION/ANSWER: A and C
+
+#65
+    -
+        question: |
+            When the Magento configuration is being loaded, all the XML files in app/etc and the module registration files under app/etc/modules/ are loaded first. After that step, in which order are the following items loaded?'
+              1. Configuration from the core_config_data DB table
+              2. app/etc/local.xml
+              3. The etc/config.xml of all active modules
+        answers:
+            - {value: '1, 3, 2', correct: false}
+            - {value: '3, 1, 2', correct: false}
+            - {value: '3, 2, 1', correct: true}
+            - {value: '1, 2, 3', correct: false}
+
+#DISCUSSION/ANSWER:
+
+#68
+    -
+        question: 'What does Magento use to determine whether the automatically run upgrade scripts have been run yet?'
+        answers:
+            - {value: 'The modification date on the modules` etc/config.xml file', correct: false}
+            - {value: 'The version number (or lack thereof) stored in the core_module_version table', correct: false}
+            - {value: 'The version number (or lack thereof) stored in the core_resource table', correct: true}
+            - {value: 'A comparison of the resources that are capable of successfully loading', correct: false}
+
+# DISCUSSION/ANSWER: C. The version number (or lack thereof) stored in the core_resource table
+
+
+#73
+    -
+        question: 'What is the basic class/interface for every model observer class?'
+        answers:
+            - {value: 'Mage_Model_Config_Observer', correct: false}
+            - {value: 'Mage_Core_Model_Event_Observer_Abstract', correct: false}
+            - {value: 'Mage_Core_Model_Event_Observer_Interface', correct: false}
+            - {value: 'There is no required inheritance.', correct: true}
+            - {value: 'Varien_Object', correct: false}
+
+# DISCUSSION/ANSWER: D. There is no required inheritance.
+
+
+#76
+    -
+        question: 'Which of the following xpaths defines the correct XML structure for informing Magento that your module has install scripts?'
+        answers:
+            - {value: 'global/resources/etc/setup/<script_directory_name>/module', correct: false}
+            - {value: 'system/database/resources/<script_directory_name>/setup/module', correct: false}
+            - {value: 'global/resources/<script_directory_name>/setup/module', correct: true}
+            - {value: 'database/action/scripts/<script_directory_name>', correct: false}
+
+#DISCUSSION/ANSWER: C. global/resources/<script_directory_name>/setup/module
+
+#80
+    -
+        question: ' In which config areas are layout files declared? (Choose two)'
+        answers:
+            - {value: '<admin>', correct: false}
+            - {value: '<adminhtml>', correct: true}
+            - {value: '<default>', correct: false}
+            - {value: '<frontend>', correct: true}
+            - {value: '<global>', correct: false}
+
+#DISCUSSION/ANSWER: B + D, <adminhtml> + <frontend>
+
+#82
+    -
+        question: 'Two modules, Foo and Moo, both rewrite the catalog/product model, but only the Moo module`s rewrite is being used. Both modules Foo and Moo reside in the community code pool. Which two approaches allow the functionality from both classes to be used? (Choose two)'
+        answers:
+            - {value: 'Copy Foo_Model_Product to the local code pool', correct: false}
+            - {value: 'Copy Moo_Model_Product to the local code pool and merge the logic from Foo_Model_Product into it.', correct: true}
+            - {value: 'Copy Moo_Model_Product to the local code pool and make it extend Foo_Model_Product, making sure the logic of both classes does not conflict.', correct: true}
+            - {value: 'Copy Moo_Model_Product to the local code pool.', correct: false}
+            - {value: 'Change the rewrite directive of the Moo module to rewrite foo/product instead of catalog/product.', correct: false}
+
+# DISCUSSION/ANSWER: B + C, merge + extend
+
+
+
+#93
+    -
+        question: 'Which of the following node names may be used inside the setup resource declaration to utilize a custom setup class?'
+        answers:
+            - {value: 'resourceModel', correct: false}
+            - {value: 'resourceClass', correct: false}
+            - {value: 'setupClass', correct: false}
+            - {value: 'class', correct: true}
+
+#DISCUSSION/ANSWER: D. class ???
+
+#95
+    -
+        question: 'Which file path correctly identifies the location of a modules install/upgrade scripts inside the primary module directory?'
+        answers:
+            - {value: 'sql/<setup_resource_name>/', correct: true}
+            - {value: 'var/scripts/', correct: false}
+            - {value: 'scripts/', correct: false}
+            - {value: '<setup_resource_name>/', correct: false}
+
+#DISCUSSION/ANSWER: A. sql/<setup_resource_name>/
+
+#104
+    -
+        question: ' Which tags are used to declare catched event?(Choose 3 options among the followings)'
+        answers:
+            - {value: 'adminhtml', correct: true}
+            - {value: 'default', correct: false}
+            - {value: 'admin', correct: false}
+            - {value: 'frontend', correct: true}
+            - {value: 'global', correct: true}
+            - {value: 'crontab', correct: false}
+#  DISCUSSION/ANSWER: 1.adminhtml, 4.frontend, 5.global
+#Example: ../app/code/core/Mage/Bundle/etc/config.xml
+
+#110
+    -
+        question: 'In the module Magestore_GiftCard, what is the return value of  Mage::getModel(`giftcard/code` ( 1 answer)'
+        answers:
+            - {value: 'Return a line in database of giftcard table : giftcard_code', correct: false}
+            - {value: 'Return an object of class Magestore_GiftCard_Model_Code', correct: true}
+            - {value: 'Return a data array of module Magestore_GiftCard', correct: false}
+            - {value: 'Return the class Magestore_GiftCard_Model_Code', correct: false}
+#  DISCUSSION/ANSWER: B
+
+#112
+    -
+        question: 'Which parameters are necessary for an event observer?	(choose 3)'
+        answers:
+            - {value: 'type (model, object, none, singleton)', correct: true}
+            - {value: 'class (class name of observer)', correct: true}
+            - {value: 'model(model of observer)', correct: false}
+            - {value: 'method (method to invoke)', correct: true}
+#  DISCUSSION/ANSWER: type  +  class  +  method
+
+#127
+    -
+        question: 'When specifying a custom connection resource for a module that handles the DB reads, which of the following is a possible resource name?'
+        answers:
+            - {value: '<modulename_readonly>', correct: false}
+            - {value: '<modulename_read>', correct: true}
+            - {value: '<modulename_default>', correct: false}
+            - {value: '<modulename_setup>', correct: false}
+            - {value: '<modulename_connection_read>', correct: false}
+# DISCUSSION/ANSWER: <modulename_read>
+
+
+#129
+    - 
+        question: ' The differences between the two following methods: Mage::getStoreConfig() and Mage::getStoreConfigFlag() are:'
+        answers:
+            - {value: 'Mage::getStoreConfigFlag() is used for conditional statement when we find the system value in Magento', correct: false}
+            - {value: 'Method Mage::getStoreConfigFlag() will get config data from database. By contrast, Mage:: getStoreConfig() will get data from both files 	config.xml and database', correct: false}
+            - {value: 'Method Mage::getStoreConfig() gets config data in raw format. However, 	Mage::getStoreConfigFlag() gets config data in Boolean format', correct: true}
+            - {value: 'Method Mage::getStoreConfigFlag() is used to check depends condition in layout and config menu, but Mage::getStoreConfig() is not', correct: true}
+            - {value: 'Method Mage::getStoreConfig() gets data from data base first, then get from file config.xml, However Mage::getStoreConfigFlag() does in opposite order.', correct: false}
+ #DISCUSSION/ANSWER: C, A, D, B - wrong, correct: C and, D
+
+
+#132
+    -
+        question: 'Which of the following statements once execution will create a new object? ( 2 correct answers)'
+        answers:
+            - {value: 'Mage::getResourceModel("modulename/modelname")', correct: true}
+            - {value: 'Mage::getModel("modulename/modelname")', correct: true}
+            - {value: 'Mage::helper("modulename")', correct: false}
+            - {value: 'Mage::getSingleton("modulename/modelname")', correct: false}
+#DISCUSSION/ANSWER: A, B
+
+#136
+    -
+        question: |
+           The order of loading config in magento is:
+            (1) Configuration from the core_config_data DB table
+            (2) The etc/config.xml of all active modules
+            (3) app/etc/local.xml
+        answers:
+           - {value: '1-2-3', correct: false}
+           - {value: '1-3-2', correct: false}
+           - {value: '2-3-1', correct: true}
+           - {value: '1-2-3', correct: false}
+# DISCUSSION/ANSWER: 2-3-1 http://magento.stackexchange.com/questions/101447/possibilities-in-local-xml-configuration
+
+#138
+    - 
+        question: 'What is correct order to load code pool?'
+        answers:
+            - {value: 'Local , core, community', correct: false}
+            - {value: 'Core, local, community', correct: false}
+            - {value: 'Community,local,core', correct: false}
+            - {value: 'None of them is correct', correct: true}
+#DISCUSSION/ANSWER: None of them is correct
+
+#139
+    -         
+        question: 'To display formatted like the following example: "Aug 30, 2013" , choose the date of the following format:'
+        answers:
+            - {value: 'Mage_Core_Model_Locale :: FORMAT_TYPE_MEDIUM', correct: true}
+            - {value: 'Mage_Core_Model_Locale :: FORMAT_TYPE_SHORT', correct: false}
+            - {value: 'Mage_Core_Model_Locale :: FORMAT_TYPE_LONG', correct: false}
+            - {value: 'Mage_Core_Model_Locale :: FORMAT_TYPE_FULL', correct: false}
+#DISCUSSION/ANSWER: Mage_Core_Model_Locale :: FORMAT_TYPE_MEDIUM
+#http://www.jyotiranjan.in/blog/magento-format-datetime-using-configuration-options/
+
+#145
+    -         
+        question: 'What is true for configuration cron “1 1 1 * *” in Magento'
+        answers:
+            - {value: 'Implement once an hour', correct: false}
+            - {value: 'Implement once a minute', correct: false}
+            - {value: 'Implement once a year', correct: false}
+            - {value: 'Implement once a month', correct: true}
+#DISCUSSION/ANSWER: D
+
+
+#148
+    -
+        question: 'What is the function of Mage::helper("core")->formatDate(...) ?'
+        answers:
+            - {value: 'To display the time based on US time formating. E.g: Sept 29, 2013.', correct: false}
+            - {value: 'To display the time based on GMT.', correct: false}
+            - {value: 'To display the time based on the timezone of the visitor.', correct: false}
+            - {value: 'To display the time based on the location of the store.', correct: true}
+
+#DISCUSSION/ANSWER: To display the time based on the location of the store.
+
+#154
+    -         
+        question: 'What does CMS stand for?'
+        answers:
+            - {value: 'Content Mapping System', correct: false}
+            - {value: 'Content Management System', correct: true}
+            - {value: 'Content Master System', correct: false}
+            - {value: 'None of the above', correct: false}
+#DISCUSSION/ANSWER: B
+
+#158
+    -
+        question: 'What is true statement to get current URL in Magento?'
+        answers:
+            - {value: 'Mage::helper("core")->getCurrentUrl();', correct: false}
+            - {value: 'Mage::getSingleton("core/url")->getCurrent();', correct: false}
+            - {value: 'Mage::helper("core/url")->getCurrentUrl();', correct: true}
+            - {value: 'Mage::getUrl();', correct: false}
+#DISCUSSION/ANSWER: C
+
+#159
+    -
+        question: 'choose the correct statement:'
+        answers:
+            - {value: 'Disable module in advanced configuration but stil be able to use class rewrite of the module', correct: true}
+            - {value: 'Disable module in advanced configuration but stil be able to use block of the module', correct: false}
+            - {value: 'Disable module in configuration file in folder app/etc/modules, but still be able to rewrite class and block of the module', correct: false}
+            - {value: 'All of them are incorrect', correct: false}
+#DISCUSSION/ANSWER: Disable module in advanced configuration but stil be able to use class rewrite of the module
+
+#164
+    -
+        question: ' What is the using purpose of  Mage::register(...)?'
+        answers:
+            - {value: 'To save the value of a variable into session and then take it back by using Mage::registry(...).', correct: false}
+            - {value: 'To save the temporary value of a variable into Table core_config_data, and then take it back by using Mage::registry(...).', correct: false}
+            - {value: 'To save the value of a variable into a session of Magento, and then take it back by using Mage::registry(...).', correct: true}
+            - {value: 'To save the value of a variable into Mage::_registers, and then take it back by using Mage::registry(...)', correct: false}
+#DISCUSSION/ANSWER: D - no,  C - yes.
+
+#166
+    -
+        question: 'What are the roles of adminhtml.xml file in etc directory?(choose 3)'
+        answers:
+            - {value: 'admin menu', correct: true}
+            - {value: 'admin acl', correct: true}
+            - {value: 'admin layout', correct: true}
+            - {value: 'admin router', correct: false}
+#DISCUSSION/ANSWER: A, B ,C
+
+
+#168
+    -         
+        question: 'Which description is correct about overwrite function in Magento? Choose the correct answer.'
+        answers:
+            - {value: 'The overwritten Class cannot be used.', correct: false}
+            - {value: 'Able to overwrite class abstract.', correct: false}
+            - {value: 'Only use functions which are declared in overwrite class.', correct: false}
+            - {value: 'The Object created is an instance of overwrite class.', correct: true}
+#DISCUSSION/ANSWER: The Object created is an instance of overwrite class.
+
+#169
+    -
+        question: 'How to get current url with and without parameters?'
+        answers:
+            - {value: '$currentUrl = $this->helper(`core/url`)->getCurrentUrl();', correct: false}
+            - {value: '$currentUrl = $this->getBaseUrl();', correct: false}
+            - {value: '$request = $this->getRequest();', correct: false}
+            - {value: '$currentUrl = $this->getBaseUrl() . $request->getRouteName() .DS.$request->getControllerName() .DS. $request->getActionName();', correct: true}
+            - {value: '$currentUrl = Mage::getBaseUrl(array("params"=>false))', correct: false}
+#DISCUSSION/ANSWER: C - http://magento.stackexchange.com/questions/60955/get-current-url-without-parameters
+
+#171
+    -
+        question: ' What is the correct order to load translation files?'
+        answers:
+            - {value: 'App/locale , table core_translate, design/locale.', correct: false}
+            - {value: 'App/locale , design/locale, table core_translate', correct: true}
+            - {value: 'Table core_translate, App/locale , design/locale', correct: false}
+            - {value: 'Table core_translate, design/locale, App/locale.', correct: false}
+#DISCUSSION/ANSWER: B
+
+#173
+    -         
+        question: 'Where does Magento store system configuration data?'
+        answers:
+            - {value: 'In the database table core_config_data table with scope information', correct: true}
+            - {value: 'In the database table core_data table with scope information.', correct: false}
+            - {value: 'In the database table core_resource table with scope information.', correct: false}
+            - {value: 'In the database table core_config_information table with scope information.', correct: false}
+#DISCUSSION/ANSWER: A
+
+
+#175 (duplicate-variation of #73
+    -         
+        question: ' Which class that observer model often inherits from?'
+        answers:
+            - {value: 'Mage_Model_Config_Observer', correct: false}
+            - {value: 'Mage_Core_Model_Event_Observer_Abstract', correct: false}
+            - {value: 'Mage_Core_Model_Event_Observer_Interface', correct: false}
+            - {value: 'There is no required inheritance.', correct: true}
+            - {value: 'Varien_Object', correct: false}
+#DISCUSSION/ANSWER: D
+
+#177
+    -
+        question: 'Which is the branch statement in Magento email template?'
+        answers:
+            -
+                value: |
+                    {{depend var is_send_to_friend}}
+                    <!-- content -->
+                    {{/depend}}
+                correct: false
+            -
+                value: |
+                    {{depend is_send_to_friend}}
+                    <!-- content -->
+                    {{/depend}}
+                correct: true
+            -
+                value: |
+                    {{depend is_send_to_friend==true}}
+                    <!-- content -->
+                    {{/depend}}
+                correct: false
+            -
+                value: |
+                    {{if is_send_to_friend}}
+                    <!-- content -->
+                    {{/endif}}
+                correct: false
+
+#DISCUSSION/ANSWER: B. depend is_send_to_friend
+
+#178
+    -         
+        question: 'Which tags below are not used in email template? ( 2 answers is correct)'
+        answers:
+            - {value: '{{var …}}', correct: false}
+            - {value: '{{if …}} … {{else}} … {{endif}}', correct: true}
+            - {value: '{{skin …}}', correct: false}
+            - {value: '{{depend …}}… {{/depend}}', correct: false}
+            - {value: '{{store …}}', correct: false}
+            - {value: '{{model …}}', correct: true}
+
+#DISCUSSION/ANSWER: {{if …}} … {{else}} … {{endif}}  +  {{model …}}
+
+#179
+    -         
+        question: 'How to redirect to another url from observer(Varien_Event_Observer $observer) file?'
+        answers:
+            - {value: '$this->redirect($url)', correct: false}
+            - {value: '$observer->redirectUrl($url)', correct: false}
+            - {value: '$observer->getRequest()->setParam("return_url", $url)', correct: true}
+            - {value: '$this->getRequest()->redirect($url)', correct: false}
+#DISCUSSION/ANSWER: C
+#Mage::app()->getResponse()->setRedirect(Mage::getBaseUrl());
+#$observer->getEvent()->getControllerAction()->setFlag('', Mage_Core_Controller_Varien_Action::FLAG_NO_DISPATCH, true);
+
+#184
+    -
+        question: 'What is the factors that make Magento website slow? (Choose many answers)'
+        answers:
+            - {value: 'EAV structure of magento database, even for retrieving single entity the query becomes very complex .', correct: true}
+            - {value: 'Magento"s template system involves a lot of recursive rendering', correct: true}
+            - {value: 'Huge XML trees built up for layout configuration, application configuration settings', correct: true}
+            - {value: 'Place many orders at the same time.', correct: false}
+#DISCUSSION/ANSWER: A, B, C
+
+#189
+    -
+        question: ' Which routers exist in a native Magento implementation? (4 answers)'
+        answers:
+            - {value: 'admin', correct: true}
+            - {value: 'standard', correct: true}
+            - {value: 'cms', correct: true}
+            - {value: 'adminhtml', correct: false}
+            - {value: 'frontend', correct: false}
+            - {value: 'Default', correct: true}
+#DISCUSSION/ANSWER: A, B, C, F
+
+#191
+    -
+        question: 'Which of following statements will return the information about version of Magento?'
+        answers:
+            - {value: 'Mage::app()->getVersion()', correct: false}
+            - {value: 'Mage::getVersionInfo()', correct: true}
+            - {value: 'Mage::app()->getVersionInfo()', correct: false}
+            - {value: 'Mage::getMagentoVersion()', correct: false}
+#DISCUSSION/ANSWER: B
+
+#192
+    -
+        question: 'To change the checkout mode form GUEST to REGISTER and vice versa,  which event is needed?'
+        answers:
+            - {value: 'checkout_allow_guest', correct: true}
+            - {value: 'change_checkout_method', correct: false}
+            - {value: 'is_allowed_guest_checkout', correct: false}
+            - {value: 'is_allowed_register_checkout', correct: false}
+#DISCUSSION/ANSWER: A
+
+#196
+    - 
+        question: ' Choose a path that leads to folder containing the class Mage_Catalog_Model_Product_Type_Price? Choose the correct answer.'
+        answers:
+            - {value: 'app/code/core/Mage/Catalog/Product/Type', correct: false}
+            - {value: 'app/code/local/Mage/Catalog /Product/Model/Type', correct: false}
+            - {value: 'app/code/core/Mage/Model/Catalog/Product/Type', correct: false}
+            - {value: 'app/code/core/Mage/Catalog/Model/Product/Type', correct: true}
+#DISCUSSION/ANSWER: C
+
+
+#199
+    -         
+        question: 'When customers translate one word in three following position: table core_translate, design/locale, which position will be displayed?'
+        answers:
+            - {value: 'App/locale', correct: false}
+            - {value: 'table core_translate', correct: true}
+            - {value: 'design/locale', correct: false}
+            - {value: 'All of them are correct', correct: false}
+#DISCUSSION/ANSWER: table core_translate
+
+#205
+    -         
+        question: 'When installing a new module ( there is version 2.0, which files are run? (there are 2 correct answers)'
+        answers:
+            - {value: 'mysql4-install-0.1.0.php', correct: false}
+            - {value: 'mysql4-install-0.1.3.php', correct: true}
+            - {value: 'mysql4-upgrade-0.1.3-0.2.0.php', correct: true}
+            - {value: 'mysql4-upgrade-0.1.0-0.1.3.php', correct: false}
+            - {value: 'mysql4-upgrade-0.1.0-0.2.0.php', correct: false}
+#DISCUSSION/ANSWER: mysql4-install-0.1.3.php  +  mysql4-upgrade-0.1.3-0.2.0.php
+
+#206
+    -
+        question: 'What is the minimum PHP version required for magento installation?'
+        answers:
+            - {value: '5.4', correct: false}
+            - {value: '5.3', correct: false}
+            - {value: '5.2', correct: true}
+            - {value: 'None of the above', correct: false}
+#DISCUSSION/ANSWER: 5.2

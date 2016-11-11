@@ -154,6 +154,7 @@ questions:
     -
         question: 'You are creating a custom CMS module named Achme_Cms. Which one of the following is the correct XML required to override a controller from the Mage_Cms module in your Achme_Cms module?'
         answers:
+            -
               value: |
                   <frontend>
                       <routers>
@@ -167,7 +168,7 @@ questions:
                       </routers>
                   </frontend>
               correct: true
-
+            -
               value: |
                   <frontend>
                       <routers>
@@ -181,7 +182,7 @@ questions:
                       </routers>
                   </frontend>
               correct: false
-
+            -
               value: |
                   <frontend>
                       <routers>
@@ -195,6 +196,7 @@ questions:
                       </routers>
                   </frontend>
               correct: false
+            -
               value: |
                   <global>
                       <controllers>
@@ -206,7 +208,6 @@ questions:
                       </controllers>
                   </global>
               correct: false
-
 # DISCUSSION/ANSWER: A
 
 #14
@@ -546,7 +547,7 @@ questions:
 
 #40
     -
-         question: ' Which one of the following xpaths is correct for replacing Mage_Customer_Model_Custom_Address via Mage::helper(`customer/address`)?'
+         question: ' Which one of the following xpaths is correct for replacing Mage_Customer_Model_Customer_Address via Mage::helper(`customer/address`)?'
          answers:
             - {value: 'global/customer/helpers/address', correct: false}
             - {value: 'global/rewrite/helpers/rewrite/address', correct: false}
@@ -2283,16 +2284,19 @@ questions:
                     <!-- content -->
                     {{/depend}}
                 correct: false
+            -
                 value: |
                     {{depend is_send_to_friend}}
                     <!-- content -->
                     {{/depend}}
                 correct: true
+            -
                 value: |
                     {{depend is_send_to_friend==true}}
                     <!-- content -->
                     {{/depend}}
                 correct: false
+            -
                 value: |
                     {{if is_send_to_friend}}
                     <!-- content -->
@@ -2688,3 +2692,140 @@ questions:
             - {value: '2columns-right.phtml', correct: false}
             - {value: '1colums.phtml', correct: true}
 #DISCUSSION/ANSWER: D 1columns.phtml (typo: 1column.html)
+
+#211
+    -
+        question: 'How is a flat table updated?'
+        answers:
+            - {value: 'By a cron job', correct: false}
+            - {value: 'By a special flat indexer', correct: true}
+            - {value: 'Directly from the Product resource model, in the _aftersave method', correct: false}
+            - {value: 'By an observer on catalog_product_model_save_after', correct: false}
+#DISCUSSION/ANSWER: Not sure
+
+
+#212
+    -
+        question: 'What is the purpose of the configuration XML flag stored in g1obal/resource/connection/type/pdomysql/compatibleMode?'
+        answers:
+            - {value: 'If set to 0, then all data structures are exported when using Dataflow.', correct: false}
+            - {value: 'If set to 0, then only standard-compliant SQL is used.', correct: true}
+            - {value: 'If set to 0, then data structures compatible with OpenCommence Language are exported when using Data flow.', correct: false}
+            - {value: 'If set to 0, then MySQL-specific SQL is used.', correct: false}
+#DISCUSSION/ANSWER:
+
+#213
+    -
+        question: 'Which of the following should you do in order to add another product attribute to the condition in a shopping cart price rule?'
+        answers:
+            - {value: 'Create an observer on the load sales rule product attributes event.', correct: false}
+            - {value: 'Override Mage SalesRule Model Rule Condition Product and modify the protected variable $_ruleAttributes.', correct: false}
+            - {value: 'Mark the attribute as “Use for Promo Rule Conditions”on the attribute management page in the admin.', correct: true}
+            - {value: 'Add another child to the configuration node global/catalog/attributes_to_use_in_sales_rules.', correct: false}
+#DISCUSSION/ANSWER:
+
+#214
+    -
+        question: 'Which one of the following accurately describes the purpose of the resource helper classes instantiated through Mage::getResourceHelper?'
+        answers:
+            - {value: 'Format values returned by the database for display in templates.', correct: false}
+            - {value: 'Provide public access to concrete implementations of varien_Db_Adapter_Interface.', correct: false}
+            - {value: 'Wrap vendor-specific SQL additions into an RDBMS-agnostic interface.', correct: true}
+            - {value: 'Provide a convenient way to modify database table properties.', correct: false}
+#DISCUSSION/ANSWER: Don't know, B is wrong (Provide public access to concrete implementations of varien_Db_Adapter_Interface)
+
+
+#215
+    -
+        question: |
+            Assume the following price configuration:
+                Price: 10 Group price: group=General, price=15 Tier price: group=All Groups, qty=1, price=20 Tier price:
+                group=General, qty=1, price=25
+                Which price will a customer from the “General” group see on the product view page?
+        answers:
+            - {value: '20', correct: false}
+            - {value: '10', correct: true}
+            - {value: '25', correct: false}
+            - {value: '15', correct: false}
+#DISCUSSION/ANSWER:
+
+
+#216
+    -
+        question: 'You want to replace the instance of Mage_Customer_Helper_Address returned by Mage::helper(‘customer/address’) with an instance of your own class. Which one of the following xpaths would accomplish that?'
+        answers:
+            - {value: 'global/helpers/customer/rewrite/address', correct: true}
+            - {value: 'global/customer/helpers/address', correct: false}
+            - {value: 'global/ rewrite/ helpers/ rewrite/address', correct: false}
+            - {value: 'global/helpers/rewrite/customer/address', correct: false}
+#DISCUSSION/ANSWER:
+
+#217
+    -
+        question: 'Given an EAV-based data model, values for each of the object’s attributes are stored in?'
+        answers:
+            - {value: 'a type-specific table used for storing all attribute values of the given type for all entities', correct: false}
+            - {value: 'a table specific to both the attributes data type and the given objects entity type', correct: true}
+            - {value: 'type-specific columns on an entity-specific attribute-value storage table', correct: false}
+            - {value: 'type-specific columns on a general purpose attribute-value storage table', correct: false}
+#DISCUSSION/ANSWER:
+
+#218
+    -
+        question: 'Which is a responsibility of EAV attribute frontend models?'
+        answers:
+            - {value: 'To provide direct read access to attribute values in the EAV value tables for display', correct: false}
+            - {value: 'To provide direct access to the EAV attribute models for templates', correct: false}
+            - {value: 'To provide access to an attribute’s EAV value table', correct: false}
+            - {value: 'To format the attribute value and label before displaying them', correct: true}
+#DISCUSSION/ANSWER:
+
+
+#219
+    -
+        question: 'What is the total model Mage_Sale_Model_Quote_Addres_Total Nominal used for?'
+        answers:
+            - {value: 'It checks whether the whole quote is nominal or not.', correct: false}
+            - {value: 'It runs nominal total models in case of need.', correct: true}
+            - {value: 'It calculates nominal prices for every item.', correct: false}
+            - {value: 'It calculates prices only for items that are represented by the nominal product types.', correct: false}
+#DISCUSSION/ANSWER: don't know. d is wrong
+
+#220
+    -
+        question: 'You want your module to set some data on the shopping cart item when a product is added to the cart on the frontend. Which event can be used regardless of how the product is added to the cart (from wishlist, through quote merge, etc.)'
+        answers:
+            - {value: 'checkout_cart_add_product_complete', correct: false}
+            - {value: 'checkout_cart_product_add_after.', correct: false}
+            - {value: 'sales_quote_add_item', correct: true}
+            - {value: 'checkout_cart_save_before', correct: false}
+#DISCUSSION/ANSWER: don't know. d is wrong
+#checkout_cart_add_product_complete - wrong. no cart or quote
+#checkout_cart_product_add_after - wrong. no cart or quote
+#++sales_quote_add_item
+#checkout_cart_save_before - wrong we don't know what changes are made
+
+
+#221
+    -
+        question: |
+            Which one of the following calls returns a simple product type model?
+            Assume that $product is an instance of Mage_Catalog_Model_Product representing a simple product
+        answers:
+            - {value: 'Mage Catalog Model Product Type:: factory(`simple`)', correct: false}
+            - {value: '$product->getType()', correct: false}
+            - {value: 'Mage::getsingleton(‘catalog/producttype’)->getType($product)', correct: false}
+            - {value: '$product->getTypeInstance()', correct: true}
+#DISCUSSION/ANSWER:
+
+#222
+    -
+        question: 'When an admin page is requested, which of the following methods will be executed first?'
+        answers:
+            - {value: 'Mage Core Controller Varien Action:: dispatch ()', correct: false}
+            - {value: 'Mage Core Controller Varien Front:: dispatch ()', correct: false}
+            - {value: 'Mage Core Controller Router Default::match ()', correct: false}
+            - {value: 'Mage Adminhtml Controller Action:: preDispatch ()', correct: true}
+#DISCUSSION/ANSWER: Mage Core Controller Varien Front:: dispatch () is wrong
+# Mage Core Controller Router Default::match () has a typo (varien folder missed: Mage_Core_Controller_Varien_Router_Default)
+# Quiz tells b is wrong, but I (chab) debugged and it shows b is running first
