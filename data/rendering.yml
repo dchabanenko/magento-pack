@@ -1,0 +1,702 @@
+category: Magento Rendering
+questions:
+    -
+        question: 'What class does an adminhtml grid directly extend?'
+        answers:
+            - {value: 'Mage_Adminhtml_Block_Widget', correct: true}
+            - {value: 'Varien_Data_Grid',  correct: false}
+            - {value: 'Varien_Data_Widget', correct: false}
+            - {value: 'Mage_Adminhtml_Block_Template', correct: false}
+#13
+    -
+        question: 'You are creating a custom CMS module named Achme_Cms. Which one of the following is the correct XML required to override a controller from the Mage_Cms module in your Achme_Cms module?'
+        answers:
+            -
+              value: |
+                  <frontend>
+                      <routers>
+                          <cms>
+                              <args>
+                                  <modules>
+                                     <achme_cms before="Mage_Cms">Achme_Cms</achme_cms>
+                                  </modules>
+                              </args>
+                          </cms>
+                      </routers>
+                  </frontend>
+              correct: true
+            -
+              value: |
+                  <frontend>
+                      <routers>
+                          <achme_cms>
+                              <args>
+                                  <modules>
+                                     <cms before="Mage_Cms">Achme_Cms</cms>
+                                  </modules>
+                              </args>
+                          </achme_cms>
+                      </routers>
+                  </frontend>
+              correct: false
+            -
+              value: |
+                  <frontend>
+                      <routers>
+                          <cms>
+                              <args>
+                                  <rewrite>
+                                     <mage_cms>Achme_Cms</cms>
+                                  </rewrite>
+                              </args>
+                          </cms>
+                      </routers>
+                  </frontend>
+              correct: false
+            -
+              value: |
+                  <global>
+                      <controllers>
+                          <achme_cms>
+                              <rewrite>
+                                     <mage_cms>Achme_Cms</cms>
+                              </rewrite>
+                          </achme_cms>
+                      </controllers>
+                  </global>
+              correct: false
+# DISCUSSION/ANSWER: A
+
+#19
+    -
+         question: 'Which one of the following statements is true regarding Mage_Core_Block_Text_List?'
+         answers:
+            - {value: 'Mage_Core_Block_Text_List declares its own template for rendering, but the rendered template can be overridden via layout XML.', correct: false}
+            - {value: 'Child blocks of Mage_Core_Block_Text_List are always rendered alphabetically by name.', correct: false}
+            - {value: 'Mage_Core_Block_Text_List will always render all children automatically when it is rendered.', correct: true}
+            - {value: 'Mage_Core_Block_Text_List directly extends Mage_Core_Block_Template', correct: false}
+            - {value: 'In order to render, the parent block of Mage_Core_Block_Text_List must always be an output block.', correct: false}
+
+#DISCUSSION/ANSWER: C. Mage_Core_Block_Text_List will always render all children automatically when it is rendered.
+
+#27
+    -
+         question: 'Which two of the following will return an instance of a block object? (Choose two)'
+         answers:
+            - {value: 'Mage::getBlock(`page/html_header`);', correct: false}
+            - {value: 'Mage::app()->createBlock(`page/html_header`);', correct: false}
+            - {value: 'Mage::createBlock(`page/html_header`);', correct: false}
+            - {value: 'Mage::app()->getLayout()->createBlock(`page/html_header`);', correct: true}
+            - {value: 'Mage::getLayout()->createBlock(`page/html_header`);', correct: false}
+            - {value: 'Mage::app()->getLayout()->createBlock(`page/html_header`)->setTemplate(`page/html/header.phtml`);', correct: true}
+
+#DISCUSSION/ANSWER: D + F, with method Mage::app()->getLayout()->createBlock()
+
+#28
+    -
+         question: 'Inside the XML node config/global/blocks, what is the correct xpath for rewriting the catalog/product_view block?'
+         answers:
+            - {value: 'catalog/rewrite/product/view', correct: false}
+            - {value: 'catalog_product/rewrite/view', correct: false}
+            - {value: 'catalog/product/rewrite/view', correct: false}
+            - {value: 'catalog/product_view/rewrite', correct: false}
+            - {value: 'catalog/rewrite/product_view', correct: true }
+            - {value: 'catalog_product_view/rewrite', correct: false}
+
+# DISCUSSION/ANSWER: E. catalog/rewrite/product_view
+
+#33
+    -
+         question: 'Which class is extended to render a dropdown in admin forms?'
+         answers:
+            - {value: 'Mage_Adminhtml_Block_Widget', correct: false}
+            - {value: 'Mage_Core_Block_Abstract', correct: false}
+            - {value: 'Mage_Adminhtml_Block_Abstract', correct: false}
+            - {value: 'Mage_Adminhtml_Block_Template', correct: false}
+            - {value: 'Varien_Data_Form_Abstract', correct: true}
+
+# DISCUSSION/ANSWER: E. Varien_Data_Form_Abstract is extended by Varien_Data_Form_Element_Abstract which is extended by Varien_Data_Form_Element_Select
+
+#43
+    -
+         question: 'Which of the following block methods is the best to override when there is a need to customize how the block`s html is rendered?'
+         answers:
+            - {value: '_toHtml()', correct: true}
+            - {value: 'toHtml()', correct: false}
+            - {value: 'setLayout()', correct: false}
+            - {value: 'renderLayout ()', correct: false}
+
+#DISCUSSION/ANSWER: A. _toHtml()
+
+#50
+    -
+        question: 'Which of the following will NOT generate a <script> tag in the output of the standard Magento page/html_head block?'
+        answers:
+            -
+                value: |
+                    <layout>
+                      <default>
+                        <reference name="head">
+                          <action method="addJs">
+                            <file>js/some.js</file>
+                correct: false
+            -
+                value: |
+                    <layout>
+                      <default>
+                        <reference name="head">
+                          <action method="addJs">
+                            <name>js/some.js</file>
+                correct: false
+            -
+                value: |
+                    <layout>
+                      <default>
+                        <reference name="head">
+                          <action method="addItem">
+                            <file>js/some.js</file>
+                correct: true
+            -
+                value: |
+                    <layout>
+                      <default>
+                        <reference name="head">
+                          <action method="addItem">
+                            <item>js</item>
+                            <file>js/some.js</file>
+                correct: false
+
+#DISCUSSION/ANSWER: C
+
+#51
+    -
+         question: 'A custom frontend controller will extend which one of the following classes?'
+         answers:
+            - {value: 'Mage_Core_Controller_Front_Action', correct: true}
+            - {value: 'Mage_Adminhtml_Controller_Action', correct: false}
+            - {value: 'Mage_Core_Сontroller_Varien_Front', correct: false}
+            - {value: 'Mage_Core_Controller_Abstract', correct: false}
+
+#DISCUSSION/ANSWER: A. Mage_Core_Controller_Front_Action
+
+#58
+    -
+        question: 'Which of the following layout XML directives will set a value on a block?'
+        answers:
+            -
+                value: |
+                    <layout>
+                      <block type="some/block_class">
+                        <setSomeValue>value
+                correct: false
+            -
+                value: |
+                    <layout>
+                      <block type="some/block_class">
+                        <value>value
+                correct: false
+            -
+                value: |
+                    <layout>
+                      <block type="some/block_class">
+                        <action method="setSomeValue">value
+                correct: false
+            -
+                value: |
+                    <layout>
+                      <block type="some/block_class">
+                        <action method="setSomeValue">
+                          <a>value
+                correct: true
+            -
+                value: |
+                    <layout>
+                      <catalog_product_view>
+                        <block type="some/block_class">
+                          <setSomeValue>value
+                correct: false
+
+# DISCUSSION/ANSWER: D
+
+#59
+    -
+        question: 'To implement a standard Adminhtml form for a custom data model, which two of the following must you do? (Choose two)'
+        answers:
+            - {value: 'Declare your module`s block class prefix in the config.xml file.', correct: true}
+            - {value: 'Implement a sub-class of Mage_Adminhtml_Block_Widget_Form.', correct: true}
+            - {value: 'Implement a sub-class of Mage_Adminhtml_Block_Form_Abstract.', correct: false}
+            - {value: 'Create sub-classes of Mage_Adminhtml_Block_Form_Element_Abstract for each form field to be presented.', correct: false}
+            - {value: 'Add a set of configuration values in the module`s config.xml defining the form fields to be displayed.', correct: false}
+
+#DISCUSSION/ANSWER: A + B
+
+#61
+    -
+        question: 'Given a grid interface that extends from Mage_Adminhtml_Block_Widget_Grid, which of the following methods could you override to allow data to be loaded from a custom data collection?'
+        answers:
+            - {value: '_prepareDataModel', correct: false}
+            - {value: '_prepareCollection', correct: true}
+            - {value: '_initDataModel', correct: false}
+            - {value: 'initGrid', correct: false}
+
+#DISCUSSION/ANSWER: B. _prepareCollection
+
+#63
+    -
+         question: 'You want to implement a custom attribute source model. Which method do you have to implement after extending Mage_Eav_Model_Entity_Attribute_Source_Abstract?'
+         answers:
+            - {value: 'getOptionText()', correct: false}
+            - {value: 'getAllOptions()', correct: true}
+            - {value: 'getOptionHash()', correct: false}
+            - {value: 'getOptionld()', correct: false}
+
+#DISCUSSION/ANSWER: B
+
+#66
+    -
+        question: 'Which one of the following declares a Layout XML file?'
+        answers:
+            -
+                value: |
+                  <global>
+                    <layout>
+                      <file>
+                        <some>
+                          <module>layout.xml
+                correct: false
+            -
+                value: |
+                  <layout>
+                    <updates>
+                      <file>layout.xml
+                correct: false
+            -
+                value: |
+                  <admin>
+                    <layout>
+                      <updates>
+                        <module>
+                          <layout>layout.xml
+                correct: false
+            -
+                value: |
+                  <frontend>
+                    <layout>
+                      <updates>
+                        <module>
+                          <layout>layout.xml
+                correct: true
+
+#DISCUSSION/ANSWER: D
+
+#72
+    -
+        question: 'You want to display a grid for a custom collection. After extending Mage_Adminhtml_Block_Widget_Grid, which two of these methods should you implement? (Choose two)'
+        answers:
+            - {value: '_getCollection()', correct: false}
+            - {value: '_prepareCollection()', correct: true}
+            - {value: '_prepareColumns()', correct: true}
+            - {value: 'toHtml()', correct: false}
+            - {value: 'render()', correct: false}
+
+#DISCUSSION/ANSWER: B. _prepareCollection() and C. _prepareColumns()
+
+#77
+    -
+        question: 'You have used the "refresh" action on the cache management page for the block html cache type. Which of the following types of cache record would be cleared?'
+        answers:
+            - {value: 'all cache records containing HTML code', correct: false}
+            - {value: 'items for block classes extending Mage_Core_Block_Template only', correct: false}
+            - {value: 'items having at least one of the tags found in the configuration under the xpath global/cache/types/block_html/tags', correct: true}
+            - {value: 'block class items with expired lifetime', correct: false}
+
+#DISCUSSION/ANSWER: C
+
+#80
+    -
+        question: ' In which config areas are layout files declared? (Choose two)'
+        answers:
+            - {value: '<admin>', correct: false}
+            - {value: '<adminhtml>', correct: true}
+            - {value: '<default>', correct: false}
+            - {value: '<frontend>', correct: true}
+            - {value: '<global>', correct: false}
+
+#DISCUSSION/ANSWER: B + D, <adminhtml> + <frontend>
+
+#86
+    -
+        question: ' Which one of the following statements is true regarding layout update handles?'
+        answers:
+            - {value: 'Layout update handles must always match a module_controller_action pattern such as catalog_product_view.', correct: false}
+            - {value: 'There may never be more than one layout update handle per request.', correct: false}
+            - {value: 'Layout update handles are declared at any level of the layout XML hierarchy.', correct: false}
+            - {value: 'A layout update handle may be specified as a string argument when calling loadLayout().', correct: true}
+
+#DISCUSSION/ANSWER: D. A layout update handle may be specified as a string argument when calling loadLayout().
+
+#87
+    -
+        question: 'Which three of the following will return an instance of a resource model? (Choose three)'
+        answers:
+            - {value: 'Mage::getResourceModel(`customer/customer`);', correct: true}
+            - {value: 'Mage::getResourceSingleton(`customer/customer`);', correct: true}
+            - {value: 'Mage::getModel(`customer/customer`)->getResourceModel();', correct: false}
+            - {value: 'Mage::getResourceModel(`customer/customer`)->getInstance();', correct: false}
+            - {value: 'Mage::getModel(`customer/customer`)->getResource();', correct: true}
+            - {value: 'Mage::getResourceModel(`customer/customer`)->getResource();', correct: false}
+
+#DISCUSSION/ANSWER: A + B + E, getResourceModel + getResourceSingleton + model->getResource
+
+#98
+    -
+        question: 'Which one of the following classes does NOT exist in Magento?'
+        answers:
+            - {value: 'Mage_Adminhtml_Block_Widget_Form_Element_Abstract', correct: true}
+            - {value: 'Mage_Adminhtml_Block_Widget_Form', correct: false}
+            - {value: 'Mage_Adminhtml_Block_Widget_Form_Container', correct: false}
+            - {value: 'Mage_Adminhtml_Block_Widget_Form_Element', correct: false}
+            - {value: 'Varien_Data_Form_Element_Abstract', correct: false}
+
+# DISCUSSION/ANSWER: A. Mage_Adminhtml_Block_Widget_Form_Element_Abstract
+
+#107
+    - 
+        question: 'When declaring a field in system configuration in Magento ( in file system.xml), which input types need to declare source_model? ( Choose 2 options)'
+        answers:
+            - {value: 'text', correct: false}
+            - {value: 'select', correct: true}
+            - {value: 'textarea', correct: false}
+            - {value: 'multiselect', correct: true}
+            - {value: 'date', correct: false}
+#  DISCUSSION/ANSWER: select  +  multiselect
+
+#111
+    -
+        question: 'Choose the best answer for describing the Layout of Magento:'
+        answers:
+            - {value: 'Blocks are organized hierarchically whose core is block core.', correct: false}
+            - {value: 'Each block may have many children blocks and use multiple templates.', correct: true}
+            - {value: 'There are two types of blocks: structure block and content block.', correct: false}
+            - {value: 'All blocks are located in Layout object.', correct: false}
+#  DISCUSSION/ANSWER: C
+
+#115
+    -
+        question: 'How to change sort function for columns in grid magento in admin?'
+        answers:
+            - {value: 'Create renderer for the column you want to rewrite', correct: false}
+            - {value: 'Override template of thegrid', correct: false}
+            - {value: 'Rewrite function_setCollectionOrder for block grid', correct: true}
+            - {value: 'Rewrite _prepareCollection for block grid', correct: false}
+#  DISCUSSION/ANSWER: C(Mage_Adminhtml_Block_Widget_Grid: protected function _setCollectionOrder($column))
+
+#118
+    -
+        question: 'To update button available on the system`s form as buton Back, Save, Save and Continue Delete ... then we use the following way:'
+        answers:
+            - {value: '_setButton ("name_button");', correct: false}
+            - {value: '_changeButton (" name_button ");', correct: false}
+            - {value: '_updateButton ("name_button");', correct: true}
+            - {value: 'All are correct', correct: false}
+#  DISCUSSION/ANSWER: C
+
+
+#119
+    - 
+        question: 'When $ this ->load Layout (`foo_bar_baz`) is called in a standard front action, what is the effect on the layout update object instance?'
+        answers:
+            - {value: 'foo_bar_baz will be the only handle added', correct: false}
+            - {value: 'loadLayout () does not take any arguments, so there is no effect', correct: false}
+            - {value: 'Only two handles will be added: foo_bar_baz and default', correct: false}
+            - {value: 'Foo_bar_baz will be added instead of the default handle', correct: true}
+# DISCUSSION/ANSWER: Foo_bar_baz will be added instead of the default handle
+
+
+#120
+    -
+        question: 'Choose the FALSE statement when rewriting controller in Magento:(Choose 1 option among the followings)'
+        answers:
+            - {value: 'Need to declare Router to rewrite controller in config', correct: false}
+            - {value: 'Use a rewrite tag to declare rewrite controller', correct: false}
+            - {value: 'To re-use the system code, rewrite controller needs inheriting from the rewritten layer', correct: false}
+            - {value: 'Inheriting code has to include code from controller file of the system', correct: false}
+            - {value: 'Need to declare class for controllers of rewrite module in config', correct: true}
+# DISCUSSION/ANSWER: Need to declare class for controllers of rewrite module in config
+
+#128
+    -
+        question: 'What kind of subject is used to provide data for action method when calling from layout file?(Choose 1 option among the followings)'
+        answers:
+            - {value: 'Block', correct: false}
+            - {value: 'Helper', correct: true}
+            - {value: 'Controller', correct: false}
+            - {value: 'Model', correct: false}
+            - {value: 'Resource model', correct: false}
+ #DISCUSSION/ANSWER: Helper
+
+#131
+    -
+        question: ' Which of following statements allow to adding javascript through layout? (2 correct answers)'
+        answers:
+            - {value: 'addJsFile', correct: false}
+            - {value: 'addJsle', correct: true}
+            - {value: 'addItem', correct: true}
+            - {value: 'addJsHtml', correct: false}
+#DISCUSSION/ANSWER: B, C
+
+#135
+    -
+        question: 'How to call a CMS page in PHTML file?'
+        answers:
+            - {value: '$this->getLayout()->createBlock("cms/block")->load("blockidentifier")->toHtml();', correct: false}
+            - {value: '$this->getLayout()->createBlock("cms/block")->setBlockId("blockidentifier")->toHtml();', correct: true}
+            - {value: 'Mage::getBlock("cms/block")->setBlockId("blockidentifier")->toHtml();', correct: false}
+            - {value: '$this->getLayout()->createBlock("cms/staticblock")->load("blockidentifier")->toHtml();', correct: false}
+#DISCUSSION/ANSWER: B
+
+#139
+    -         
+        question: 'To display formatted like the following example: "Aug 30, 2013" , choose the date of the following format:'
+        answers:
+            - {value: 'Mage_Core_Model_Locale :: FORMAT_TYPE_MEDIUM', correct: true}
+            - {value: 'Mage_Core_Model_Locale :: FORMAT_TYPE_SHORT', correct: false}
+            - {value: 'Mage_Core_Model_Locale :: FORMAT_TYPE_LONG', correct: false}
+            - {value: 'Mage_Core_Model_Locale :: FORMAT_TYPE_FULL', correct: false}
+#DISCUSSION/ANSWER: Mage_Core_Model_Locale :: FORMAT_TYPE_MEDIUM
+#http://www.jyotiranjan.in/blog/magento-format-datetime-using-configuration-options/
+
+#141
+    - 
+        question: 'What types of subject doesMagentocreate cache for?(Choose 2 options among the followings)'
+        answers:
+            - {value: 'Module Configuration', correct: true}
+            - {value: 'Block Data', correct: false}
+            - {value: 'Model', correct: false}
+            - {value: 'Block Output HTML', correct: true}
+            - {value: 'Controller', correct: false}
+#DISCUSSION/ANSWER: Module Configuration + Block Output HTML
+
+#142
+    - 
+        question: ' Which of following caches are in Core Magento 1.9?'
+        answers:
+            - {value: 'Full page cache', correct: true}
+            - {value: 'APC cache', correct: false}
+            - {value: 'Cache Blocks HTML output', correct: true}
+            - {value: 'Vanish cache', correct: false}
+#DISCUSSION/ANSWER: C - B,C - A,C
+
+#148
+    -
+        question: 'What is the function of Mage::helper("core")->formatDate(...) ?'
+        answers:
+            - {value: 'To display the time based on US time formating. E.g: Sept 29, 2013.', correct: false}
+            - {value: 'To display the time based on GMT.', correct: false}
+            - {value: 'To display the time based on the timezone of the visitor.', correct: false}
+            - {value: 'To display the time based on the location of the store.', correct: true}
+
+#DISCUSSION/ANSWER: To display the time based on the location of the store.
+
+#151
+    -
+        question: ' To delete button is available on the system`s form as buton Back, Save, Save and Continue Delete ... then we use the following way:'
+        answers:
+            - {value: '_removeButton ("name_button");', correct: true}
+            - {value: '_deleteButton (" name_button ");', correct: false}
+            - {value: '_dropButton ("name_button");', correct: false}
+            - {value: 'All are correct', correct: false}
+#DISCUSSION/ANSWER: _removeButton ('name_button');
+#Mage_Adminhtml_Block_Widget_Container
+#public function removeButton($id)
+#{
+#   return $this->_removeButton($id);
+#}
+
+#152
+    -
+        question: 'Which of the following sentences is FALSE when talking about the structureblock and content block ? (2 correct answers)'
+        answers:
+            - {value: 'Structure block is a block which is created in oder to define the layout"s structure of a magento page', correct: false}
+            - {value: 'Content block is a child of structure block in layout system', correct: true}
+            - {value: 'Content block displays the content which is seen by users on their browser', correct: false}
+            - {value: 'Structure blocks don"t need to have template file', correct: false}
+            - {value: 'Content blocks have to have template to display', correct: true}
+#DISCUSSION/ANSWER: D, E - B, D false, B, E - true
+
+#160
+    -
+        question: 'Which tags below are NOT used in declaring XML layout? (2 correct answers)'
+        answers:
+            - {value: 'update', correct: false}
+            - {value: 'block', correct: false}
+            - {value: 'handle', correct: true}
+            - {value: 'template', correct: true}
+            - {value: 'Action', correct: false}
+#DISCUSSION/ANSWER: C, D
+
+#165
+    -
+        question: ' Which statement will return a Block object? Choose the correct answer.'
+        answers:
+            - {value: 'Mage::getSingleton("catalog/product")', correct: false}
+            - {value: 'Mage::getLayout()->createBlock("catalog/product")', correct: false}
+            - {value: 'Mage::app()->getBlock("catalog/product")', correct: false}
+            - {value: 'Mage::getBlockSingleton("catalog/product")', correct: true}
+#DISCUSSION/ANSWER: D
+
+#166
+    -
+        question: 'What are the roles of adminhtml.xml file in etc directory?(choose 3)'
+        answers:
+            - {value: 'admin menu', correct: true}
+            - {value: 'admin acl', correct: true}
+            - {value: 'admin layout', correct: true}
+            - {value: 'admin router', correct: false}
+#DISCUSSION/ANSWER: A, B ,C
+
+#167
+    -
+        question: ' How to insert static block in template file(.phtml)?'
+        answers:
+            - {value: 'echo $this->getLayout()->createBlock("cms/block")->setBlockId("static_block_id")->toHTML();', correct: true}
+            - {value: 'echo $this->getLayout()->setBlockId("static_block_id")->toHTML();', correct: false}
+            - {value: 'echo $this->getLayout()->createBlock("cms/block")->getBlockId("static_block_id")->toHTML();', correct: false}
+            - {value: 'echo $this->getLayout()->getBlockId("static_block_id")->toHTML();', correct: false}
+#DISCUSSION/ANSWER: A
+
+#171
+    -
+        question: ' What is the correct order to load translation files?'
+        answers:
+            - {value: 'App/locale , table core_translate, design/locale.', correct: false}
+            - {value: 'App/locale , design/locale, table core_translate', correct: true}
+            - {value: 'Table core_translate, App/locale , design/locale', correct: false}
+            - {value: 'Table core_translate, design/locale, App/locale.', correct: false}
+#DISCUSSION/ANSWER: B
+
+#174
+    -         
+        question: 'Which block type is usually used for a “content” block on Magento pages?;'
+        answers:
+            - {value: 'core/template', correct: false}
+            - {value: 'core/text_list', correct: true}
+            - {value: 'core/text', correct: false}
+            - {value: 'core/text_content', correct: false}
+#DISCUSSION/ANSWER: B
+
+#176
+    -
+        question: 'Which tag below is used to check config in layout? (1 answer is correct)'
+        answers:
+            - {value: 'depends', correct: false}
+            - {value: 'ifconfig', correct: true}
+            - {value: 'if', correct: false}
+            - {value: 'storeconfig', correct: false}
+            - {value: 'action', correct: false}
+#DISCUSSION/ANSWER: ifconfig
+
+#180
+    -         
+        question: 'Do display a custom total in order page view in frontend, what do we do? ( Choose 2 options)'
+        answers:
+            - {value: 'Declare model total in configuration file of the module', correct: false}
+            - {value: 'Add layout to handle sales_order_view for model total declared in config', correct: true}
+            - {value: 'Write collect and fetch method for model total declared in config', correct: false}
+            - {value: 'Declare invoice total model in configuration file ( config.xml) of the module', correct: false}
+            - {value: 'Write method init Totals for block declared from layout.', correct: true}
+#DISCUSSION/ANSWER: A, C, B, E
+
+
+#181
+    -         
+        question: ' Choose the correct function to edit getURL customer in grid files in admin'
+        answers:
+            - {value: '$this->getUrl(`adminhtml/customer/edit`, array(`id` => $row->getId()));', correct: true}
+            - {value: '$this->getUrl(`admin/customer/edit`, array(`id` => $row->getId()));', correct: false}
+            - {value: '$this->getUrl(`customeradmin/customer/edit`, array(`id` => $row->getId()));', correct: false}
+            - {value: 'None of them is correct.', correct: false}
+#DISCUSSION/ANSWER: A
+
+#182
+    -
+        question: 'How can a template`s block instance be accessed inside the template file, and how can other block instances be accessed? or How can block instances be accessed from the controller?(choose 1) By use of the $this object From Controller:'
+        answers:
+            - {value: '$this->getLayout()->createBlock(`foo/bar`)', correct: true}
+            - {value: '$this->loadLayout()->createBlock(`foo/bar`)', correct: false}
+            - {value: '$this->renderLayout()->createBlock(`foo/bar`)', correct: false}
+            - {value: '$this->setLayout()->createBlock(`foo/bar`)', correct: false}
+#DISCUSSION/ANSWER: A
+
+#189
+    -
+        question: ' Which routers exist in a native Magento implementation? (4 answers)'
+        answers:
+            - {value: 'admin', correct: true}
+            - {value: 'standard', correct: true}
+            - {value: 'cms', correct: true}
+            - {value: 'adminhtml', correct: false}
+            - {value: 'frontend', correct: false}
+            - {value: 'Default', correct: true}
+#DISCUSSION/ANSWER: A, B, C, F
+
+#190
+    -         
+        question: 'To creat a mass action for grid in backend in Magento, what we need to do?'
+        answers:
+            - {value: 'Add mass action item in method _prepareMassaction of Thêmmassaction item trongphươngthức_prepareMassaction of the corresponding model grid.', correct: false}
+            - {value: 'Add mass action item in method_prepareMassaction of the corresponding block grid.', correct: true}
+            - {value: 'Add admin html controller/action to execute the corresponding action which is declared in method_prepare Massaction.', correct: true}
+            - {value: 'Declare massaction in file xml layout of the module', correct: false}
+#DISCUSSION/ANSWER: B, C
+
+#191
+    -
+        question: 'Which of following statements will return the information about version of Magento?'
+        answers:
+            - {value: 'Mage::app()->getVersion()', correct: false}
+            - {value: 'Mage::getVersionInfo()', correct: true}
+            - {value: 'Mage::app()->getVersionInfo()', correct: false}
+            - {value: 'Mage::getMagentoVersion()', correct: false}
+#DISCUSSION/ANSWER: B
+
+#199
+    -         
+        question: 'When customers translate one word in three following position: table core_translate, design/locale, which position will be displayed?'
+        answers:
+            - {value: 'App/locale', correct: false}
+            - {value: 'table core_translate', correct: true}
+            - {value: 'design/locale', correct: false}
+            - {value: 'All of them are correct', correct: false}
+#DISCUSSION/ANSWER: table core_translate
+
+#207
+    -         
+        question: 'To create a validate data for a Magento form, what should we do? (Choose 2 answers)'
+        answers:
+            - {value: 'Write a form with class : validate-form.', correct: true}
+            - {value: 'Write a form with field of a form which has a class required-entry', correct: true}
+            - {value: 'Declare Javascript code: new VarienForm("form_id", true);', correct: false}
+            - {value: 'Write a form with the method :post', correct: false}
+# DISCUSSION/ANSWER: A, C - A, D - B, C - B, D - C, D - A, B
+
+#210
+    -
+        question: 'What is not a default layout of native magento?(choose 1)'
+        answers:
+            - {value: '3columns.phtml', correct: false}
+            - {value: '2columns-left.phtml', correct: false}
+            - {value: '2columns-right.phtml', correct: false}
+            - {value: '1colums.phtml', correct: true}
+#DISCUSSION/ANSWER: D 1columns.phtml (typo: 1column.html)
+
+#218
+    -
+        question: 'Which is a responsibility of EAV attribute frontend models?'
+        answers:
+            - {value: 'To provide direct read access to attribute values in the EAV value tables for display', correct: false}
+            - {value: 'To provide direct access to the EAV attribute models for templates', correct: false}
+            - {value: 'To provide access to an attribute’s EAV value table', correct: false}
+            - {value: 'To format the attribute value and label before displaying them', correct: true}
+#DISCUSSION/ANSWER:
+

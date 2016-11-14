@@ -1,0 +1,245 @@
+category: Magento Request Flow
+questions:
+    -
+        question: 'Which three of the following conditions are used to protect an admin route via ACL? (Choose three)'
+        answers:
+            - {value: 'You have defined an ACL in your module configuration', correct: true}
+            - {value: 'At least one admin role must have permission for that route',  correct: false}
+            - {value: 'You have extended the controller from Mage_Adminhtml_Controller_Action', correct: true}
+            - {value: 'You have defined a method _isAllowed which checks the permission', correct: true}
+            - {value: 'The route name must start with admin', correct: false}
+
+#13
+    -
+        question: 'You are creating a custom CMS module named Achme_Cms. Which one of the following is the correct XML required to override a controller from the Mage_Cms module in your Achme_Cms module?'
+        answers:
+            -
+              value: |
+                  <frontend>
+                      <routers>
+                          <cms>
+                              <args>
+                                  <modules>
+                                     <achme_cms before="Mage_Cms">Achme_Cms</achme_cms>
+                                  </modules>
+                              </args>
+                          </cms>
+                      </routers>
+                  </frontend>
+              correct: true
+            -
+              value: |
+                  <frontend>
+                      <routers>
+                          <achme_cms>
+                              <args>
+                                  <modules>
+                                     <cms before="Mage_Cms">Achme_Cms</cms>
+                                  </modules>
+                              </args>
+                          </achme_cms>
+                      </routers>
+                  </frontend>
+              correct: false
+            -
+              value: |
+                  <frontend>
+                      <routers>
+                          <cms>
+                              <args>
+                                  <rewrite>
+                                     <mage_cms>Achme_Cms</cms>
+                                  </rewrite>
+                              </args>
+                          </cms>
+                      </routers>
+                  </frontend>
+              correct: false
+            -
+              value: |
+                  <global>
+                      <controllers>
+                          <achme_cms>
+                              <rewrite>
+                                     <mage_cms>Achme_Cms</cms>
+                              </rewrite>
+                          </achme_cms>
+                      </controllers>
+                  </global>
+              correct: false
+# DISCUSSION/ANSWER: A
+
+#41
+    -
+         question: 'Which one of the following controller classes could respond to this URL?: http://example.com/modulename/controller/index'
+         answers:
+            - {value: 'Namespace_ModuleName_IndexController', correct: false}
+            - {value: 'Namespace_ModuleName_Controller_Controllerlndex', correct: false}
+            - {value: 'Namespace_ModuleName_Controller_lndexController', correct: false}
+            - {value: 'Namespace_Modulename_ControllerController', correct: true}
+
+#DISCUSSION/ANSWER: D. Namespace_Modulename_ControllerController
+
+
+#49
+    -
+        question: |
+           In what order are the routers from the Magento core checked for a matching route?
+                Default: Mage_Core_Controller_Varien_Router_Default
+                CMS: Mage_Cms_Controller_Router
+                Standard: Mage_Core_Controller_Varien_Router_Standard
+                Admin: Mage_Core_Controller_Varien_Router_Admin
+        answers:
+            - {value: 'Admin, Standard, CMS, Default', correct: true}
+            - {value: 'Default, CMS, Standard, Admin', correct: false}
+            - {value: 'Admin, CMS, Standard, Default', correct: false}
+            - {value: 'Standard, Admin, Default, CMS', correct: false}
+
+#DISCUSSION/ANSWER: A. Admin, Standard, CMS, Default
+
+
+#51
+    -
+         question: 'A custom frontend controller will extend which one of the following classes?'
+         answers:
+            - {value: 'Mage_Core_Controller_Front_Action', correct: true}
+            - {value: 'Mage_Adminhtml_Controller_Action', correct: false}
+            - {value: 'Mage_Core_Сontroller_Varien_Front', correct: false}
+            - {value: 'Mage_Core_Controller_Abstract', correct: false}
+
+#DISCUSSION/ANSWER: A. Mage_Core_Controller_Front_Action
+
+#55
+    -
+         question: |
+            A valid way to extend Mage_Adminhtml_Cms_PageController with the Acme Cms Adminhtml_PageController class would be to set the following configuration;
+               <admin>
+                   <routers>
+                       <adminhtml>
+                           <args>
+                               <modules>
+                                   <custom_cms before="____">____</<custom_cms>
+                               </modules>
+                           </args>
+                       </adminhtml>
+                   </routers>
+               </admin>
+            Which of the following code pairs should be inserted in the blank spots in the code shown above?
+         answers:
+            - {value: 'Mage_Adminhtml, Acme_Cms_Adminhtml', correct: true}
+            - {value: 'Mage_Adminhtml, Acme_Cms_Adminhtml_PageController', correct: false}
+            - {value: 'Mage_Adminhtml_Cms_PageController, Acme_Cms_Adminhtml', correct: false}
+            - {value: 'Mage_Adminhtml_Cms_PageController, Acme_Cms_Adminhtml_PageController', correct: false}
+
+#DISCUSSION/ANSWER: A. Mage_Adminhtml, Acme_Cms_Adminhtml
+#Rewriting modules front-names and not the controllers
+
+
+#120
+    -
+        question: 'Choose the FALSE statement when rewriting controller in Magento:(Choose 1 option among the followings)'
+        answers:
+            - {value: 'Need to declare Router to rewrite controller in config', correct: false}
+            - {value: 'Use a rewrite tag to declare rewrite controller', correct: false}
+            - {value: 'To re-use the system code, rewrite controller needs inheriting from the rewritten layer', correct: false}
+            - {value: 'Inheriting code has to include code from controller file of the system', correct: false}
+            - {value: 'Need to declare class for controllers of rewrite module in config', correct: true}
+# DISCUSSION/ANSWER: Need to declare class for controllers of rewrite module in config
+
+
+#154
+    -
+        question: 'What does CMS stand for?'
+        answers:
+            - {value: 'Content Mapping System', correct: false}
+            - {value: 'Content Management System', correct: true}
+            - {value: 'Content Master System', correct: false}
+            - {value: 'None of the above', correct: false}
+#DISCUSSION/ANSWER: B
+
+#158
+    -
+        question: 'What is true statement to get current URL in Magento?'
+        answers:
+            - {value: 'Mage::helper("core")->getCurrentUrl();', correct: false}
+            - {value: 'Mage::getSingleton("core/url")->getCurrent();', correct: false}
+            - {value: 'Mage::helper("core/url")->getCurrentUrl();', correct: true}
+            - {value: 'Mage::getUrl();', correct: false}
+#DISCUSSION/ANSWER: C
+
+#166
+    -
+        question: 'What are the roles of adminhtml.xml file in etc directory?(choose 3)'
+        answers:
+            - {value: 'admin menu', correct: true}
+            - {value: 'admin acl', correct: true}
+            - {value: 'admin layout', correct: true}
+            - {value: 'admin router', correct: false}
+#DISCUSSION/ANSWER: A, B ,C
+
+#169
+    -
+        question: 'How to get current url with and without parameters?'
+        answers:
+            - {value: '$currentUrl = $this->helper(`core/url`)->getCurrentUrl();', correct: false}
+            - {value: '$currentUrl = $this->getBaseUrl();', correct: false}
+            - {value: '$request = $this->getRequest();', correct: false}
+            - {value: '$currentUrl = $this->getBaseUrl() . $request->getRouteName() .DS.$request->getControllerName() .DS. $request->getActionName();', correct: true}
+            - {value: '$currentUrl = Mage::getBaseUrl(array("params"=>false))', correct: false}
+#DISCUSSION/ANSWER: C - http://magento.stackexchange.com/questions/60955/get-current-url-without-parameters
+
+#179
+    -         
+        question: 'How to redirect to another url from observer(Varien_Event_Observer $observer) file?'
+        answers:
+            - {value: '$this->redirect($url)', correct: false}
+            - {value: '$observer->redirectUrl($url)', correct: false}
+            - {value: '$observer->getRequest()->setParam("return_url", $url)', correct: true}
+            - {value: '$this->getRequest()->redirect($url)', correct: false}
+#DISCUSSION/ANSWER: C
+#Mage::app()->getResponse()->setRedirect(Mage::getBaseUrl());
+#$observer->getEvent()->getControllerAction()->setFlag('', Mage_Core_Controller_Varien_Action::FLAG_NO_DISPATCH, true);
+
+#189
+    -
+        question: ' Which routers exist in a native Magento implementation? (4 answers)'
+        answers:
+            - {value: 'admin', correct: true}
+            - {value: 'standard', correct: true}
+            - {value: 'cms', correct: true}
+            - {value: 'adminhtml', correct: false}
+            - {value: 'frontend', correct: false}
+            - {value: 'Default', correct: true}
+#DISCUSSION/ANSWER: A, B, C, F
+
+#192
+    -
+        question: 'To change the checkout mode form GUEST to REGISTER and vice versa,  which event is needed?'
+        answers:
+            - {value: 'checkout_allow_guest', correct: true}
+            - {value: 'change_checkout_method', correct: false}
+            - {value: 'is_allowed_guest_checkout', correct: false}
+            - {value: 'is_allowed_register_checkout', correct: false}
+#DISCUSSION/ANSWER: A
+
+#202
+    -
+        question: ' How does Magento process requests that cannot be mapped?'
+        answers:
+            - {value: 'It will redirect to 404 page.. cms/index/noRouter', correct: true}
+            - {value: 'It will return home page', correct: false}
+            - {value: 'It will show empty page', correct: false}
+            - {value: 'It will redirect to your previous page', correct: false}
+#DISCUSSION/ANSWER: A
+
+#222
+    -
+        question: 'When an admin page is requested, which of the following methods will be executed first?'
+        answers:
+            - {value: 'Mage Core Controller Varien Action:: dispatch ()', correct: false}
+            - {value: 'Mage Core Controller Varien Front:: dispatch ()', correct: false}
+            - {value: 'Mage Core Controller Router Default::match ()', correct: false}
+            - {value: 'Mage Adminhtml Controller Action:: preDispatch ()', correct: true}
+#DISCUSSION/ANSWER: Mage Core Controller Varien Front:: dispatch () is wrong
+# Mage Core Controller Router Default::match () has a typo (varien folder missed: Mage_Core_Controller_Varien_Router_Default)
+# Quiz tells b is wrong, but I (chab) debugged and it shows b is running first

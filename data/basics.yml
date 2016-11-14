@@ -240,6 +240,16 @@ questions:
 
 # DISCUSSION/ANSWER: C. The version number (or lack thereof) stored in the core_resource table
 
+#71
+    -
+        question: 'The initial call to ______________ will create and return an instance of the specified class. Subsequent calls to this method during the same execution cycle will return the same class instance as opposed to creating a new one.'
+        answers:
+            - {value: 'Mage::getResourceModel(`namespace/modulename`);', correct: false}
+            - {value: 'Mage::getInstance(`namespace/modulename`);', correct: false}
+            - {value: 'Mage::getModel(`modulename/modelname`) ;', correct: false}
+            - {value: 'Mage::getSingleton(`modulename/modelname`);', correct: true}
+
+# DISCUSSION/ANSWER: D. Mage::getSingleton('modulename/modelname');
 
 #73
     -
@@ -289,7 +299,18 @@ questions:
 
 # DISCUSSION/ANSWER: B + C, merge + extend
 
+#87
+    -
+        question: 'Which three of the following will return an instance of a resource model? (Choose three)'
+        answers:
+            - {value: 'Mage::getResourceModel(`customer/customer`);', correct: true}
+            - {value: 'Mage::getResourceSingleton(`customer/customer`);', correct: true}
+            - {value: 'Mage::getModel(`customer/customer`)->getResourceModel();', correct: false}
+            - {value: 'Mage::getResourceModel(`customer/customer`)->getInstance();', correct: false}
+            - {value: 'Mage::getModel(`customer/customer`)->getResource();', correct: true}
+            - {value: 'Mage::getResourceModel(`customer/customer`)->getResource();', correct: false}
 
+#DISCUSSION/ANSWER: A + B + E, getResourceModel + getResourceSingleton + model->getResource
 
 #93
     -
@@ -345,6 +366,19 @@ questions:
             - {value: 'model(model of observer)', correct: false}
             - {value: 'method (method to invoke)', correct: true}
 #  DISCUSSION/ANSWER: type  +  class  +  method
+
+
+#113
+    -
+        question: 'How to improve magento website`s performance? (Choose many answers)'
+        answers:
+            - {value: 'Enabled magento caching', correct: true}
+            - {value: 'Disable any unused modules', correct: true}
+            - {value: 'Disable the Magento log', correct: false}
+            - {value: 'Combik8ne external CSS/JS into one file', correct: true}
+            - {value: 'Use eav table replace flat table', correct: false}
+#  DISCUSSION/ANSWER: A, D, E;  A,B,D;  A,B,D,E; - wrong, ABE-wrong; ABCDE-wrong;
+
 
 #127
     -
@@ -680,3 +714,45 @@ questions:
             - {value: '5.2', correct: true}
             - {value: 'None of the above', correct: false}
 #DISCUSSION/ANSWER: 5.2
+
+#212
+    -
+        question: 'What is the purpose of the configuration XML flag stored in g1obal/resource/connection/type/pdomysql/compatibleMode?'
+        answers:
+            - {value: 'If set to 0, then all data structures are exported when using Dataflow.', correct: false}
+            - {value: 'If set to 0, then only standard-compliant SQL is used.', correct: true}
+            - {value: 'If set to 0, then data structures compatible with OpenCommence Language are exported when using Data flow.', correct: false}
+            - {value: 'If set to 0, then MySQL-specific SQL is used.', correct: false}
+#DISCUSSION/ANSWER:
+
+#214
+    -
+        question: 'Which one of the following accurately describes the purpose of the resource helper classes instantiated through Mage::getResourceHelper?'
+        answers:
+            - {value: 'Format values returned by the database for display in templates.', correct: false}
+            - {value: 'Provide public access to concrete implementations of varien_Db_Adapter_Interface.', correct: false}
+            - {value: 'Wrap vendor-specific SQL additions into an RDBMS-agnostic interface.', correct: true}
+            - {value: 'Provide a convenient way to modify database table properties.', correct: false}
+#DISCUSSION/ANSWER: Don't know, B is wrong (Provide public access to concrete implementations of varien_Db_Adapter_Interface)
+
+#216
+    -
+        question: 'You want to replace the instance of Mage_Customer_Helper_Address returned by Mage::helper(‘customer/address’) with an instance of your own class. Which one of the following xpaths would accomplish that?'
+        answers:
+            - {value: 'global/helpers/customer/rewrite/address', correct: true}
+            - {value: 'global/customer/helpers/address', correct: false}
+            - {value: 'global/ rewrite/ helpers/ rewrite/address', correct: false}
+            - {value: 'global/helpers/rewrite/customer/address', correct: false}
+#DISCUSSION/ANSWER:
+
+#221
+    -
+        question: |
+            Which one of the following calls returns a simple product type model?
+            Assume that $product is an instance of Mage_Catalog_Model_Product representing a simple product
+        answers:
+            - {value: 'Mage Catalog Model Product Type:: factory(`simple`)', correct: false}
+            - {value: '$product->getType()', correct: false}
+            - {value: 'Mage::getsingleton(‘catalog/producttype’)->getType($product)', correct: false}
+            - {value: '$product->getTypeInstance()', correct: true}
+#DISCUSSION/ANSWER:
