@@ -524,6 +524,16 @@ questions:
             - {value: 'Content blocks have to have template to display', correct: true}
 #DISCUSSION/ANSWER: D, E - B, D false, B, E - true
 
+#158
+    -
+        question: 'What is true statement to get current URL in Magento?'
+        answers:
+            - {value: 'Mage::helper("core")->getCurrentUrl();', correct: false}
+            - {value: 'Mage::getSingleton("core/url")->getCurrent();', correct: false}
+            - {value: 'Mage::helper("core/url")->getCurrentUrl();', correct: true}
+            - {value: 'Mage::getUrl();', correct: false}
+#DISCUSSION/ANSWER: C
+
 #160
     -
         question: 'Which tags below are NOT used in declaring XML layout? (2 correct answers)'

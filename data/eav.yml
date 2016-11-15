@@ -1,13 +1,65 @@
-category: EAV
+category: Magento EAV
 questions:
+    -
+        question: 'You have a product collection and want to add a filter to get all products whose name starts with Test or whose price is 0.00. Which of the following statements would add that OR condition?'
+        answers:
+            -
+              value: |
+                $collection->addAttributeToFilter(array(
+                array('attribute' => 'price', 'eq' => 0.00),
+                array('attribute' => 'name', 'like' => 'Test%')
+                ))
+              correct: true
+
+            -
+              value: |
+                $collection
+                ->addFieldToFilter('price', 0.00)
+                ->addFieldToFilter('name', array('like' => 'Test%')
+                );
+              correct: false
+
+            -
+              value: |
+                $collection
+                ->addAttributeToFilter('price', 0.00)
+                ->addAttributeToFilter('name', array('like' => 'Test%')
+                );
+              correct: false
+
+            -
+              value: |
+                $collection->addFieldToFilter(
+                array('price', 'name'),
+                array(array('eq' => 0.00, array('like' =>'Test%'),
+                );
+              correct: false
+
+            -
+              value: |
+                $collection
+                ->addAttributeToFilter('price',0.00)
+                ->addOrCondition('name', array('like' => 'Test%'));
+              correct: false
+
     -
         question: 'For an attribute to be loaded on a catalog/product object, which two of the following conditions must be satisfied? (Choose two)'
         answers:
-            - {value: 'The eav_attribute table must contain a row defining the attributes properties and its entity type', correct: true}
-            - {value: 'The attribute must have a backend model configured in the XML config',  correct: false}
-            - {value: 'The attribute must be part of the attribute set pertaining to the object being loaded', correct: true}
-            - {value: 'There must be a record of the attribute on the catalog_product_super_attribute table', correct: false}
-            - {value: 'There must be a column added to the catalog_product_entity table', correct: false}
+            - {value: 'The eav_attribute table must contain a row defining the attribute s properties and its entity type.', correct: true}
+            - {value: 'The attribute must have a backend model configured in the XML config.',  correct: false}
+            - {value: 'The attribute must be part of the attribute set pertaining to the object being loaded.', correct: true}
+            - {value: 'There must be a record of the attribute on the catalog_product_super_attribute table.', correct: false}
+            - {value: 'There must be a column added to the catalog_product_entity table.', correct: false}
+#5
+    -
+        question: 'Which table is used for calculating a new increment ID for an order?'
+        answers:
+            - {value: 'sales_flat_order_increment', correct: false}
+            - {value: 'eav_entity_store',  correct: true}
+            - {value: 'core_increment', correct: false}
+            - {value: 'core_config_data', correct: false}
+
+#8
     -
         question: 'Which two EAV attribute frontend_input types make use of source models? (Choose two)'
         answers:
@@ -17,3 +69,311 @@ questions:
             - {value: 'multiselect', correct: true}
             - {value: 'date', correct: false}
             - {value: 'gallery', correct: false}
+
+# DISCUSSION/ANSWER: C, D (from http://wap.testsnow.net/4/4647/54941.html)
+
+#12
+    -
+        question: 'Which one of the following EAV attribute types may be used for layered navigation in native Magento?'
+        answers:
+            - {value: 'varchar', correct: false}
+            - {value: 'enum', correct: false}
+            - {value: 'option', correct: true}
+            - {value: 'union', correct: false}
+
+#DISCUSSION/ANSWER: C option
+
+#16
+    -
+         question: ' Which of the following is a true statement about how Magento loads data for an EAV-based data model?'
+         answers:
+            - {value: 'A data helper is used in order to properly load an object`s attributes from the database.', correct: false}
+            - {value: 'EAV-based data models use a different abstract resource class than other data models.', correct: true}
+            - {value: 'The attribute values are loaded into an attribute collection object.', correct: false}
+            - {value: 'You must always specify each of the attributes to be loaded on the model.', correct: false}
+
+#DISCUSSION/ANSWER: B - different abstract
+
+#23
+    -
+         question: 'Which of the following items is NOT utilized in Magento implementation of EAV-based data models?'
+         answers:
+            - {value: 'An entity table for storing the entities basic information', correct: false}
+            - {value: 'One or more tables to store the entities associated pieces of information', correct: false}
+            - {value: 'A two-column cross-link table to associate attribute values with a corresponding entity', correct: true}
+            - {value: 'Foreign keys on each relevant table to connect relevant pieces of information at the database level', correct: false}
+            - {value: 'An attribute table that defines what data (and of what type) may be stored on a particular entity', correct: false}
+
+#DISCUSSION/ANSWER:
+
+#35
+    -
+         question: 'The checkbox "Use default value" is checked and the corresponding input field is disabled, as shown in the graphic above. How does Magento represent this state in the corresponding EAV value tables?'
+         answers:
+            - {value: 'no row with a value for this store view and a row with value NULL for default', correct: false}
+            - {value: 'no row with a value for this store view and a row with any value for default', correct: true}
+            - {value: 'a row with value NULL for this store view and a row with value NULL for default', correct: false}
+            - {value: 'a row with value NULL for this store view and a row with any value for default', correct: false}
+            - {value: 'no row with a value for this store view and no row with a value for default', correct: false}
+
+#DISCUSSION/ANSWER: B
+
+#45
+    -
+         question: 'Which of the following allows you to save a single attribute value on an EAV entity?'
+         answers:
+            - {value: '$model->saveAttribute($attributeCode);', correct: false}
+            - {value: '$model->save($attributeCode);', correct: false}
+            - {value: '$model->getResource()->saveAttribute($model, $attributeCode);', correct: true}
+            - {value: '$model->getResource()->save($model, $attributeCode);', correct: false}
+
+#DISCUSSION/ANSWER: C. $model->getResource()->saveAttribute($model, $attributeCode);
+
+#46
+    -
+         question: |
+              When setData('some', 'value') is called on an EAV entity and the entity is saved to the database, __________________.
+         answers:
+            - {value: 'the `value` of the attribute named ``some`` is saved in the eav_values table', correct: false}
+            - {value: 'the `value` of the attribute named ``some`` is saved in one of the entity`s tables depending on its datatype (for example, entityname_varchar)', correct: true}
+            - {value: 'the data will be stored in the EAV registry making `some` `value` available to the entity', correct: false}
+            - {value: 'the `value` of the attribute named `some` is saved in the eav attribute values table', correct: false}
+
+#DISCUSSION/ANSWER: B. the 'value' of the attribute named 'some' is saved in one of the entity's tables depending on its datatype (for example, entityname_varchar)
+
+
+#60
+    -
+        question: 'Which three of the following object types will have a parent class found in the Mage_Eav module for the purposes of EAV data storage in Magento? (Choose three)'
+        answers:
+            - {value: 'data model', correct: false}
+            - {value: 'data helper', correct: false}
+            - {value: 'resource model', correct: true}
+            - {value: 'resource collection', correct: true}
+            - {value: 'setup class', correct: true}
+
+#DISCUSSION/ANSWER: C,D,E
+
+#78
+    -
+        question: 'Which of the following methods will force an EAV resource collection model to include an attribute in its result set?'
+        answers:
+            - {value: 'addAttributeToSelect($attribute);', correct: true}
+            - {value: 'getResource()->addAttribute($attribute);', correct: false}
+            - {value: 'addFieldToSelect($attribute);', correct: false}
+            - {value: 'getSelect()->from( ` ` , $attribute);', correct: false}
+            - {value: 'addAttributeToCollection($attribute);', correct: false}
+
+#DISCUSSION/ANSWER: A. addAttributeToSelect($attribute);
+
+#88
+    -
+        question: ' By enabling Flat catalog, you will ____________.'
+        answers:
+            - {value: 'speed up performance on the frontend', correct: true}
+            - {value: 'speed up saving product on the backend', correct: false}
+            - {value: 'simplify the product import process', correct: false}
+            - {value: 'speed up loading product on the backend', correct: false}
+
+#DISCUSSION/ANSWER: A. speed up performance on the frontend
+
+#91
+    -
+        question: ' A native Magento EAV entity will use _____________.'
+        answers:
+            - {value: 'A single table with separate columns for each data type (for instance, decimal, text, varchar, etc.)', correct: false}
+            - {value: 'A single table with separate columns for all data types used by the entity', correct: false}
+            - {value: 'A separate table for each data type (for instance, decimal, text, varchar, etc.)', correct: true}
+            - {value: 'A separate table for each data type in addition to a flat data table with separate columns to store values for each data type used by the entity', correct: false}
+
+#DISCUSSION/ANSWER: C. A separate table for each data type (for instance, decimal, text, varchar, etc.)
+
+#96
+    -
+        question: 'Given an EAV-based data model whose data is stored in the table foo_entity, in which table would you find the values for an attribute of the varchar type?'
+        answers:
+            - {value: 'foo_entity_attribute_storage', correct: false}
+            - {value: 'foo_entity_varchar', correct: true}
+            - {value: 'entity_attribute_varchar', correct: false}
+            - {value: 'foo_entity', correct: false}
+
+# DISCUSSION/ANSWER: B. foo_entity_varchar
+
+
+#116
+    -
+        question: 'Choose the correct statement'
+        answers:
+            - {value: 'Attributes added to products are not included in catalog condition', correct: false}
+            - {value: 'Rewrite model catalog to add attributes', correct: false}
+            - {value: 'Edite attributes to allow display in catalog condition', correct: true}
+            - {value: 'All of them are incorrect', correct: false}
+#  DISCUSSION/ANSWER: Edite attributes to allow display in catalog condition
+
+#122
+    -
+        question: 'What is the difference between Model and Resource Model? Choose the correct answer.'
+        answers:
+            - {value: 'In EAV models, Model works with the entity tables and Resource Model works with the Attribute and Value tables.', correct: false}
+            - {value: 'The Model loads data of one entity (one row) from database table. The Resource Model loads data of one collection (includes many entities)', correct: false}
+            - {value: 'The Model is a temporary data store. The Resource Model works with database.', correct: true}
+            - {value: 'The Model and the Resource Model support for database manipulation but the Resource Model includes more functions manipulating with database.', correct: false}
+# DISCUSSION/ANSWER:The Model is a temporary data store. The Resource Model works with database.
+
+#134
+    -
+        question: 'How to get attribute value from attribute code of product? (choose some)'
+        answers:
+            - {value: '$attribute_value = $product->getAttributeText($attribute_code);', correct: true}
+            - {value: '$attribute_value = Mage::getResourceModel(`catalog/product`)->getAttributeRawValue($product_id, 	$attribute_code, $store_id);', correct: true}
+            - {value: '$attribute_value = $product->getAttributeValue($attribute_code)', correct: false}
+            - {value: '$attribute_value = $product->getResource()->getAttribute($attribute_code)->getFrontend()->getValue($product);', correct: true}
+#DISCUSSION/ANSWER: B, C, D, -wrong, A,B,D - correct
+
+#149
+    -
+        question: 'The advantage of using EAV comparing with flat table in Magento is: (2 answers)'
+        answers:
+            - {value: 'Storing the data in many small tables instead of a big one, which helps the data access speed become faster when there is a large amount of data.', correct: false}
+            - {value: 'Protecting the data better and safer than flat table.', correct: false}
+            - {value: 'Changing the attributes without changing the table structure.', correct: true}
+            - {value: 'Reducing the number of blank cells in the database table when storing the entities with different attributes.', correct: true}
+#DISCUSSION/ANSWER: C,D
+
+#155
+    -
+        question: 'How to filter product collection ($collection = Mage::getModel("catalog/product")->getCollection()) by status?'
+        answers:
+            - {value: '$collection->addStatusFilter($status);', correct: false}
+            - {value: '$collection->addAttributeToSelect("*")-> addAttributeToFilter("status"=>array("eq"=>$status));', correct: true}
+            - {value: '$collection->addFieldToFilter("status"=>array($status));', correct: false}
+            - {value: '$collection-> addAttributeToSelect("*")->addFilterStatus($status);', correct: false}
+#DISCUSSION/ANSWER: B
+
+#162
+    -
+        question: 'Which of the following types is not an input type when creating an attribute to product by Add Attribute method? (Choose 1 option among the followings)'
+        answers:
+            - {value: 'price', correct: false}
+            - {value: 'text', correct: false}
+            - {value: 'boolean', correct: false}
+            - {value: 'multiselect', correct: false}
+            - {value: 'int', correct: true}
+#DISCUSSION/ANSWER: int
+
+#184
+    -
+        question: 'What is the factors that make Magento website slow? (Choose many answers)'
+        answers:
+            - {value: 'EAV structure of magento database, even for retrieving single entity the query becomes very complex .', correct: true}
+            - {value: 'Magento"s template system involves a lot of recursive rendering', correct: true}
+            - {value: 'Huge XML trees built up for layout configuration, application configuration settings', correct: true}
+            - {value: 'Place many orders at the same time.', correct: false}
+#DISCUSSION/ANSWER: A, B, C
+
+#186
+    -
+        question: ' When seting up class of Mage_Sales_Model_Mysql4_Setup, which of the following will correctly add an attribute to the sales/order entity?'
+        answers:
+            - {value: '$installer->addAttribute("sales_order_entity", "foo", array("type" => "int"));', correct: false}
+            - {value: '$installer->addAttribute("sales/order", "foo", array("type" => "int"));', correct: false}
+            - {value: '$installer->addAttribute("order", "foo", array("type" => "int"));', correct: true}
+            - {value: '$installer->addAttribute("sales_flat_order", "foo", array("type" => "int"));', correct: false}
+#DISCUSSION/ANSWER: C
+
+#193
+    -
+        question: 'Which statement to generate the product list contains “phone” in product name or has the price higher than 99? Choose the correct answer.'
+        answers:
+            -
+                value: |
+                     $productCollection->addAttributeToFilter('
+                         array(
+                             array('attribute'=>'price','gt'=>99),
+                             array('attribute'=>'name','like'=>'%phone%')
+                         ));
+                correct: true
+            -
+                value: |
+                    $productCollection->addFieldToFilter('price',array('gt'=>99))'
+                        ->addFieldToFilter('name',array('like'=>'%phone%'));
+                correct: false
+            -
+                value: |
+                    $productCollection->addFieldToFilter('
+                        array('price','name'),
+                        array(array('gt'=>99),array('like'=>'%phone%')),
+                    );
+                correct: false
+            -
+                value: |
+                    $productCollection->addAttributeToFilter('price'=>array('gt'=>99))'
+                        ->addOrCondition('name',array('like'=>'%phone%'));
+                correct: false
+#DISCUSSION/ANSWER: a
+
+#198
+    -
+        question: 'Which statement is CORRECT when comparing database model EAV and the classic database model.'
+        answers:
+            - {value: 'EAV model is bulkier but runs faster.', correct: false}
+            - {value: 'EAV model is convenient to add a field by adding a table hi I that not to break data structure of the table', correct: true}
+            - {value: 'Installing EAV model is eaiser than installing the classic model.', correct: false}
+            - {value: 'EAV model is becoming popular and gradually replace the classic model', correct: false}
+#DISCUSSION/ANSWER: B
+
+#203
+    -
+        question: 'When we add a Value of an attribute (price format)  to product, where is it stored? (1 correct answer)'
+        answers:
+            - {value: 'sales_flat_order', correct: false}
+            - {value: 'catalog_product_entity', correct: false}
+            - {value: 'catalog_product_entity_decimal', correct: true}
+            - {value: 'catalog_product_entity_text', correct: false}
+            - {value: 'catalog_eav_attribute', correct: false}
+#DISCUSSION/ANSWER: C
+
+#211
+    -
+        question: 'How is a flat table updated?'
+        answers:
+            - {value: 'By a cron job', correct: false}
+            - {value: 'By a special flat indexer', correct: true}
+            - {value: 'Directly from the Product resource model, in the _aftersave method', correct: false}
+            - {value: 'By an observer on catalog_product_model_save_after', correct: false}
+#DISCUSSION/ANSWER: Not sure
+
+#217
+    -
+        question: 'Given an EAV-based data model, values for each of the object’s attributes are stored in?'
+        answers:
+            - {value: 'a type-specific table used for storing all attribute values of the given type for all entities', correct: false}
+            - {value: 'a table specific to both the attributes data type and the given objects entity type', correct: true}
+            - {value: 'type-specific columns on an entity-specific attribute-value storage table', correct: false}
+            - {value: 'type-specific columns on a general purpose attribute-value storage table', correct: false}
+#DISCUSSION/ANSWER:
+
+
+#218
+    -
+        question: 'Which is a responsibility of EAV attribute frontend models?'
+        answers:
+            - {value: 'To provide direct read access to attribute values in the EAV value tables for display', correct: false}
+            - {value: 'To provide direct access to the EAV attribute models for templates', correct: false}
+            - {value: 'To provide access to an attribute’s EAV value table', correct: false}
+            - {value: 'To format the attribute value and label before displaying them', correct: true}
+#DISCUSSION/ANSWER:
+
+
+#221
+    -
+        question: |
+            Which one of the following calls returns a simple product type model?
+            Assume that $product is an instance of Mage_Catalog_Model_Product representing a simple product
+        answers:
+            - {value: 'Mage Catalog Model Product Type:: factory(`simple`)', correct: false}
+            - {value: '$product->getType()', correct: false}
+            - {value: 'Mage::getsingleton(‘catalog/producttype’)->getType($product)', correct: false}
+            - {value: '$product->getTypeInstance()', correct: true}
+#DISCUSSION/ANSWER:
+

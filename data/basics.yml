@@ -123,6 +123,9 @@ questions:
             - {value: 'global/helpers/rewrite/customer/address', correct: false}
 
 # DISCUSSION/ANSWER: C. global/helpers/customer/rewrite/address
+# This question mentions the wrong name for helper class. The class Mage_Customer_Model_Customer_Address does not exist and it is not a helper, it is a model (that doesnt exists).
+# The correct helper is here: Mage_Customer_Helper_Address
+# But anyway the answer is correct for rewritting the real helper class
 
 
 #41
@@ -397,7 +400,7 @@ questions:
         question: ' The differences between the two following methods: Mage::getStoreConfig() and Mage::getStoreConfigFlag() are:'
         answers:
             - {value: 'Mage::getStoreConfigFlag() is used for conditional statement when we find the system value in Magento', correct: false}
-            - {value: 'Method Mage::getStoreConfigFlag() will get config data from database. By contrast, Mage:: getStoreConfig() will get data from both files 	config.xml and database', correct: false}
+            - {value: 'Method Mage::getStoreConfigFlag() will get config data from database. By contrast, Mage:: getStoreConfig() will get data from both files config.xml and database', correct: false}
             - {value: 'Method Mage::getStoreConfig() gets config data in raw format. However, 	Mage::getStoreConfigFlag() gets config data in Boolean format', correct: true}
             - {value: 'Method Mage::getStoreConfigFlag() is used to check depends condition in layout and config menu, but Mage::getStoreConfig() is not', correct: true}
             - {value: 'Method Mage::getStoreConfig() gets data from data base first, then get from file config.xml, However Mage::getStoreConfigFlag() does in opposite order.', correct: false}

@@ -1,13 +1,5 @@
-category: Adminhtml
+category: Magento Adminhtml
 questions:
-    -
-        question: 'For an attribute to be loaded on a catalog/product object, which two of the following conditions must be satisfied? (Choose two)'
-        answers:
-            - {value: 'The eav_attribute table must contain a row defining the attribute s properties and its entity type.', correct: true}
-            - {value: 'The attribute must have a backend model configured in the XML config.',  correct: false}
-            - {value: 'The attribute must be part of the attribute set pertaining to the object being loaded.', correct: true}
-            - {value: 'There must be a record of the attribute on the catalog_product_super_attribute table.', correct: false}
-            - {value: 'There must be a column added to the catalog_product_entity table.', correct: false}
     -
         question: 'What class does an adminhtml grid directly extend?'
         answers:
@@ -23,3 +15,362 @@ questions:
             - {value: 'You have extended the controller from Mage_Adminhtml_Controller_Action', correct: true}
             - {value: 'You have defined a method _isAllowed which checks the permission', correct: true}
             - {value: 'The route name must start with admin', correct: false}
+
+
+#24
+    -
+         question: 'Which four of these xml elements are used in system.xml to configure a system configuration property? (Choose four)'
+         answers:
+            - {value: 'backend_model', correct: true}
+            - {value: 'admin_model', correct: false}
+            - {value: 'frontend_model', correct: true}
+            - {value: 'source_model', correct: true}
+            - {value: 'source_type', correct: false}
+            - {value: 'show in store', correct: true}
+
+#DISCUSSION/ANSWER: A, C, D, F
+
+
+#33
+    -
+         question: 'Which class is extended to render a dropdown in admin forms?'
+         answers:
+            - {value: 'Mage_Adminhtml_Block_Widget', correct: false}
+            - {value: 'Mage_Core_Block_Abstract', correct: false}
+            - {value: 'Mage_Adminhtml_Block_Abstract', correct: false}
+            - {value: 'Mage_Adminhtml_Block_Template', correct: false}
+            - {value: 'Varien_Data_Form_Abstract', correct: true}
+
+# DISCUSSION/ANSWER: E. Varien_Data_Form_Abstract is extended by Varien_Data_Form_Element_Abstract which is extended by Varien_Data_Form_Element_Select
+
+
+#55
+    -
+         question: |
+            A valid way to extend Mage_Adminhtml_Cms_PageController with the Acme Cms Adminhtml_PageController class would be to set the following configuration;
+               <admin>
+                   <routers>
+                       <adminhtml>
+                           <args>
+                               <modules>
+                                   <custom_cms before="____">____</<custom_cms>
+                               </modules>
+                           </args>
+                       </adminhtml>
+                   </routers>
+               </admin>
+            Which of the following code pairs should be inserted in the blank spots in the code shown above?
+         answers:
+            - {value: 'Mage_Adminhtml, Acme_Cms_Adminhtml', correct: true}
+            - {value: 'Mage_Adminhtml, Acme_Cms_Adminhtml_PageController', correct: false}
+            - {value: 'Mage_Adminhtml_Cms_PageController, Acme_Cms_Adminhtml', correct: false}
+            - {value: 'Mage_Adminhtml_Cms_PageController, Acme_Cms_Adminhtml_PageController', correct: false}
+
+#DISCUSSION/ANSWER: A. Mage_Adminhtml, Acme_Cms_Adminhtml
+#Rewriting modules front-names and not the controllers
+
+#59
+    -
+        question: 'To implement a standard Adminhtml form for a custom data model, which two of the following must you do? (Choose two)'
+        answers:
+            - {value: 'Declare your module`s block class prefix in the config.xml file.', correct: true}
+            - {value: 'Implement a sub-class of Mage_Adminhtml_Block_Widget_Form.', correct: true}
+            - {value: 'Implement a sub-class of Mage_Adminhtml_Block_Form_Abstract.', correct: false}
+            - {value: 'Create sub-classes of Mage_Adminhtml_Block_Form_Element_Abstract for each form field to be presented.', correct: false}
+            - {value: 'Add a set of configuration values in the module`s config.xml defining the form fields to be displayed.', correct: false}
+
+#DISCUSSION/ANSWER: A + B
+
+#61
+    -
+        question: 'Given a grid interface that extends from Mage_Adminhtml_Block_Widget_Grid, which of the following methods could you override to allow data to be loaded from a custom data collection?'
+        answers:
+            - {value: '_prepareDataModel', correct: false}
+            - {value: '_prepareCollection', correct: true}
+            - {value: '_initDataModel', correct: false}
+            - {value: 'initGrid', correct: false}
+
+#DISCUSSION/ANSWER: B. _prepareCollection
+
+#63
+    -
+         question: 'You want to implement a custom attribute source model. Which method do you have to implement after extending Mage_Eav_Model_Entity_Attribute_Source_Abstract?'
+         answers:
+            - {value: 'getOptionText()', correct: false}
+            - {value: 'getAllOptions()', correct: true}
+            - {value: 'getOptionHash()', correct: false}
+            - {value: 'getOptionld()', correct: false}
+
+#DISCUSSION/ANSWER: B
+
+#72
+    -
+        question: 'You want to display a grid for a custom collection. After extending Mage_Adminhtml_Block_Widget_Grid, which two of these methods should you implement? (Choose two)'
+        answers:
+            - {value: '_getCollection()', correct: false}
+            - {value: '_prepareCollection()', correct: true}
+            - {value: '_prepareColumns()', correct: true}
+            - {value: 'toHtml()', correct: false}
+            - {value: 'render()', correct: false}
+
+#DISCUSSION/ANSWER: B. _prepareCollection() and C. _prepareColumns()
+
+#80
+    -
+        question: ' In which config areas are layout files declared? (Choose two)'
+        answers:
+            - {value: '<admin>', correct: false}
+            - {value: '<adminhtml>', correct: true}
+            - {value: '<default>', correct: false}
+            - {value: '<frontend>', correct: true}
+            - {value: '<global>', correct: false}
+
+#DISCUSSION/ANSWER: B + D, <adminhtml> + <frontend>
+
+#98
+    -
+        question: 'Which one of the following classes does NOT exist in Magento?'
+        answers:
+            - {value: 'Mage_Adminhtml_Block_Widget_Form_Element_Abstract', correct: true}
+            - {value: 'Mage_Adminhtml_Block_Widget_Form', correct: false}
+            - {value: 'Mage_Adminhtml_Block_Widget_Form_Container', correct: false}
+            - {value: 'Mage_Adminhtml_Block_Widget_Form_Element', correct: false}
+            - {value: 'Varien_Data_Form_Element_Abstract', correct: false}
+
+# DISCUSSION/ANSWER: A. Mage_Adminhtml_Block_Widget_Form_Element_Abstract
+
+#104
+    -
+        question: ' Which tags are used to declare catched event?(Choose 3 options among the followings)'
+        answers:
+            - {value: 'adminhtml', correct: true}
+            - {value: 'default', correct: false}
+            - {value: 'admin', correct: false}
+            - {value: 'frontend', correct: true}
+            - {value: 'global', correct: true}
+            - {value: 'crontab', correct: false}
+#  DISCUSSION/ANSWER: 1.adminhtml, 4.frontend, 5.global
+#Example: ../app/code/core/Mage/Bundle/etc/config.xml
+
+#107
+    -
+        question: 'When declaring a field in system configuration in Magento ( in file system.xml), which input types need to declare source_model? ( Choose 2 options)'
+        answers:
+            - {value: 'text', correct: false}
+            - {value: 'select', correct: true}
+            - {value: 'textarea', correct: false}
+            - {value: 'multiselect', correct: true}
+            - {value: 'date', correct: false}
+#  DISCUSSION/ANSWER: select  +  multiselect
+
+#109
+    -
+        question: |
+            When declaring a code in file system.xml to add configuration for system.
+            Where to get the default value that display in backend configuration?
+                <config>
+                    <tabs>
+                        <magestore translate="label">
+                            <label>Magestore Extension</label>
+                            <sort_order>400</sort_order>
+                        </magestore>
+                    </tabs>
+                    <sections>
+                        <giftcard translate="label" module="giftcard">
+                            <class>separator-top</class>
+                            <label>Gift Card</label>
+                            <tab>magestore</tab>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>299</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <groups>
+                                <general translate="label">
+                                    <label>General Configuration</label>
+                                    <frontend_type>text</frontend_type>
+                                    <sort_order>299</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>1</show_in_website>
+                                    <show_in_store>1</show_in_store>
+                                    <fields>
+                                        <prefix translate="label comment">
+                                            <label>Frontend Gift Code Prefix</label>
+                                            <frontend_type>text</frontend_type>
+                                            <sort_order>299</sort_order>
+                                            <show_in_default>1</show_in_default>
+                                            <show_in_website>1</show_in_website>
+                                            <show_in_store>1</show_in_store>
+                                            <comment></comment>
+                                        </prefix>
+                                    </fields>
+                                </general>
+                            </groups>
+                        </giftcard>
+                    </sections>
+                <config>
+        answers:
+            - {value: 'Always display an empty textbox', correct: false}
+            - {value: 'Configuration in file admin html.xml under xpath is config/global/giftcard/general/prefix.', correct: false}
+            - {value: 'Configuration in file config.xml under xpath is config/global/giftcard/general/prefix', correct: false}
+            - {value: 'Configuration in file config.xml under xpath is config/default/giftcard/general/prefix', correct: true}
+            - {value: 'Value in tags in the above code', correct: false}
+#  DISCUSSION/ANSWER: config/default/giftcard/general/prefix
+
+#115
+    -
+        question: 'How to change sort function for columns in grid magento in admin?'
+        answers:
+            - {value: 'Create renderer for the column you want to rewrite', correct: false}
+            - {value: 'Override template of thegrid', correct: false}
+            - {value: 'Rewrite function_setCollectionOrder for block grid', correct: true}
+            - {value: 'Rewrite _prepareCollection for block grid', correct: false}
+#  DISCUSSION/ANSWER: C(Mage_Adminhtml_Block_Widget_Grid: protected function _setCollectionOrder($column))
+
+#118
+    -
+        question: 'To update button available on the system`s form as buton Back, Save, Save and Continue Delete ... then we use the following way:'
+        answers:
+            - {value: '_setButton ("name_button");', correct: false}
+            - {value: '_changeButton (" name_button ");', correct: false}
+            - {value: '_updateButton ("name_button");', correct: true}
+            - {value: 'All are correct', correct: false}
+#  DISCUSSION/ANSWER: C
+
+#129
+    -
+        question: ' The differences between the two following methods: Mage::getStoreConfig() and Mage::getStoreConfigFlag() are:'
+        answers:
+            - {value: 'Mage::getStoreConfigFlag() is used for conditional statement when we find the system value in Magento', correct: false}
+            - {value: 'Method Mage::getStoreConfigFlag() will get config data from database. By contrast, Mage:: getStoreConfig() will get data from both files config.xml and database', correct: false}
+            - {value: 'Method Mage::getStoreConfig() gets config data in raw format. However, 	Mage::getStoreConfigFlag() gets config data in Boolean format', correct: true}
+            - {value: 'Method Mage::getStoreConfigFlag() is used to check depends condition in layout and config menu, but Mage::getStoreConfig() is not', correct: true}
+            - {value: 'Method Mage::getStoreConfig() gets data from data base first, then get from file config.xml, However Mage::getStoreConfigFlag() does in opposite order.', correct: false}
+ #DISCUSSION/ANSWER: C, A, D, B - wrong, correct: C and, D
+
+
+#139
+    -
+        question: 'To display formatted like the following example: "Aug 30, 2013" , choose the date of the following format:'
+        answers:
+            - {value: 'Mage_Core_Model_Locale :: FORMAT_TYPE_MEDIUM', correct: true}
+            - {value: 'Mage_Core_Model_Locale :: FORMAT_TYPE_SHORT', correct: false}
+            - {value: 'Mage_Core_Model_Locale :: FORMAT_TYPE_LONG', correct: false}
+            - {value: 'Mage_Core_Model_Locale :: FORMAT_TYPE_FULL', correct: false}
+#DISCUSSION/ANSWER: Mage_Core_Model_Locale :: FORMAT_TYPE_MEDIUM
+#http://www.jyotiranjan.in/blog/magento-format-datetime-using-configuration-options/
+
+#148
+    -
+        question: 'What is the function of Mage::helper("core")->formatDate(...) ?'
+        answers:
+            - {value: 'To display the time based on US time formating. E.g: Sept 29, 2013.', correct: false}
+            - {value: 'To display the time based on GMT.', correct: false}
+            - {value: 'To display the time based on the timezone of the visitor.', correct: false}
+            - {value: 'To display the time based on the location of the store.', correct: true}
+
+#DISCUSSION/ANSWER: To display the time based on the location of the store.
+
+#151
+    -
+        question: ' To delete button is available on the system`s form as buton Back, Save, Save and Continue Delete ... then we use the following way:'
+        answers:
+            - {value: '_removeButton ("name_button");', correct: true}
+            - {value: '_deleteButton (" name_button ");', correct: false}
+            - {value: '_dropButton ("name_button");', correct: false}
+            - {value: 'All are correct', correct: false}
+#DISCUSSION/ANSWER: _removeButton ('name_button');
+#Mage_Adminhtml_Block_Widget_Container
+#public function removeButton($id)
+#{
+#   return $this->_removeButton($id);
+#}
+
+#162
+    -
+        question: 'Which of the following types is not an input type when creating an attribute to product by Add Attribute method? (Choose 1 option among the followings)'
+        answers:
+            - {value: 'price', correct: false}
+            - {value: 'text', correct: false}
+            - {value: 'boolean', correct: false}
+            - {value: 'multiselect', correct: false}
+            - {value: 'int', correct: true}
+#DISCUSSION/ANSWER: int
+
+#166
+    -
+        question: 'What are the roles of adminhtml.xml file in etc directory?(choose 3)'
+        answers:
+            - {value: 'admin menu', correct: true}
+            - {value: 'admin acl', correct: true}
+            - {value: 'admin layout', correct: true}
+            - {value: 'admin router', correct: false}
+#DISCUSSION/ANSWER: A, B ,C
+
+#189
+    -
+        question: ' Which routers exist in a native Magento implementation? (4 answers)'
+        answers:
+            - {value: 'admin', correct: true}
+            - {value: 'standard', correct: true}
+            - {value: 'cms', correct: true}
+            - {value: 'adminhtml', correct: false}
+            - {value: 'frontend', correct: false}
+            - {value: 'Default', correct: true}
+#DISCUSSION/ANSWER: A, B, C, F
+
+#190
+    -
+        question: 'To creat a mass action for grid in backend in Magento, what we need to do?'
+        answers:
+            - {value: 'Add mass action item in method _prepareMassaction of Thêmmassaction item trongphươngthức_prepareMassaction of the corresponding model grid.', correct: false}
+            - {value: 'Add mass action item in method_prepareMassaction of the corresponding block grid.', correct: true}
+            - {value: 'Add admin html controller/action to execute the corresponding action which is declared in method_prepare Massaction.', correct: true}
+            - {value: 'Declare massaction in file xml layout of the module', correct: false}
+#DISCUSSION/ANSWER: B, C
+
+#191
+    -
+        question: 'Which of following statements will return the information about version of Magento?'
+        answers:
+            - {value: 'Mage::app()->getVersion()', correct: false}
+            - {value: 'Mage::getVersionInfo()', correct: true}
+            - {value: 'Mage::app()->getVersionInfo()', correct: false}
+            - {value: 'Mage::getMagentoVersion()', correct: false}
+#DISCUSSION/ANSWER: B
+
+#197
+    -
+        question: |
+            The order to call function in grid block'
+              _prepareColumns
+              _prepareMassaction
+              _prepareCollection
+        answers:
+            - {value: '1->3->2', correct: false}
+            - {value: '1->2->3', correct: true}
+            - {value: '3->2->1', correct: false}
+            - {value: '2->1->3', correct: false}
+#DISCUSSION/ANSWER: 1>2>3
+
+#207
+    -
+        question: 'To create a validate data for a Magento form, what should we do? (Choose 2 answers)'
+        answers:
+            - {value: 'Write a form with class : validate-form.', correct: true}
+            - {value: 'Write a form with field of a form which has a class required-entry', correct: true}
+            - {value: 'Declare Javascript code: new VarienForm("form_id", true);', correct: false}
+            - {value: 'Write a form with the method :post', correct: false}
+# DISCUSSION/ANSWER: A, C - A, D - B, C - B, D - C, D - A, B
+
+#222
+    -
+        question: 'When an admin page is requested, which of the following methods will be executed first?'
+        answers:
+            - {value: 'Mage Core Controller Varien Action:: dispatch ()', correct: false}
+            - {value: 'Mage Core Controller Varien Front:: dispatch ()', correct: false}
+            - {value: 'Mage Core Controller Router Default::match ()', correct: false}
+            - {value: 'Mage Adminhtml Controller Action:: preDispatch ()', correct: true}
+#DISCUSSION/ANSWER: Mage Core Controller Varien Front:: dispatch () is wrong
+# Mage Core Controller Router Default::match () has a typo (varien folder missed: Mage_Core_Controller_Varien_Router_Default)
+# Quiz tells b is wrong, but I (chab) debugged and it shows b is running first

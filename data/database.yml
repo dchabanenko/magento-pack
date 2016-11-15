@@ -1,4 +1,4 @@
-category: Database
+category: Magento Database
 questions:
     -
         question: 'You have a product collection and want to add a filter to get all products whose name starts with Test or whose price is 0.00. Which of the following statements would add that OR condition?'
@@ -43,16 +43,452 @@ questions:
               correct: false
 
     -
-        question: |
-                       What would go in place of ?????? below to make this script execute without a fatal error?
-                       $a = 1;
-                       $b = 0;
-                       /* ?????? */
-                       $c = $a / $b;
+        question: 'For an attribute to be loaded on a catalog/product object, which two of the following conditions must be satisfied? (Choose two)'
         answers:
-            - {value: 'quit();', correct: false}
-            - {value: 'die();', correct: true}
-            - {value: 'stop();', correct: false}
-            - {value: '__halt_compiler();', correct: true}
-            - {value: 'exit();', correct: true}
+            - {value: 'The eav_attribute table must contain a row defining the attribute s properties and its entity type.', correct: true}
+            - {value: 'The attribute must have a backend model configured in the XML config.',  correct: false}
+            - {value: 'The attribute must be part of the attribute set pertaining to the object being loaded.', correct: true}
+            - {value: 'There must be a record of the attribute on the catalog_product_super_attribute table.', correct: false}
+            - {value: 'There must be a column added to the catalog_product_entity table.', correct: false}
+#5
+    -
+        question: 'Which table is used for calculating a new increment ID for an order?'
+        answers:
+            - {value: 'sales_flat_order_increment', correct: false}
+            - {value: 'eav_entity_store',  correct: true}
+            - {value: 'core_increment', correct: false}
+            - {value: 'core_config_data', correct: false}
 
+#14
+    -
+        question: 'Which of the following options would cause a "poll/poll" collection to load all entities that have been posted during April, 2011?'
+        answers:
+            -
+                value: |
+                    $collection->addAttributeToFilter('date_posted', array('from' => '2011-04-01', 'to' => '2011-04-30') );
+                correct: false
+            -
+                value: |
+                    $collection->addFieldToFilter('date_posted', array('from' => '2011-04-01', 'to' => '2011-04-30'));
+                correct: true
+            -
+                value: |
+                   $collection->addPostDateFilter('2011-04-01', '2011-04-30');
+                correct: false
+            -
+                value: |
+                   $collection->addFieldToSelect(('date_posted', Array('from' => '2011-04-01', 'to' => '2011-04-30') );
+                correct: false
+#DISCUSSION/ANSWER: B. $collection->addFieldToFilter('date_posted', array('from' => '2011-04-01', 'to' => '2011-04-30'));
+
+#32
+    -
+         question: 'Which two of the following methods can be used to bad an entity`s data from its configured data table? (Choose two)'
+         answers:
+            - {value: '$entityModel->loadEntity($id)', correct: false}
+            - {value: '$entityModel->load($attributeValue, SattributeCode)', correct: true}
+            - {value: '$entityModel->loadById($id)', correct: false}
+            - {value: '$entityModel->loadEntity($attributeCode, $attributeValue)', correct: false}
+            - {value: '$entityModel->load($id)', correct: true}
+
+# DISCUSSION/ANSWER: B + E, only variants with $entityModel->load()  is available by default
+
+#37
+    -
+         question: 'Which statement describes a model class that extends Mage_Core_Model_Abstract?'
+         answers:
+            - {value: 'The model class consists of properties and methods for storing and manipulating data retrieved via separate resource classes responsible for database operations.', correct: true}
+            - {value: 'The model class is responsible for loading the frontend layout templates and responding to page requests via its Action methods (for example, indexAction).', correct: false}
+            - {value: 'The model class does not encapsulate any logic except for logic providing access to the data loaded from the database.', correct: false}
+            - {value: 'The model class is primarily responsible for direct query operations such as retrieving and storing data and then rendering that data to the frontend view.', correct: false}
+
+#DISCUSSION/ANSWER: A. The model class consists of properties and methods...
+
+#45
+    -
+         question: 'Which of the following allows you to save a single attribute value on an EAV entity?'
+         answers:
+            - {value: '$model->saveAttribute($attributeCode);', correct: false}
+            - {value: '$model->save($attributeCode);', correct: false}
+            - {value: '$model->getResource()->saveAttribute($model, $attributeCode);', correct: true}
+            - {value: '$model->getResource()->save($model, $attributeCode);', correct: false}
+
+#DISCUSSION/ANSWER: C. $model->getResource()->saveAttribute($model, $attributeCode);
+
+#46
+    -
+         question: |
+              When setData('some', 'value') is called on an EAV entity and the entity is saved to the database, __________________.
+         answers:
+            - {value: 'the `value` of the attribute named ``some`` is saved in the eav_values table', correct: false}
+            - {value: 'the `value` of the attribute named ``some`` is saved in one of the entity`s tables depending on its datatype (for example, entityname_varchar)', correct: true}
+            - {value: 'the data will be stored in the EAV registry making `some` `value` available to the entity', correct: false}
+            - {value: 'the `value` of the attribute named `some` is saved in the eav attribute values table', correct: false}
+
+#DISCUSSION/ANSWER: B. the 'value' of the attribute named 'some' is saved in one of the entity's tables depending on its datatype (for example, entityname_varchar)
+
+#48
+    -
+         question: 'Which of the following is the default setup script class name?'
+         answers:
+            - {value: 'Mage_Core_Model_Mysql4_Setup', correct: false}
+            - {value: 'Mage_Core_Model_Resource_Setup_Default', correct: false}
+            - {value: 'Mage_Setup_Model_Resource_Default', correct: false}
+            - {value: 'Mage_Core_Model_Resource_Setup', correct: true}
+
+#DISCUSSION/ANSWER: D. Mage_Core_Model_Resource_Setup
+
+
+#62
+    -
+        question: 'When changes are made to more than one of a collection`s items using setData(`some`, `value`), which of the following methods will save the changes in the collection?'
+        answers:
+            - {value: '$collection->saveAll();', correct: false}
+            - {value: '$collection->saveItems();', correct: false}
+            - {value: '$collection->saveAllItems ();', correct: false}
+            - {value: '$collection->save();', correct: true}
+
+#DISCUSSION/ANSWER: D. $collection->save(); the same as for models
+
+#67
+    -
+        question: 'In order to successfully register and configure a new entity capable of being saved and loaded from the database, you must create a model and which three of the following? (Choose three)'
+        answers:
+            - {value: 'a collection class', correct: false}
+            - {value: 'configuration settings in your module`s config.xml', correct: true}
+            - {value: 'an entry in Mage::$_registry', correct: false}
+            - {value: 'a record in the eav_entity table', correct: false}
+            - {value: 'a resource model', correct: true}
+            - {value: 'a table in the database that will store the entity"s data', correct: true}
+
+# DISCUSSION/ANSWER: B + E + F, config.xml + resource model + table in the database
+
+#68
+    -
+        question: 'What does Magento use to determine whether the automatically run upgrade scripts have been run yet?'
+        answers:
+            - {value: 'The modification date on the modules` etc/config.xml file', correct: false}
+            - {value: 'The version number (or lack thereof) stored in the core_module_version table', correct: false}
+            - {value: 'The version number (or lack thereof) stored in the core_resource table', correct: true}
+            - {value: 'A comparison of the resources that are capable of successfully loading', correct: false}
+
+# DISCUSSION/ANSWER: C. The version number (or lack thereof) stored in the core_resource table
+
+
+#71
+    -
+        question: 'The initial call to ______________ will create and return an instance of the specified class. Subsequent calls to this method during the same execution cycle will return the same class instance as opposed to creating a new one.'
+        answers:
+            - {value: 'Mage::getResourceModel(`namespace/modulename`);', correct: false}
+            - {value: 'Mage::getInstance(`namespace/modulename`);', correct: false}
+            - {value: 'Mage::getModel(`modulename/modelname`) ;', correct: false}
+            - {value: 'Mage::getSingleton(`modulename/modelname`);', correct: true}
+
+# DISCUSSION/ANSWER: D. Mage::getSingleton('modulename/modelname');
+
+#72
+    -
+        question: 'You want to display a grid for a custom collection. After extending Mage_Adminhtml_Block_Widget_Grid, which two of these methods should you implement? (Choose two)'
+        answers:
+            - {value: '_getCollection()', correct: false}
+            - {value: '_prepareCollection()', correct: true}
+            - {value: '_prepareColumns()', correct: true}
+            - {value: 'toHtml()', correct: false}
+            - {value: 'render()', correct: false}
+
+#DISCUSSION/ANSWER: B. _prepareCollection() and C. _prepareColumns()
+
+#74
+    -
+        question: 'You want to filter a product collection so that it will return only SKUs 12 and 123. You will use a call to $collection->addFieldToFilter(`sku`, ____________ ); Two of the following arrays could be used to complete that call correctly. Which two? (Choose two)'
+        answers:
+            - {value: 'array(`sku` => 12, `sku` => 123)', correct: false}
+            - {value: 'array(array(`eq` => 12), array(`eq` => 123))', correct: true}
+            - {value: 'array(12 => true, 123 => true)', correct: false}
+            - {value: 'array(12, 123)', correct: true}
+            - {value: 'array(array(`int` => 12), array(`int` => 123))', correct: false}
+
+#DISCUSSION/ANSWER: B + D, array(array('eq' => 12), array('eq' => 123)) + array(12, 123)
+
+#76
+    -
+        question: 'Which of the following xpaths defines the correct XML structure for informing Magento that your module has install scripts?'
+        answers:
+            - {value: 'global/resources/etc/setup/<script_directory_name>/module', correct: false}
+            - {value: 'system/database/resources/<script_directory_name>/setup/module', correct: false}
+            - {value: 'global/resources/<script_directory_name>/setup/module', correct: true}
+            - {value: 'database/action/scripts/<script_directory_name>', correct: false}
+
+#DISCUSSION/ANSWER: C. global/resources/<script_directory_name>/setup/module
+
+#87
+    -
+        question: 'Which three of the following will return an instance of a resource model? (Choose three)'
+        answers:
+            - {value: 'Mage::getResourceModel(`customer/customer`);', correct: true}
+            - {value: 'Mage::getResourceSingleton(`customer/customer`);', correct: true}
+            - {value: 'Mage::getModel(`customer/customer`)->getResourceModel();', correct: false}
+            - {value: 'Mage::getResourceModel(`customer/customer`)->getInstance();', correct: false}
+            - {value: 'Mage::getModel(`customer/customer`)->getResource();', correct: true}
+            - {value: 'Mage::getResourceModel(`customer/customer`)->getResource();', correct: false}
+
+#DISCUSSION/ANSWER: A + B + E, getResourceModel + getResourceSingleton + model->getResource
+
+#92
+    -
+        question: |
+          In which order are the following methods executed after Mage_Core_Model_Abstract::save () is called?
+            1- Mage_Core_Model_Abstract::_beforeSave()
+            2- Mage_Core_Model_Abstract::_afterSave()
+            3- Mage_Core_Model_Mysql4_Abstract::_beforeSave()
+            4- Mage_Core_Model_Mysql4_Abstract::_afterSave()
+            5- Mage_Core_Model_Abstract::afterCommitCallback()
+        answers:
+            - {value: '1, 2, 3, 4, 5', correct: false}
+            - {value: '1, 3, 2, 4, 5', correct: false}
+            - {value: '1, 3, 4, 2, 5', correct: true}
+            - {value: '3, 1, 4, 2, 5', correct: false}
+
+#DISCUSSION/ANSWER: C. 1, 3, 4, 2, 5, model->before + mysql->before + mysql->after + model->after + callback
+
+#93
+    -
+        question: 'Which of the following node names may be used inside the setup resource declaration to utilize a custom setup class?'
+        answers:
+            - {value: 'resourceModel', correct: false}
+            - {value: 'resourceClass', correct: false}
+            - {value: 'setupClass', correct: false}
+            - {value: 'class', correct: true}
+
+#DISCUSSION/ANSWER: D. class
+
+#95
+    -
+        question: 'Which file path correctly identifies the location of a modules install/upgrade scripts inside the primary module directory?'
+        answers:
+            - {value: 'sql/<setup_resource_name>/', correct: true}
+            - {value: 'var/scripts/', correct: false}
+            - {value: 'scripts/', correct: false}
+            - {value: '<setup_resource_name>/', correct: false}
+
+#DISCUSSION/ANSWER: A. sql/<setup_resource_name>/
+
+#110
+    -
+        question: 'In the module Magestore_GiftCard, what is the return value of  Mage::getModel(`giftcard/code` ( 1 answer)'
+        answers:
+            - {value: 'Return a line in database of giftcard table : giftcard_code', correct: false}
+            - {value: 'Return an object of class Magestore_GiftCard_Model_Code', correct: true}
+            - {value: 'Return a data array of module Magestore_GiftCard', correct: false}
+            - {value: 'Return the class Magestore_GiftCard_Model_Code', correct: false}
+#  DISCUSSION/ANSWER: B
+
+#117
+    -
+        question: 'In data base, What is time zone saved in magento core?'
+        answers:
+            - {value: 'Customer`s timezone', correct: false}
+            - {value: 'Store`s timezone in configuration.', correct: false}
+            - {value: 'Website`s timezone.', correct: false}
+            - {value: 'GTM 0', correct: true}
+#  DISCUSSION/ANSWER: GTM 0
+
+#122
+    -
+        question: 'What is the difference between Model and Resource Model? Choose the correct answer.'
+        answers:
+            - {value: 'In EAV models, Model works with the entity tables and Resource Model works with the Attribute and Value tables.', correct: false}
+            - {value: 'The Model loads data of one entity (one row) from database table. The Resource Model loads data of one collection (includes many entities)', correct: false}
+            - {value: 'The Model is a temporary data store. The Resource Model works with database.', correct: true}
+            - {value: 'The Model and the Resource Model support for database manipulation but the Resource Model includes more functions manipulating with database.', correct: false}
+# DISCUSSION/ANSWER:The Model is a temporary data store. The Resource Model works with database.
+
+
+#123
+    -
+        question: 'How to set order for a magento collection?(Choose 2)'
+        answers:
+            - {value: '$coll->getSelect()->order("entity_id desc");', correct: true}
+            - {value: '$coll->setOrder("entity_id","desc");', correct: true}
+            - {value: '$coll->setOrder("entity_id desc");', correct: false}
+            - {value: '$coll->getSelect()->order("entity_id","desc");', correct: false}
+# DISCUSSION/ANSWER: A, B
+
+
+#125
+    -
+        question: |
+             Choose the order of implement of the following functions:
+               1 - Mage_Core_Model_Abstract::_afterSave ( ) 3
+               2 - Mage_Core_Model_Mysql4_Abstract::_beforeSave ( ) 1
+               3 - Mage_Core_Model_Mysql4_Abstract::_afterSave ( ) 2
+               4 - Mage_Core_Model_Abstract::afterCommitCallback ( ) 4
+        answers:
+            - {value: '1->2->3->4', correct: false}
+            - {value: '1->2->4->3', correct: false}
+            - {value: '2->1->3->4', correct: true}
+            - {value: '2->3->1->4', correct: false}
+# DISCUSSION/ANSWER: 2->3->1->4   C.2->1->3->4
+# 2->1->3->4 - this answer has been verified on Magento 1.9.2.4
+
+#127
+    -
+        question: 'When specifying a custom connection resource for a module that handles the DB reads, which of the following is a possible resource name?'
+        answers:
+            - {value: '<modulename_readonly>', correct: false}
+            - {value: '<modulename_read>', correct: true}
+            - {value: '<modulename_default>', correct: false}
+            - {value: '<modulename_setup>', correct: false}
+            - {value: '<modulename_connection_read>', correct: false}
+# DISCUSSION/ANSWER: <modulename_read>
+
+#132
+    -
+        question: 'Which of the following statements once execution will create a new object? ( 2 correct answers)'
+        answers:
+            - {value: 'Mage::getResourceModel("modulename/modelname")', correct: true}
+            - {value: 'Mage::getModel("modulename/modelname")', correct: true}
+            - {value: 'Mage::helper("modulename")', correct: false}
+            - {value: 'Mage::getSingleton("modulename/modelname")', correct: false}
+#DISCUSSION/ANSWER: A, B
+
+#134
+    -
+        question: 'How to get attribute value from attribute code of product? (choose some)'
+        answers:
+            - {value: '$attribute_value = $product->getAttributeText($attribute_code);', correct: true}
+            - {value: '$attribute_value = Mage::getResourceModel(`catalog/product`)->getAttributeRawValue($product_id, 	$attribute_code, $store_id);', correct: true}
+            - {value: '$attribute_value = $product->getAttributeValue($attribute_code)', correct: false}
+            - {value: '$attribute_value = $product->getResource()->getAttribute($attribute_code)->getFrontend()->getValue($product);', correct: true}
+#DISCUSSION/ANSWER: B, C, D, -wrong, A,B,D - correct
+
+#155
+    -
+        question: 'How to filter product collection ($collection = Mage::getModel("catalog/product")->getCollection()) by status?'
+        answers:
+            - {value: '$collection->addStatusFilter($status);', correct: false}
+            - {value: '$collection->addAttributeToSelect("*")-> addAttributeToFilter("status"=>array("eq"=>$status));', correct: true}
+            - {value: '$collection->addFieldToFilter("status"=>array($status));', correct: false}
+            - {value: '$collection-> addAttributeToSelect("*")->addFilterStatus($status);', correct: false}
+#DISCUSSION/ANSWER: B
+
+
+
+#170
+    -
+        question: 'How to get product collection which IDs are in array(16,17,18,20) ?'
+        answers:
+            - {value: '$collection->addFieldToFilter("entity_id"=>array("in"=>array(16,17,18,19)))', correct: true}
+            - {value: '$collection->addFieldToFilter("id", array(16,17,18,19));', correct: false}
+            - {value: '$collection->addFieldToFilter("entity_id"=>array("gt"=>16,"lt"=>"19"))', correct: false}
+            - {value: '$collection->addIdToFilter(array(16,17,18,19));', correct: false}
+#DISCUSSION/ANSWER: A
+
+#183
+    -
+        question: 'Which methods to get magento table name?(Choose 2)'
+        answers:
+            - {value: 'Mage_Core_Model_Resource::getTableName()', correct: true}
+            - {value: 'Mage_Core_Model_Resource::getTable()', correct: false}
+            - {value: 'Mage_Core_Model_Mysql4_Abstract::getTableName()', correct: false}
+            - {value: 'Mage_Core_Model_Mysql4_Abstract::getTable()', correct: true}
+#DISCUSSION/ANSWER: A, D
+
+
+#185
+    -
+        question: 'Which exist methods to join tables on collections and on select instances? (select 3 answers)'
+        answers:
+            - {value: 'joinLeft', correct: true}
+            - {value: 'joinnatural', correct: true}
+            - {value: 'joinfull', correct: true}
+            - {value: 'joinTable', correct: false}
+#ON/ANSWER: A, B, C
+
+#193
+    -
+        question: 'Which statement to generate the product list contains “phone” in product name or has the price higher than 99? Choose the correct answer.'
+        answers:
+            -
+                value: |
+                     $productCollection->addAttributeToFilter('
+                         array(
+                             array('attribute'=>'price','gt'=>99),
+                             array('attribute'=>'name','like'=>'%phone%')
+                         ));
+                correct: true
+            -
+                value: |
+                    $productCollection->addFieldToFilter('price',array('gt'=>99))'
+                        ->addFieldToFilter('name',array('like'=>'%phone%'));
+                correct: false
+            -
+                value: |
+                    $productCollection->addFieldToFilter('
+                        array('price','name'),
+                        array(array('gt'=>99),array('like'=>'%phone%')),
+                    );
+                correct: false
+            -
+                value: |
+                    $productCollection->addAttributeToFilter('price'=>array('gt'=>99))'
+                        ->addOrCondition('name',array('like'=>'%phone%'));
+                correct: false
+#DISCUSSION/ANSWER: a
+
+#201
+    -
+        question: ' How to change default length of Increment ID for orders?'
+        answers:
+            - {value: '$entityType = Mage::getModel("eav/entity_type")->loadByCode("order");$entityType->setIncrementPadLength(12)->save();', correct: true}
+            - {value: '$entity = Mage::getModel("eav/entity_type")->setType("order"); $entityType->setIncrementPadLength(12)->save();', correct: false} #true?
+            - {value: '$entity = Mage::getModel("eav/entity_type_order"); $entityType->setIncrementPadLength(12)->save();', correct: false}
+#DISCUSSION/ANSWER: A(quiz tells A is wrong, but should work fine)  B (quiz bruteforcing tells B, but the model is in $entity but undefined variable $entityType is saving. Typo ? (no c, because no model eav/entity_type_order exists)
+
+#204
+    -
+        question: |
+            By implementing the following commands, the price value saved in database is......Choose the correct answer.'
+                $firstProduct = Mage::getSingleton('catalog/product')->load(12);
+            	$secondProduct = Mage::getSingleton('catalog/product')->load(15);
+            	$firstProduct->setPrice(99);
+            	$secondProduct->setPrice($firstProduct->getPrice() * 2 + 1);
+            	$firstProduct->save();
+        answers:
+            - {value: 'firstProduct is 99, secondProduct is unchanged', correct: false}
+            - {value: 'firstProduct is 99, secondProduct is 199', correct: false}
+            - {value: 'firstProduct is unchanged, secondProduct is 199', correct: true}
+            - {value: 'Both of them are 199', correct: false}
+
+#DISCUSSION/ANSWER: firstProduct is unchanged, secondProduct is 199
+
+#205
+    -
+        question: 'When installing a new module ( there is version 2.0, which files are run? (there are 2 correct answers)'
+        answers:
+            - {value: 'mysql4-install-0.1.0.php', correct: false}
+            - {value: 'mysql4-install-0.1.3.php', correct: true}
+            - {value: 'mysql4-upgrade-0.1.3-0.2.0.php', correct: true}
+            - {value: 'mysql4-upgrade-0.1.0-0.1.3.php', correct: false}
+            - {value: 'mysql4-upgrade-0.1.0-0.2.0.php', correct: false}
+#DISCUSSION/ANSWER: mysql4-install-0.1.3.php  +  mysql4-upgrade-0.1.3-0.2.0.php
+
+#212
+    -
+        question: 'What is the purpose of the configuration XML flag stored in g1obal/resource/connection/type/pdomysql/compatibleMode?'
+        answers:
+            - {value: 'If set to 0, then all data structures are exported when using Dataflow.', correct: false}
+            - {value: 'If set to 0, then only standard-compliant SQL is used.', correct: true}
+            - {value: 'If set to 0, then data structures compatible with OpenCommence Language are exported when using Data flow.', correct: false}
+            - {value: 'If set to 0, then MySQL-specific SQL is used.', correct: false}
+#DISCUSSION/ANSWER:
+
+#214
+    -
+        question: 'Which one of the following accurately describes the purpose of the resource helper classes instantiated through Mage::getResourceHelper?'
+        answers:
+            - {value: 'Format values returned by the database for display in templates.', correct: false}
+            - {value: 'Provide public access to concrete implementations of varien_Db_Adapter_Interface.', correct: false}
+            - {value: 'Wrap vendor-specific SQL additions into an RDBMS-agnostic interface.', correct: true}
+            - {value: 'Provide a convenient way to modify database table properties.', correct: false}
+#DISCUSSION/ANSWER: Don't know, B is wrong (Provide public access to concrete implementations of varien_Db_Adapter_Interface)
