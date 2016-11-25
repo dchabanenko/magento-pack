@@ -319,10 +319,10 @@ questions:
     -
         question: |
              Choose the order of implement of the following functions:
-               1 - Mage_Core_Model_Abstract::_afterSave ( ) 3
-               2 - Mage_Core_Model_Mysql4_Abstract::_beforeSave ( ) 1
-               3 - Mage_Core_Model_Mysql4_Abstract::_afterSave ( ) 2
-               4 - Mage_Core_Model_Abstract::afterCommitCallback ( ) 4
+               1 - Mage_Core_Model_Abstract::_afterSave ( )
+               2 - Mage_Core_Model_Mysql4_Abstract::_beforeSave ( )
+               3 - Mage_Core_Model_Mysql4_Abstract::_afterSave ( )
+               4 - Mage_Core_Model_Abstract::afterCommitCallback ( )
         answers:
             - {value: '1->2->3->4', correct: false}
             - {value: '1->2->4->3', correct: false}

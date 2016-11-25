@@ -16,6 +16,19 @@ questions:
             - {value: 'You have defined a method _isAllowed which checks the permission', correct: true}
             - {value: 'The route name must start with admin', correct: false}
 
+#8
+    -
+        question: 'Which two EAV attribute frontend_input types make use of source models? (Choose two)'
+        answers:
+            - {value: 'text', correct: false}
+            - {value: 'textarea', correct: false}
+            - {value: 'select', correct: true}
+            - {value: 'multiselect', correct: true}
+            - {value: 'date', correct: false}
+            - {value: 'gallery', correct: false}
+
+# DISCUSSION/ANSWER: C, D (from http://wap.testsnow.net/4/4647/54941.html)
+
 
 #24
     -
