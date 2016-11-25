@@ -381,9 +381,9 @@ questions:
         question: 'When an admin page is requested, which of the following methods will be executed first?'
         answers:
             - {value: 'Mage Core Controller Varien Action:: dispatch ()', correct: false}
-            - {value: 'Mage Core Controller Varien Front:: dispatch ()', correct: false}
+            - {value: 'Mage Core Controller Varien Front:: dispatch ()', correct: true}
             - {value: 'Mage Core Controller Router Default::match ()', correct: false}
-            - {value: 'Mage Adminhtml Controller Action:: preDispatch ()', correct: true}
+            - {value: 'Mage Adminhtml Controller Action:: preDispatch ()', correct: false}
 #DISCUSSION/ANSWER: Mage Core Controller Varien Front:: dispatch () is wrong
 # Mage Core Controller Router Default::match () has a typo (varien folder missed: Mage_Core_Controller_Varien_Router_Default)
 # Quiz tells b is wrong, but I (chab) debugged and it shows b is running first

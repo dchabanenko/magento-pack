@@ -1,0 +1,284 @@
+category: Magento Catalog
+questions:
+
+#6
+    -
+        question: 'Which one of the following API methods exists in Magento?'
+        answers:
+            - {value: 'catalog_category.save', correct: false}
+            - {value: 'catalog_product.items',  correct: false}
+            - {value: 'catalog_product_attribute_set.update', correct: false}
+            - {value: 'catalog_product.info', correct: true}
+
+#12
+    -
+        question: 'Which one of the following EAV attribute types may be used for layered navigation in native Magento?'
+        answers:
+            - {value: 'varchar', correct: false}
+            - {value: 'enum', correct: false}
+            - {value: 'option', correct: true}
+            - {value: 'union', correct: false}
+
+#DISCUSSION/ANSWER: C option
+
+
+#15
+    -
+        question: 'The final price for the product on the product view page is __________.'
+        answers:
+            - {value: 'taken from the catalog_product_index_price table', correct: false}
+            - {value: 'taken from the catalog_product_index_price_idx table', correct: false}
+            - {value: 'taken from the catalog_product_index_price_final_idx table', correct: false}
+            - {value: 'calculated on-the-fly on php-level', correct: true}
+            - {value: 'pre-calculated in the products price attribute', correct: false}
+
+#DISCUSSION/ANSWER: D. calculated on-the-fly on php-level
+
+#26
+    -
+         question: 'Which of the following API calls allows you to fetch the list of related products using the native Magento API?'
+         answers:
+            -
+                value: |
+                    catalog_product_link.list, with arguments $type='related', $product_id'
+                correct: true
+            -
+                value: |
+                    catalog_product.list, with arguments $type='related', $product_id'
+                correct: false
+            - {value: 'catalog_product_related.list, with argument $product_id', correct: false}
+            -
+                value: |
+                    catalog_product_option.list, with arguments $type='related', $product_id'
+                correct: false
+
+#DISCUSSION/ANSWER: A. catalog_product_link.list, with arguments $type='related', $product_id
+
+#39
+    -
+         question: ' Which method is responsible for a full re-index in the abstract Magento indexer?'
+         answers:
+            - {value: 'fullReindex()', correct: false}
+            - {value: 'reindexAll()', correct: true}
+            - {value: 'processEvent()', correct: false}
+            - {value: 'reindex()', correct: false}
+
+# DISCUSSION/ANSWER: B. reindexAll()
+
+#52
+    -
+         question: 'Which table stores information about the relationship between configurable products and their child products?'
+         answers:
+            - {value: 'catalog_product_link', correct: false}
+            - {value: 'catalog_product_super_link', correct: true}
+            - {value: 'catalog_product_option', correct: false}
+            - {value: 'catalog_product_relation', correct: false}
+
+#DISCUSSION/ANSWER: B
+
+#88
+    -
+        question: ' By enabling Flat catalog, you will ____________.'
+        answers:
+            - {value: 'speed up performance on the frontend', correct: true}
+            - {value: 'speed up saving product on the backend', correct: false}
+            - {value: 'simplify the product import process', correct: false}
+            - {value: 'speed up loading product on the backend', correct: false}
+
+#DISCUSSION/ANSWER: A. speed up performance on the frontend
+
+#100
+    -
+        question: 'What is the xpath to the list of product types?'
+        answers:
+            - {value: 'catalog/product/type', correct: false}
+            - {value: 'global/catalog/product/type', correct: true}
+            - {value: 'default/catalog/product/type', correct: false}
+            - {value: 'It depends on the product type.', correct: false}
+
+#DISCUSSION/ANSWER: B. global/catalog/product/type
+
+#101
+    -
+        question: 'For which two of the following composite products could the options be shipped separately on the frontend using "Checkout with multiple addresses"? (Choose two)'
+        answers:
+            - {value: 'configurable physical product', correct: false}
+            - {value: 'bundle product consisting of physical products', correct: true}
+            - {value: 'grouped product consisting of physical products', correct: true}
+            - {value: 'bundle product consisting of virtual products', correct: false}
+            - {value: 'grouped product consisting of virtual products', correct: false}
+
+# DISCUSSION/ANSWER: B, C
+
+#102
+    -
+        question: 'Assume you added a product with custom options to the shopping cart. Where will the data for the custom options be stored persistently?'
+        answers:
+            - {value: 'in the sales_flat_quote table, as a serialized string in a text field', correct: false}
+            - {value: 'in the session, as a serialized array', correct: false}
+            - {value: 'in a separate table, sales_flat_quote_item_option', correct: true}
+            - {value: 'Magento doesn`t store persistent data about custom options; only the new price and new SKU are stored.', correct: false}
+
+# DISCUSSION/ANSWER: C. in a separate table, sales_flat_quote_item_option
+
+
+#103
+    -
+        question: 'Which of the following operations is most impacted (in time required) by a large number of products and stores?'
+        answers:
+            - {value: 'loading a simple product page on the front', correct: false}
+            - {value: 'saving product in the admin area', correct: false}
+            - {value: 'importing tax rates to the database', correct: false}
+            - {value: 'adding new attributes to be used in flat catalog', correct: true}
+# DISCUSSION/ANSWER: 4.adding new attributes to be used in flat catalog
+
+#114
+    -
+        question: 'Which product types are implemented as part of the Mage_Catalog module? (3 answers)'
+        answers:
+            - {value: 'Configurable', correct: true}
+            - {value: 'Grouped', correct: true}
+            - {value: 'Bundle', correct: false}
+            - {value: 'Simple', correct: true}
+#  DISCUSSION/ANSWER: A, B, D
+
+#116
+    -
+        question: 'Choose the correct statement'
+        answers:
+            - {value: 'Attributes added to products are not included in catalog condition', correct: false}
+            - {value: 'Rewrite model catalog to add attributes', correct: false}
+            - {value: 'Edite attributes to allow display in catalog condition', correct: true}
+            - {value: 'All of them are incorrect', correct: false}
+#  DISCUSSION/ANSWER: Edite attributes to allow display in catalog condition
+
+#133
+    -         
+        question: 'Which product types implement a parent-child relationship between product entities?(choose 3)'
+        answers:
+            - {value: 'Configurable', correct: true}
+            - {value: 'Simple', correct: false}
+            - {value: 'Grouped', correct: true}
+            - {value: 'Bundle', correct: true}
+            - {value: 'Virtual', correct: false}
+            - {value: 'Downloadable', correct: false}
+#DISCUSSION/ANSWER: A, C, D
+
+#147
+    - 
+        question: 'Which product type does NOT exist in magento core? (1 correct answer)'
+        answers:
+            - {value: 'Bundle', correct: false}
+            - {value: 'Configurable', correct: false}
+            - {value: 'Options', correct: true}
+            - {value: 'Virtual', correct: false}
+            - {value: 'Simple', correct: false}
+#DISCUSSION/ANSWER: C (quiz bruteforce) (b) Configuration is their typo, should be Configurable)
+
+#156
+    -
+        question: 'Why some magento products are not shown in categories? (choose some)'
+        answers:
+            - {value: 'Status disable', correct: true}
+            - {value: 'Invisibility in catalog, search', correct: true}
+            - {value: 'Product out of stock', correct: true}
+            - {value: 'Assigned website', correct: false}
+#DISCUSSION/ANSWER: A, B, D - ab - abcd - ; ABC - true
+
+#157
+    -         
+        question: ' Which product types can NOT be shipped?'
+        answers:
+            - {value: 'Virtual product , bundle product', correct: false}
+            - {value: 'Downloadable product, vitural product', correct: true}
+            - {value: 'Bundle product, group product', correct: false}
+            - {value: 'Download product, bundle product', correct: false}
+#DISCUSSION/ANSWER: B
+
+#163
+    -
+        question: 'What we need to do to add a product type into magento? ( 2 answers is correct)'
+        answers:
+            - {value: 'Add structure product type into file config by following XPath global/catalog/product/type', correct: true}
+            - {value: 'Add structure product type into file config by following XPath global/product/type', correct: false}
+            - {value: 'Write model for the new product type which is inherited from Mage_Catalog_Model_Product_Type_Abstract', correct: true}
+            - {value: 'Write model for the new product type which is inherited from Mage_Catalog_Model_Product_Type_Price', correct: false}
+            - {value: 'Add product display configuration in menu in file adminhtml.xml', correct: false}
+#DISCUSSION/ANSWER: A, C
+
+#188
+    -         
+        question: 'What product types do not need to ship?(choose 2)'
+        answers:
+            - {value: 'Configurable', correct: false}
+            - {value: 'Simple', correct: false}
+            - {value: 'Grouped', correct: false}
+            - {value: 'Bundle', correct: false}
+            - {value: 'Virtual', correct: true}
+            - {value: 'Downloadable', correct: true}
+#DISCUSSION/ANSWER: E, F
+
+#194
+    -         
+        question: 'Which table to store the relationship data between configurable product and it"s simple product?'
+        answers:
+            - {value: 'catalog_product_relation table', correct: false}
+            - {value: 'catalog_product_superlink table', correct: false}
+            - {value: 'Both table catalog_product_superlink and catalog_product_relation', correct: true}
+            - {value: 'Catalog_product_link table', correct: false}
+#DISCUSSION/ANSWER: B
+
+#195
+    - 
+        question: | 
+            What does the following config mean?
+            <fieldsets>
+                <sales_convert_quote_address>
+                    <rewardpoints_earn>
+                        <to_order>*</to_order>
+                    </rewardpoints_earn>
+                </sales_convert_quote_address>
+            </fieldsets>
+        answers:
+            - {value: 'Save data in quote address', correct: false}
+            - {value: 'Save data in rewardpoints_earn table', correct: false}
+            - {value: 'Transfer data from sales/quote_address table to sale/order table', correct: true}
+            - {value: 'Transfer sale/order table to sales/quote_address table', correct: false}
+#DISCUSSION/ANSWER: Transfer data from sales/quote_address table to sale/order table
+
+#200
+    -         
+        question: 'Which product types exist in Magento?(choose 6)'
+        answers:
+            - {value: 'simple product', correct: true}
+            - {value: 'gift product', correct: false}
+            - {value: 'grouped product', correct: true}
+            - {value: 'configurable product', correct: true}
+            - {value: 'special product', correct: false}
+            - {value: 'virtual product', correct: true}
+            - {value: 'bundle product', correct: true}
+            - {value: 'downloadable product', correct: true}
+#DISCUSSION/ANSWER: A, C, D, F, G, H
+
+#203
+    -
+        question: 'When we add a Value of an attribute (price format)  to product, where is it stored? (1 correct answer)'
+        answers:
+            - {value: 'sales_flat_order', correct: false}
+            - {value: 'catalog_product_entity', correct: false}
+            - {value: 'catalog_product_entity_decimal', correct: true}
+            - {value: 'catalog_product_entity_text', correct: false}
+            - {value: 'catalog_eav_attribute', correct: false}
+#DISCUSSION/ANSWER: C
+
+#221
+    -
+        question: |
+            Which one of the following calls returns a simple product type model?
+            Assume that $product is an instance of Mage_Catalog_Model_Product representing a simple product
+        answers:
+            - {value: 'Mage Catalog Model Product Type:: factory(`simple`)', correct: false}
+            - {value: '$product->getType()', correct: false}
+            - {value: 'Mage::getsingleton(‘catalog/producttype’)->getType($product)', correct: false}
+            - {value: '$product->getTypeInstance()', correct: true}
+#DISCUSSION/ANSWER:

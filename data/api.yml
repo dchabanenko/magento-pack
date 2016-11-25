@@ -1,0 +1,159 @@
+category: Magento API
+questions:
+
+#6
+    -
+        question: 'Which one of the following API methods exists in Magento?'
+        answers:
+            - {value: 'catalog_category.save', correct: false}
+            - {value: 'catalog_product.items',  correct: false}
+            - {value: 'catalog_product_attribute_set.update', correct: false}
+            - {value: 'catalog_product.info', correct: true}
+
+#20
+    -
+         question: 'Which one of the following API protocols does native Magento support?'
+         answers:
+            - {value: 'XmlRpc', correct: true}
+            - {value: 'REST', correct: false}
+            - {value: 'POST', correct: false}
+            - {value: 'Open Social', correct: false}
+            - {value: 'XQuery', correct: false}
+
+#DISCUSSION/ANSWER: A. XmlRpc
+
+#25
+    -
+         question: 'Which two of the following are supported in the native Magento API? (Choose two)'
+         answers:
+            - {value: 'partial void', correct: false}
+            - {value: 'partial invoice', correct: true}
+            - {value: 'partial capture', correct: false}
+            - {value: 'partial refund', correct: false}
+            - {value: 'partial shipment', correct: true}
+
+# DISCUSSION/ANSWER: B. partial invoice + E. partial shipment
+
+#26
+    -
+         question: 'Which of the following API calls allows you to fetch the list of related products using the native Magento API?'
+         answers:
+            -
+                value: |
+                    catalog_product_link.list, with arguments $type='related', $product_id'
+                correct: true
+            -
+                value: |
+                    catalog_product.list, with arguments $type='related', $product_id'
+                correct: false
+            - {value: 'catalog_product_related.list, with argument $product_id', correct: false}
+            -
+                value: |
+                    catalog_product_option.list, with arguments $type='related', $product_id'
+                correct: false
+
+#DISCUSSION/ANSWER: A. catalog_product_link.list, with arguments $type='related', $product_id
+
+#47
+    -
+         question: 'In which of the following integrations should you use the Magento API?'
+         answers:
+            - {value: 'to send a SOAP request from Magento to a third-party system', correct: false}
+            - {value: 'to receive a SOAP request from a third-party system to Magento', correct: true}
+            - {value: 'to send or receive SOAP requests in Magento', correct: false}
+            - {value: 'to provide tracking on the order success page', correct: false}
+
+#DISCUSSION/ANSWER: B. to receive a SOAP request from a third-party system to Magento
+
+#54
+    -
+         question: 'What type of Magento class is an API resource?'
+         answers:
+            - {value: 'Controller', correct: false}
+            - {value: 'Helper', correct: false}
+            - {value: 'Model', correct: true}
+            - {value: 'Resource model', correct: false}
+
+#DISCUSSION/ANSWER: C
+
+#57
+    -
+         question: 'To update your order information from a third-party system using an XmlRpc call, you should:'
+         answers:
+            - {value: 'use the native sales_order.update API call with the url /api/xmlrpc/', correct: true}
+            - {value: 'create a custom API resource which allows you to receive XmlRpc requests', correct: false}
+            - {value: 'create a custom API adapter to receive XmlRpc requests', correct: false}
+            - {value: 'create a custom API handler to process XmlRpc requests', correct: false}
+
+#DISCUSSION/ANSWER: a (bruteforce) b?
+
+#DISCUSSION/ANSWER: B
+
+#75
+    -
+        question: ' How can you update a third-party system with every new order created in Magento?'
+        answers:
+            - {value: 'Use the native sales_order_update API call.', correct: false}
+            - {value: 'Use a sales_order_place_after API call.', correct: false}
+            - {value: 'Create an observer in Magento on the sales_order_place_after event.', correct: true}
+            - {value: 'Customize the third-party system to listen to Magento`s sales_order_place_after event.', correct: false}
+
+#DISCUSSION/ANSWER: C. Create an observer in Magento on the sales_order_place_after event.
+
+#81
+    -
+        question: ' To register a new API resource, what should you do?'
+        answers:
+            - {value: 'Register your new resource in config.xml in the node global/api/[module name]/resources.', correct: false}
+            - {value: 'Create etc/api.xml and register your resource in the api/resources node.', correct: true}
+            - {value: 'Go to the System/Web services/API Resources management page, and add a new resource from there.', correct: false}
+            - {value: 'Create an etc/resources.xml config file and register your resource in the api/resources node.', correct: false}
+
+# DISCUSSION/ANSWER: B. Create etc/api.xml and register your resource in the api/resources node.
+
+#84
+    -
+        question: 'How can you restrict access to a custom API resource?'
+        answers:
+            - {value: 'Only by creating a new role under System/Web Services/Roles', correct: false}
+            - {value: 'By setting up an ACL in etc/api.xml and creating a new role for it in System/Web Services/Roles', correct: true}
+            - {value: 'Only by extending Mage_Api_Controller_Action and overriding the _isAllowed method', correct: false}
+            - {value: 'By setting up an ACL in etc/adminhtml.xml and creating a new role in System/Permissions/Roles', correct: false}
+
+# DISCUSSION/ANSWER: B. By setting up an ACL in etc/api.xml and creating a new role for it in System/Web Services/Roles
+
+#85
+    -
+        question: 'What must be done to allow a third-party system to access the Magento API?'
+        answers:
+            - {value: 'Run a login call with username/password, and use the returned session_id for every request.', correct: true}
+            - {value: 'Get a token previously generated in Magento admin.', correct: false}
+            - {value: 'Run an authenticate call with username/password; the call will set up a session automatically.', correct: false}
+            - {value: 'Register the remote IP address in the api/allowed_ips/[system name] node.', correct: false}
+            - {value: 'Use a secure certificate, with public/private keys, and get a private key installed inside Magento.', correct: false}
+
+#DISCUSSION/ANSWER: A. Run a login call with username/password, and use the returned session_id for every request.
+
+#99
+    -
+        question: 'What do you need to do to implement a completely new Web Service protocol in Magento?'
+        answers:
+            - {value: 'Create your own adapter and controller.', correct: true}
+            - {value: 'Create your own API resource.', correct: false}
+            - {value: 'Create a new API helper.', correct: false}
+            - {value: 'Create a new model extended from Mage_Api_Model_Abstract.', correct: false}
+
+#DISCUSSION/ANSWER: A
+
+#121
+    - 
+        question: 'What elements are necessary to create API (SOAP) in Magento (2 answers)'
+        answers:
+            - {value: 'controller', correct: false}
+            - {value: 'Model', correct: true}
+            - {value: 'Helper', correct: false}
+            - {value: 'etc/api.xml', correct: true}
+            - {value: 'Resource Model', correct: false}
+# DISCUSSION/ANSWER: Model, etc/api.xml
+
+

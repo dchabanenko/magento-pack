@@ -1,0 +1,530 @@
+category: Magento Checkout
+# Other topics except basic, request flow, rendering, db, eav and adminhtml
+# Should contain the questions on Catalog, Sales, Checkout, Price Rules, Caching and others (advanced)
+questions:
+
+#9
+    -
+        question: 'What is the difference in the effect of calling the invoice capture() method versus the invoice pay() method?'
+        answers:
+            - {value: 'No difference: pay() will always call capture().', correct: false}
+            - {value: 'pay() will trigger the payment and capture() will not.', correct: false}
+            - {value: 'capture() will trigger the payment and pay() will not.', correct: true}
+            - {value: 'The difference is determined by the payment method implementation.', correct: false}
+
+#DISCUSSION/ANSWER: C. capture() will trigger the payment and pay() will not.
+
+#10
+    -
+        question: 'How is the sort order in which total models collect their values specified?'
+        answers:
+            - {value: 'The sort order is specified in the admin configuration under Sales > "Checkout Totals Sort Order".', correct: false}
+            - {value: 'The sort order is specified in the system configuration under global/sales/quote/totals/ [total_code] with <before> and <after> nodes.', correct: true}
+            - {value: 'The sort order is defined by the module loading order as specified by the children of the modules/[module_name]/depends configuration node.', correct: false}
+            - {value: 'The sort order is specified by the collect method in each total model.', correct: false}
+
+#DISCUSSION/ANSWER: not sure
+
+
+
+#11
+    -
+        question: 'Which method is called on a shipping carrier model to fetch a list of all available shipping methods, along with the rates associated with them, for a quote address?'
+        answers:
+            - {value: 'collectShippingRates()', correct: false}
+            - {value: 'getAllowedMethods()', correct: false}
+            - {value: 'getShippingRates ()', correct: false}
+            - {value: 'getAvailableRates()', correct: false}
+            - {value: 'collectRates()', correct: true}
+#DISCUSSION/ANSWER: E
+
+#15
+    -
+        question: 'The final price for the product on the product view page is __________.'
+        answers:
+            - {value: 'taken from the catalog_product_index_price table', correct: false}
+            - {value: 'taken from the catalog_product_index_price_idx table', correct: false}
+            - {value: 'taken from the catalog_product_index_price_final_idx table', correct: false}
+            - {value: 'calculated on-the-fly on php-level', correct: true}
+            - {value: 'pre-calculated in the products price attribute', correct: false}
+
+#DISCUSSION/ANSWER: D. calculated on-the-fly on php-level
+
+#17
+    -
+         question: 'Which one of the following class types directly charges a credit card when you capture an invoice in Magento admin?'
+         answers:
+             - {value: 'Order', correct: false}
+             - {value: 'Payment', correct: false}
+             - {value: 'Invoice', correct: false}
+             - {value: 'payment_method', correct: true}
+
+#DISCUSSION/ANSWER: D. payment_method
+
+#18
+    -
+         question: 'Applying the shopping cart rule`s action affects the quote item by setting the quote item`s ___________.'
+         answers:
+            - {value: 'base_price and price properties with the discounted price', correct: false}
+            - {value: 'base_discount_amount and discount_amount with the discount applied to the original price', correct: true}
+            - {value: 'base_row_total and row_total properties with the discounted price', correct: false}
+            - {value: 'base_price_incl_tax and price_incl_tax properties with the discounted price', correct: false}
+
+#DISCUSSION/ANSWER: B. base_discount_amount and discount_amount with the discount applied to the original price
+
+#21
+    -
+         question: 'What is the difference between the base_grand_total and grand_total attributes of the order?'
+         answers:
+            - {value: 'base_grand_total is a grand total before tax is applied; grand_total is the grand total after tax is applied.', correct: false}
+            - {value: 'base_grand_total is the grand total at the moment of order submission; grand_total is the grand total at the moment of order closing.', correct: false}
+            - {value: 'base_grand_total is the grand total in the currency of the store where the order was submitted; grand_total is in US dollars always.', correct: false}
+            - {value: 'base_grand_total is in a base currency and grand_total is in the currency of the website where the order was submitted.', correct: true}
+
+#DISCUSSION/ANSWER: D. base_grand_total is in a base currency and grand_total is in the currency of the website where the order was submitted.
+
+#22
+    -
+         question: 'Which object never encapsulates any shopping cart items?'
+         answers:
+            - {value: 'Mage_Checkout_Model_Cart', correct: false}
+            - {value: 'Mage_Sales_Model_Quote', correct: true}
+            - {value: 'Mage_Sales_Model_Quote_Address<type=shipping>', correct: false}
+            - {value: 'Mage_Sales_Model_Quote_Address<type=billing>', correct: false}
+
+#DISCUSSION/ANSWER: B. Mage_Sales_Model_Quote
+
+#30
+    -
+         question: 'Which three of the following conditions should exclude a quote item from the shipping rate calculation by a carrier model? (Choose three)'
+         answers:
+            - {value: '$quoteItem->getFreeShipping() == true', correct: true}
+            - {value: '$quoteltem->getProduct()->isvirtual() == true', correct: true}
+            - {value: '$quoteltem->getWeight() > 0', correct: false}
+            - {value: '$quoteItem->isShipSeparately() && $quoteItem->getHasChildren()', correct: true}
+            - {value: '$quoteItem()->getQty() < Mage::getStoreConfig(`carriers/tablerate/min_shipping_qty`)', correct: false}
+
+#DISCUSSION/ANSWER: A + B + D
+
+#34
+    -
+         question: 'Which one of the following is responsible for sending a remote request to the payment service when capturing an order?'
+         answers:
+            - {value: 'Payment Info', correct: false}
+            - {value: 'Order Payment', correct: false}
+            - {value: 'Payment Method', correct: true}
+            - {value: 'Invoice', correct: false}
+
+#DISCUSSION/ANSWER: C. Payment Method
+
+#36
+    -
+         question: 'You want to define a list of quote object attributes that are copied to the order object when an order is placed. Which one of the following statements is true?'
+         answers:
+            - {value: 'You can define this list by modifying the list of elements found in the configuration with the xpath global/fieldsets/sales_convert_quote.', correct: true}
+            - {value: 'You can define this list by modifying the list of elements found in the configuration with the xpath global/sales/quote/item/product_attributes.', correct: false}
+            - {value: 'You can define this list by checking the checkbox on the attribute edit page in the admin.', correct: false}
+            - {value: 'You cannot modify the list of fields copied from quote to order because the process is hardcoded.', correct: false}
+
+#DISCUSSION/ANSWER: A. global/fieldsets/sales_convert_quote.
+#But, for some reason, the really working variant is global/fieldsets/sales_convert_quote_address
+
+#38
+    -
+         question: 'Which of the following actions will enable logging via calls to debugData() on a native Magento payment method model?'
+         answers:
+            - {value: 'Set the protected property $_debug of the payment model to true', correct: false}
+            - {value: 'Set the config node default/payment/debug/[method code] to 1', correct: false}
+            - {value: 'Call Mage::register("payment_method_debug_" . [method code], true);', correct: false}
+            - {value: 'Set the config node default/payment/[method code]/debug to 1', correct: true}
+            - {value: 'Call setDebug(true) on the payment method model', correct: false}
+
+#DISCUSSION/ANSWER: D. Set the config node default/payment/[method code]/debug to 1
+#Example:
+#<default>
+#   <payment>
+#       <authorizenet_directpost>
+#           <active>0</active>
+#           <cctypes>AE,VI,MC,DI</cctypes>
+#           <cgi_url>https://secure.authorize.net/gateway/transact.dll</cgi_url>
+#           <debug>0</debug>
+#
+
+#44
+    -
+         question: 'How many items will be added to the quote after adding a configurable product to the shopping cart?'
+         answers:
+            - {value: 'the number of options', correct: false}
+            - {value: 'the number of options+1', correct: false}
+            - {value: 'always 1', correct: false}
+            - {value: 'always 2', correct: true}
+
+#DISCUSSION/ANSWER: "D. always 2" and one of the items (parent item) will be invisible
+
+#53
+    -
+         question: 'Which of the following lines includes a payment method object?'
+         answers:
+            - {value: '$quote->getShippingAddress()->setPaymentMethod(isset($data["method"]) ? $data["method"] : null); inside Mage_Checkout_Model_Type_Onepage', correct: false}
+            - {value: 'public function setPayment(Mage_Sales_Model_Quote_Payment $payment) inside Mage_Sales_Model_Quote', correct: true}
+            - {value: '$method = $this->getMethodInstance(); inside Mage_Sales_Model_Quote_Payment', correct: false}
+            - {value: '$instance->setInfoInstance($this); inside Mage_Payment_Model_Info', correct: false}
+
+#DISCUSSION/ANSWER: C. $method = $this->getMethodInstance(); inside Mage_Sales_Model_Quote_Payment
+
+#64
+    -
+        question: 'How can you make a payment method store entire credit card numbers?'
+        answers:
+            - {value: 'For security reasons, there are no native ways for doing that.', correct: false}
+            - {value: 'Pass the credit card number to the payment method: it will be stored automatically.', correct: false}
+            - {value: 'Change the protected property of payment method $_canSaveCc to true.', correct: true}
+            - {value: 'Configure your method to save the card number by setting 1 to the following xpath: default/payment/_NAME_/save_cc', correct: false}
+
+#DISCUSSION/ANSWER: C, потрібно обговорити, бо актуально тільки для нащадків Mage_Payment_Model_Method_Cc та номер кредитки сториться зашифрованим
+
+#69
+    -
+        question: 'Assume that PayPal has presented a new API for online purchasing that you are going to use. Which class should you extend for doing that?'
+        answers:
+            - {value: 'Mage_Sales_Model_Quote_Payment', correct: false}
+            - {value: 'Mage_Payment_Model_lnfo', correct: false}
+            - {value: 'Mage_Payment_Model_Method_Abstract', correct: true}
+            - {value: 'Mage_Sales_Model_Order_Payment', correct: false}
+
+# DISCUSSION/ANSWER: C. Mage_Payment_Model_Method_Abstract
+
+#70
+    -
+        question: 'Which two public methods must be implemented in a functional custom shipping method directly extending Mage_Shipping_Model_Carrier_Abstract and also implementing Mage_Shipping_Model_Carrier_Interface? (Choose two)'
+        answers:
+            - {value: 'collectRates()', correct: true}
+            - {value: 'getAllowedMethods()', correct: true}
+            - {value: 'isTrackingAvailable()', correct: false}
+            - {value: 'isFixed()', correct: false}
+            - {value: 'getConfigDatat()', correct: false}
+            - {value: 'checkAvailablesnipCountries()', correct: false}
+
+# DISCUSSION/ANSWER: A + B, collectRates() + getAllowedMethods()
+
+#75
+    -
+        question: ' How can you update a third-party system with every new order created in Magento?'
+        answers:
+            - {value: 'Use the native sales_order_update API call.', correct: false}
+            - {value: 'Use a sales_order_place_after API call.', correct: false}
+            - {value: 'Create an observer in Magento on the sales_order_place_after event.', correct: true}
+            - {value: 'Customize the third-party system to listen to Magento`s sales_order_place_after event.', correct: false}
+
+#DISCUSSION/ANSWER: C. Create an observer in Magento on the sales_order_place_after event.
+
+#79
+    -
+        question: 'Assume you have product with `qty in stock`=1, and two people are trying to buy it at the same time. Which of the following statements is true?'
+        answers:
+            - {value: 'Only one is able to add the product to the shopping cart. That person will be able to buy the product.', correct: false}
+            - {value: 'Only the person who starts checkout first will be able to buy the product.', correct: false}
+            - {value: 'Only the person who passes the payment step first will be able to buy the product.', correct: false}
+            - {value: 'Both persons can go to the Place Order step, but the one who places the order first will get the product.', correct: true}
+            - {value: 'Both persons will be able to complete the checkout, because both have local copies of the available inventory.', correct: false}
+
+# DISCUSSION/ANSWER: D. Both persons can go to the Place Order step, but the one who places the order first will get the product.
+
+#89
+    -
+        question: 'Which of the following payment methods` payment actions creates an invoice during the "place order" step?'
+        answers:
+            - {value: 'Mage_Payment_Model_Method_Abstract::ACTION_AUTHORIZE', correct: false}
+            - {value: 'Mage_Payment_Model_Method_Abstract::ACTION_CAPTURE', correct: false}
+            - {value: 'Mage_Payment_Model_Method_Abstract::ACTION_AUTHORIZE_CAPTURE', correct: true}
+            - {value: 'Mage_Payment_Model_Method_Abstract::ACTION_INVOICE', correct: false}
+
+#DISCUSSION/ANSWER: C. Mage_Payment_Model_Method_Abstract::ACTION_AUTHORIZE_CAPTURE
+
+#90
+    -
+        question: 'Which model is responsible for calculating the taxes for the selected shipping rate?'
+        answers:
+            - {value: 'shipping/rate_result', correct: false}
+            - {value: 'shipping/total_tax', correct: false}
+            - {value: 'tax/sales_total_quote_tax', correct: true}
+            - {value: 'the concrete shipping carrier model implementation', correct: false}
+            - {value: 'shipping/rate_request', correct: false}
+
+#DISCUSSION/ANSWER: C. tax/sales_total_quote_tax
+
+#101
+    -
+        question: 'For which two of the following composite products could the options be shipped separately on the frontend using "Checkout with multiple addresses"? (Choose two)'
+        answers:
+            - {value: 'configurable physical product', correct: false}
+            - {value: 'bundle product consisting of physical products', correct: true}
+            - {value: 'grouped product consisting of physical products', correct: true}
+            - {value: 'bundle product consisting of virtual products', correct: false}
+            - {value: 'grouped product consisting of virtual products', correct: false}
+
+# DISCUSSION/ANSWER: B, C
+
+#102
+    -
+        question: 'Assume you added a product with custom options to the shopping cart. Where will the data for the custom options be stored persistently?'
+        answers:
+            - {value: 'in the sales_flat_quote table, as a serialized string in a text field', correct: false}
+            - {value: 'in the session, as a serialized array', correct: false}
+            - {value: 'in a separate table, sales_flat_quote_item_option', correct: true}
+            - {value: 'Magento doesn`t store persistent data about custom options; only the new price and new SKU are stored.', correct: false}
+
+# DISCUSSION/ANSWER: C. in a separate table, sales_flat_quote_item_option
+
+#106
+    - 
+        question: 'Which element below has effect on Tax and price of product when customer checkout? (1 answer is correct)'
+        answers:
+            - {value: 'Customer name and email', correct: false}
+            - {value: 'Customer billing address', correct: false}
+            - {value: 'Customer shipping address', correct: false}
+            - {value: 'Customer Group', correct: true}
+#  DISCUSSION/ANSWER: 4. Customer Group
+
+#108
+    -         
+        question: 'To add a total to reduce product price on page Shopping Cart, what do we do? ( 2 answers)'
+        answers:
+            - {value: 'Add config total in file config.xml under xpath is config/global/sales/order_invoice/totals', correct: false}
+            - {value: 'Add config total in file config.xml under xpath is config/global/sales/quote/totals', correct: true}
+            - {value: 'Add code in to layout file with handle is sales_order_view', correct: false}
+            - {value: 'Add Block that is correspondent to the configuration in config.xml, block with method initTotals', correct: false}
+            - {value: 'Add Model that is correspondent to the configuration in config.xml, model with collect and fetch method.', correct: true}
+#  DISCUSSION/ANSWER: B, E
+
+#124
+    -
+        question: ' Discount "To fixed Ammount" 10$ means:'
+        answers:
+            - {value: 'Discount $10', correct: false}
+            - {value: 'The product is sold at $10', correct: true}
+            - {value: 'The minimum price is $10', correct: false}
+            - {value: 'None of the above is correct', correct: false}
+# DISCUSSION/ANSWER: B
+
+#126
+    - 
+         question: |
+            Choose the correct statement with the following config:
+              <default>
+                <sales>
+                  <totals_sort>
+                    <rewardpoints>34</rewardpoints>
+                  </totals_sort>
+                </sales>
+              </default>
+         answers:
+            - {value: 'Declare total rewardpoints for calculation.', correct: false}
+            - {value: 'Declare the order of calculation for the total rewardpoints', correct: false}
+            - {value: 'Config the value displayed for the total rewardpoints', correct: true}
+            - {value: 'Config doesn`t work', correct: false}
+# DISCUSSION/ANSWER:  3
+
+#130
+    -
+         question: |
+           What is purpose of the following code (in file config.xml)? ( Choose 1 option):
+           <global>
+               ...
+               <fieldsets>
+                   <sales_convert_quote_address>
+                       <base_discount>
+                           <to_order>*</to_order>
+                       </base_discount>
+                   </sales_convert_quote_address>
+               </fieldsets>
+           </global>
+         answers:
+            - {value: 'Transfer data of field base_discount from quote to order when a customer orders.', correct: false}
+            - {value: 'Transfer data of field base_discount from quote address to order when creating an order', correct: true}
+            - {value: 'Transfer data of field base_discount field from order to address when creating an order', correct: false}
+            - {value: 'Create 	field base_discount for quote_address và order', correct: false}
+            - {value: 'Transfer field base_discount from quote address to order in database', correct: false}
+# DISCUSSION/ANSWER: Transfer data of field base_discount from quote address to order when creating an order
+
+#140
+    -
+        question: |
+          What is the order to generate 3 events
+            (1)sales_order_place_after,
+            (2)sales_convert_quote_to_order,
+            (3)sales_order_save_before
+        answers:
+            - {value: '1->2->3', correct: false}
+            - {value: '1->3->2', correct: false}
+            - {value: '2->1->3', correct: true}
+            - {value: '2->3->1', correct: false}
+#DISCUSSION/ANSWER: С
+
+#143
+    -
+        question: 'What are necessary steps to create 1 module payment in Magento? (3 answers)'
+        answers:
+            - {value: 'Create model payment', correct: true}
+            - {value: 'Create controller', correct: false}
+            - {value: 'Declare payment method in xpathconfig/default/payment', correct: true}
+            - {value: 'Declare configuration in etc/system.xml', correct: true}
+            - {value: 'Create resource model payment', correct: false}
+#DISCUSSION/ANSWER: A, C, D
+
+#144
+    -
+        question: 'Choose the correct relationship between tax and discount in magento'
+        answers:
+            - {value: 'Tax is calculated before discount', correct: false}
+            - {value: 'Discount is calculated before tax', correct: false}
+            - {value: 'Admin config in order to change the order of calculating tax and discount', correct: true}
+            - {value: 'Tax and discount are calculated independently in 2 separate total.', correct: false}
+
+#DISCUSSION/ANSWER: C (System->Configuration->Apply Customer Tax:Before Discount, After Discount)
+
+#150
+    -
+        question: 'What is the address in which tax is calculated?'
+        answers:
+            - {value: 'Shipping Address', correct: false}
+            - {value: 'Billing Address', correct: false}
+            - {value: 'Shipping Origin', correct: false}
+            - {value: 'According to config in admin', correct: true}
+#DISCUSSION/ANSWER: D
+
+#153
+    - 
+        question: 'To declare a totalmodel ( used to recalculate value of an order), which xpath do we follow to declare in file config.xml? ( Choose 1 option)'
+        answers:
+            - {value: 'default/sales/quote/totals', correct: false}
+            - {value: 'frontend/quote/sales/totals', correct: false}
+            - {value: 'global/sales/quote/totals', correct: true}
+            - {value: 'global/fieldsets/totals/quote', correct: false}
+            - {value: 'frontend/totals/quote/model', correct: false}
+            - {value: '', correct: false}
+#DISCUSSION/ANSWER: C global/sales/quote/totals
+
+#157
+    -         
+        question: ' Which product types can NOT be shipped?'
+        answers:
+            - {value: 'Virtual product , bundle product', correct: false}
+            - {value: 'Downloadable product, vitural product', correct: true}
+            - {value: 'Bundle product, group product', correct: false}
+            - {value: 'Download product, bundle product', correct: false}
+#DISCUSSION/ANSWER: B
+
+#161
+    -
+        question: ' Which functions are required to be declared when creating a Shipping carrier model? (2 answers):'
+        answers:
+            - {value: 'get Allowed Methods', correct: true}
+            - {value: 'is Tracking Available', correct: false}
+            - {value: 'is Active', correct: false}
+            - {value: 'collect Rates', correct: true}
+            - {value: 'get Method Price', correct: false}
+#DISCUSSION/ANSWER: collect Rates and get Allowed Methods
+#In Mage_Shipping_Model_Carrier_Abstract:
+#abstract public function collectRates(Mage_Shipping_Model_Rate_Request $request);
+#And in
+#Mage_Shipping_Model_Carrier_Interface
+#public function getAllowedMethods();
+
+#188
+    -         
+        question: 'What product types do not need to ship?(choose 2)'
+        answers:
+            - {value: 'Configurable', correct: false}
+            - {value: 'Simple', correct: false}
+            - {value: 'Grouped', correct: false}
+            - {value: 'Bundle', correct: false}
+            - {value: 'Virtual', correct: true}
+            - {value: 'Downloadable', correct: true}
+#DISCUSSION/ANSWER: E, F
+
+#192
+    -
+        question: 'To change the checkout mode form GUEST to REGISTER and vice versa,  which event is needed?'
+        answers:
+            - {value: 'checkout_allow_guest', correct: true}
+            - {value: 'change_checkout_method', correct: false}
+            - {value: 'is_allowed_guest_checkout', correct: false}
+            - {value: 'is_allowed_register_checkout', correct: false}
+#DISCUSSION/ANSWER: A
+
+#195
+    - 
+        question: | 
+            What does the following config mean?
+            <fieldsets>
+                <sales_convert_quote_address>
+                    <rewardpoints_earn>
+                        <to_order>*</to_order>
+                    </rewardpoints_earn>
+                </sales_convert_quote_address>
+            </fieldsets>
+        answers:
+            - {value: 'Save data in quote address', correct: false}
+            - {value: 'Save data in rewardpoints_earn table', correct: false}
+            - {value: 'Transfer data from sales/quote_address table to sale/order table', correct: true}
+            - {value: 'Transfer sale/order table to sales/quote_address table', correct: false}
+#DISCUSSION/ANSWER: Transfer data from sales/quote_address table to sale/order table
+
+#208
+    - 
+        question: ' When exactly does inventory decrement occur? (choose 1)'
+        answers:
+            - {value: 'checkoutAllSubmitAfter()', correct: true}
+            - {value: 'saveOrder()', correct: false}
+            - {value: 'placeOrder()', correct: false}
+            - {value: 'createShipment()', correct: false}
+#DISCUSSION/ANSWER: checkoutAllSubmitAfter()
+
+#209
+    -
+        question: 'In which database is discount value of an order stored? Choose the correct answer.'
+        answers:
+            - {value: 'sales_order_entity_decimal', correct: false}
+            - {value: 'sales_flat_order', correct: true}
+            - {value: 'sales_order_entity', correct: false}
+            - {value: 'Sales_order_entity_int', correct: false}
+#DISCUSSION/ANSWER: B
+
+#213
+    -
+        question: 'Which of the following should you do in order to add another product attribute to the condition in a shopping cart price rule?'
+        answers:
+            - {value: 'Create an observer on the load sales rule product attributes event.', correct: false}
+            - {value: 'Override Mage SalesRule Model Rule Condition Product and modify the protected variable $_ruleAttributes.', correct: false}
+            - {value: 'Mark the attribute as “Use for Promo Rule Conditions”on the attribute management page in the admin.', correct: true}
+            - {value: 'Add another child to the configuration node global/catalog/attributes_to_use_in_sales_rules.', correct: false}
+#DISCUSSION/ANSWER:
+
+#215
+    -
+        question: |
+            Assume the following price configuration:
+                Price: 10 Group price: group=General, price=15 Tier price: group=All Groups, qty=1, price=20 Tier price:
+                group=General, qty=1, price=25
+                Which price will a customer from the “General” group see on the product view page?
+        answers:
+            - {value: '20', correct: false}
+            - {value: '10', correct: true}
+            - {value: '25', correct: false}
+            - {value: '15', correct: false}
+#DISCUSSION/ANSWER:
+
+#220
+    -
+        question: 'You want your module to set some data on the shopping cart item when a product is added to the cart on the frontend. Which event can be used regardless of how the product is added to the cart (from wishlist, through quote merge, etc.)'
+        answers:
+            - {value: 'checkout_cart_add_product_complete', correct: false}
+            - {value: 'checkout_cart_product_add_after.', correct: false}
+            - {value: 'sales_quote_add_item', correct: true}
+            - {value: 'checkout_cart_save_before', correct: false}
+#DISCUSSION/ANSWER: don't know. d is wrong
+#checkout_cart_add_product_complete - wrong. no cart or quote
+#checkout_cart_product_add_after - wrong. no cart or quote
+#++sales_quote_add_item
+#checkout_cart_save_before - wrong we don't know what changes are made
