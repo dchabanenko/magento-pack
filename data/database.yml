@@ -31,7 +31,7 @@ questions:
               value: |
                 $collection->addFieldToFilter(
                 array('price', 'name'),
-                array(array('eq' => 0.00, array('like' =>'Test%'),
+                array(array('eq' => 0.00, array('like' =>'Test%'))
                 );
               correct: false
 
