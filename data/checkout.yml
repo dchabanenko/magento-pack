@@ -18,8 +18,8 @@ questions:
     -
         question: 'How is the sort order in which total models collect their values specified?'
         answers:
-            - {value: 'The sort order is specified in the admin configuration under Sales > "Checkout Totals Sort Order".', correct: false}
-            - {value: 'The sort order is specified in the system configuration under global/sales/quote/totals/ [total_code] with <before> and <after> nodes.', correct: true}
+            - {value: 'The sort order is specified in the admin configuration under Sales > "Checkout Totals Sort Order".', correct: true}
+            - {value: 'The sort order is specified in the system configuration under global/sales/quote/totals/ [total_code] with <before> and <after> nodes.', correct: false}
             - {value: 'The sort order is defined by the module loading order as specified by the children of the modules/[module_name]/depends configuration node.', correct: false}
             - {value: 'The sort order is specified by the collect method in each total model.', correct: false}
 
@@ -166,8 +166,8 @@ questions:
          question: 'Which of the following lines includes a payment method object?'
          answers:
             - {value: '$quote->getShippingAddress()->setPaymentMethod(isset($data["method"]) ? $data["method"] : null); inside Mage_Checkout_Model_Type_Onepage', correct: false}
-            - {value: 'public function setPayment(Mage_Sales_Model_Quote_Payment $payment) inside Mage_Sales_Model_Quote', correct: true}
-            - {value: '$method = $this->getMethodInstance(); inside Mage_Sales_Model_Quote_Payment', correct: false}
+            - {value: 'public function setPayment(Mage_Sales_Model_Quote_Payment $payment) inside Mage_Sales_Model_Quote', correct: false}
+            - {value: '$method = $this->getMethodInstance(); inside Mage_Sales_Model_Quote_Payment', correct: true}
             - {value: '$instance->setInfoInstance($this); inside Mage_Payment_Model_Info', correct: false}
 
 #DISCUSSION/ANSWER: C. $method = $this->getMethodInstance(); inside Mage_Sales_Model_Quote_Payment
@@ -402,7 +402,7 @@ questions:
             - {value: 'global/sales/quote/totals', correct: true}
             - {value: 'global/fieldsets/totals/quote', correct: false}
             - {value: 'frontend/totals/quote/model', correct: false}
-            - {value: '', correct: false}
+
 #DISCUSSION/ANSWER: C global/sales/quote/totals
 
 #157

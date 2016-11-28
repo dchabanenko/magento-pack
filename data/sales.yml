@@ -195,8 +195,8 @@ questions:
          question: 'Which of the following lines includes a payment method object?'
          answers:
             - {value: '$quote->getShippingAddress()->setPaymentMethod(isset($data["method"]) ? $data["method"] : null); inside Mage_Checkout_Model_Type_Onepage', correct: false}
-            - {value: 'public function setPayment(Mage_Sales_Model_Quote_Payment $payment) inside Mage_Sales_Model_Quote', correct: true}
-            - {value: '$method = $this->getMethodInstance(); inside Mage_Sales_Model_Quote_Payment', correct: false}
+            - {value: 'public function setPayment(Mage_Sales_Model_Quote_Payment $payment) inside Mage_Sales_Model_Quote', correct: false}
+            - {value: '$method = $this->getMethodInstance(); inside Mage_Sales_Model_Quote_Payment', correct: true}
             - {value: '$instance->setInfoInstance($this); inside Mage_Payment_Model_Info', correct: false}
 
 #DISCUSSION/ANSWER: C. $method = $this->getMethodInstance(); inside Mage_Sales_Model_Quote_Payment
@@ -394,7 +394,7 @@ questions:
             - {value: 'When items are not fully refunded', correct: false}
             - {value: 'When total order is greater than 0', correct: false}
             - {value: 'When there is a item which is invoiced but not refunded d.', correct: false}
-            - {value: 'B and C', correct: true}
+            - {value: 'When items are not fully refunded and when total order is greater than 0', correct: true}
 #DISCUSSION/ANSWER: B and C. According to test quiz bruteforcing )
 
 #140
@@ -452,7 +452,7 @@ questions:
             - {value: 'global/sales/quote/totals', correct: true}
             - {value: 'global/fieldsets/totals/quote', correct: false}
             - {value: 'frontend/totals/quote/model', correct: false}
-            - {value: '', correct: false}
+
 #DISCUSSION/ANSWER: C global/sales/quote/totals
 
 #161
